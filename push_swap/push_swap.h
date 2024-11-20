@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "../ft_printf/libft/libft.h"
 
 typedef struct s_node
 {
@@ -30,9 +31,11 @@ typedef struct s_stack
 	t_node	*bottom;
 }	t_stack;
 
+int		ft_push_swap_atoi(char *av);
 t_node	*node_create(int data);
 t_node	*pop(t_stack *list);
 t_node	*bottom_pop(t_stack *list);
+void	stack_add(t_stack *a, t_stack *b, char **av);
 void	push(t_stack *list, t_node *data);
 void	bottom_push(t_stack *list, t_node *data);
 void	sa(t_stack *a);
@@ -46,5 +49,6 @@ void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
+char	**make_data(char **av, int ac);
 
 #endif

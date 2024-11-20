@@ -39,71 +39,32 @@ t_node	*node_create(int data)
 	return (new);
 }
 
-int	ft_push_swap_atoi(char *av)
+void	algorithm(t_stack *a, t_stack *b)
 {
-	int			i;
-	int			flag;
-	long long	temp;
 
-	i = 0;
-	flag = 1;
-	temp = 0;
-	if (av[i] == '-' || av[i] == '+')
-	{
-		if (av[i] == '-')
-			flag = -1;
-		i++;
-	}
-	while (av[i] >= '0' && av[i] <= '9')
-	{
-		temp = (temp * 10) + av[i] - 48;
-		i++;
-	}
-	if (temp > 2147483647 || temp < -2147483648 || av[i] != '\0')
-	{
-		write (2, "Error\n", 6);
-		exit (1);
-	}
-	return ((int)temp * flag);
 }
-
-void	stack_add(t_stack *a, t_stack *b, char **av)
-{
-	int	i;
-
-	i = 1;
-	while (av[i])
-	{
-		push(b, node_create(ft_push_swap_atoi(av[i])));
-		i++;
-	}
-	while (b->size > 0)
-	{
-		push(a, pop(b));
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
+	char	**data;
 
 	if (ac < 2)
 		return (0);
 	a = stack_init();
 	b = stack_init();
-	stack_add(a, b, av);
-	/*t_node *now;
+	data = make_data(av, ac);
+	stack_add(a, b, data);
+/*	t_node *now;
 	printf("------------------------------\n");
 	int	i;
 
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (data[i])
 	{
-		push(b, node_create(ft_push_swap_atoi(av[i])));
+		push(b, node_create(ft_push_swap_atoi(data[i])));
 		i++;
 	}
-	rra(a);
 	now = a->top;
 	while (now->next)
 	{
