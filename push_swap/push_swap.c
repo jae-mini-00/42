@@ -39,10 +39,6 @@ t_node	*node_create(int data)
 	return (new);
 }
 
-void	algorithm(t_stack *a, t_stack *b)
-{
-
-}
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -55,17 +51,10 @@ int	main(int ac, char **av)
 	b = stack_init();
 	data = make_data(av, ac);
 	stack_add(a, b, data);
-/*	t_node *now;
+	push_swap_algorithm(a, b);
+	t_node *now;
 	printf("------------------------------\n");
-	int	i;
-
-	i = 0;
-	while (data[i])
-	{
-		push(b, node_create(ft_push_swap_atoi(data[i])));
-		i++;
-	}
-	now = a->top;
+	now = b->top;
 	while (now->next)
 	{
 		printf("a :%d\n", now->data);
@@ -73,7 +62,7 @@ int	main(int ac, char **av)
 	}
 	printf("a :%d\n", now->data);
 	printf("------------------------------\n");
-	now = b->top;
+/*	now = b->top;
 	while (now->next)
 	{
 		printf("b :%d\n", now->data);
