@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 	push_swap_algorithm(a, b);
 	t_node *now;
 	printf("------------------------------\n");
-	now = b->top;
+	now = a->top;
 	while (now->next)
 	{
 		printf("a :%d\n", now->data);
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 	}
 	printf("a :%d\n", now->data);
 	printf("------------------------------\n");
-/*	now = b->top;
+	/*now = b->top;
 	while (now->next)
 	{
 		printf("b :%d\n", now->data);

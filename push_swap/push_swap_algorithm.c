@@ -20,7 +20,6 @@ void	push_swap_algorithm(t_stack *a, t_stack *b)
 	int	i;
 	int	small_data;
 
-	(void)b;
 //	int fuck = 5;
 	while (a->size)
 	{
@@ -58,4 +57,6 @@ void	push_swap_algorithm(t_stack *a, t_stack *b)
 		//printf("data :%d\n\n", a->top->data);
 		pb(b, a);
 	}
+	while (b->size)
+		pa(a, b);
 }
