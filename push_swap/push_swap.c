@@ -62,11 +62,11 @@ int	main(int ac, char **av)
 	}
 	printf("a :%d\n", now->data);
 	printf("------------------------------\n");
-	/*now = b->top;
+	now = b->top;
 	while (now->next)
 	{
 		printf("b :%d\n", now->data);
 		now = now->next;
 	}
-	printf("b :%d\n", now->data);*/
+	printf("b :%d\n", now->data);
 }

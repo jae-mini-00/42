@@ -32,10 +32,11 @@ typedef struct s_stack
 }	t_stack;
 
 int		ft_push_swap_atoi(char *av);
+int		ft_pivot(t_stack *a, t_stack *b);
 t_node	*node_create(int data);
 t_node	*pop(t_stack *list);
 t_node	*bottom_pop(t_stack *list);
-//void	ft_atob(t_stack *a, t_stack *b, int p);
+void	pivot_setting(t_stack *a, t_stack *b);
 void	push_swap_algorithm(t_stack *a, t_stack *b);
 void	stack_add(t_stack *a, t_stack *b, char **av);
 void	push(t_stack *list, t_node *data);

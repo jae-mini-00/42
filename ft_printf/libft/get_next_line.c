@@ -68,7 +68,7 @@ static char	*ft_line(char *backup)
 	if (!line)
 		return (free(backup), NULL);
 	while (backup[i] && backup[i] != '\n')
-  	{
+	{
 		line[i] = backup[i];
 		i++;
 	}
