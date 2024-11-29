@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 	push_swap_stack_add(a, b, data);
 	push_swap_error_check(a, b, data);
 	push_swap_algorithm(a, b);
-	t_node *now;
+	/*t_node *now;
 	printf("------------------------------\n");
 	now = a->top;
 	while (now->next)
@@ -84,6 +84,6 @@ int	main(int ac, char **av)
 		printf("b :%d\n", now->data);
 		now = now->next;
 	}
-	printf("b :%d\n", now->data);
+	printf("b :%d\n", now->data);*/
 	ft_end_free(a, b);
 }

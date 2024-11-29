@@ -12,14 +12,20 @@
 
 #include "push_swap.h"
 
-void	stack_add(t_stack *a, t_stack *b, char **av)
+void	push_swap_stack_add(t_stack *a, t_stack *b, char **data)
 {
-	int	i;
+	int			i;
+	long long	temp;
 
 	i = 0;
-	while (av[i])
+	if (!data)
+		exit(2);
+	while (data[i])
 	{
-		push(b, node_create(ft_push_swap_atoi(av[i])));
+		temp = push_swap_atoi(data[i]);
+		if (temp < -2147483648)
+			push_swap_error_check(a, b, data);
+		push(b, push_swap_node_create((int)temp));
 		i++;
 	}
 	while (b->size > 0)
@@ -28,7 +34,7 @@ void	stack_add(t_stack *a, t_stack *b, char **av)
 	}
 }
 
-int	ft_push_swap_atoi(char *av)
+long long	push_swap_atoi(char *av)
 {
 	int			i;
 	int			flag;
@@ -50,14 +56,11 @@ int	ft_push_swap_atoi(char *av)
 	}
 	if ((temp > 2147483647 || temp < -2147483648 || av[i] != '\0') && \
 		av[i] != ' ')
-	{
-		write (2, "Error\n", 6);
-		exit (1);
-	}
-	return ((int)temp * flag);
+		return (-2147483649);
+	return (temp * flag);
 }
 
-char	**make_data(char **av, int ac)
+char	**push_swap_make_data(char **av, int ac)
 {
 	char	**data;
 	char	*temp;

@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-int	ft_pivot2(t_stack *a, t_stack *b)
+int	ft_pivot2(t_stack *a)
 {
-	t_node	*now;
-	int		pivot;
-	int		s;
-	int		i;
+	t_node		*now;
+	int			pivot;
+	int			i;
+	long long	s;
 
 	i = 1;
 	pivot = 2147483647;
-	s = -2147483648;
-	while (i <= (a->size / 3 + a->size / 3))
+	s = -2147483649;
+	while (i <= (a->size / 2))
 	{
 		now = a->top;
 		pivot = 2147483647;
@@ -33,23 +32,25 @@ int	ft_pivot2(t_stack *a, t_stack *b)
 				pivot = now->data;
 			now = now->next;
 		}
+		if (now->data <= pivot && s < now->data)
+			pivot = now->data;
 		s = pivot;
 		i++;
 	}
 	return (s);
 }
 
-int	ft_pivot(t_stack *a, t_stack *b)
+int	ft_pivot(t_stack *a)
 {
-	t_node	*now;
-	int		pivot;
-	int		s;
-	int		i;
+	t_node		*now;
+	int			pivot;
+	int			i;
+	long long	s;
 
 	i = 1;
 	pivot = 2147483647;
-	s = -2147483648;
-	while (i <= (a->size / 3))
+	s = -2147483649;
+	while (i <= (a->size / 4))
 	{
 		now = a->top;
 		pivot = 2147483647;
@@ -59,40 +60,49 @@ int	ft_pivot(t_stack *a, t_stack *b)
 				pivot = now->data;
 			now = now->next;
 		}
+		if (now->data <= pivot && s < now->data)
+			pivot = now->data;
 		s = pivot;
 		i++;
 	}
 	return (s);
 }
 
-void	rb_ox(t_stack *b, int pivot2)
+int	push_swap_hard_pivot(t_stack *a)
+{
+	t_node		*now;
+	int			pivot;
+	int			i;
+	long long	s;
+
+	i = 1;
+	pivot = -2147483648;
+	s = 2147483648;
+	while (i <= 3)
+	{
+		now = a->top;
+		pivot = -2147483648;
+		while (now->next)
+		{
+			if (now->data >= pivot && s > now->data)
+				pivot = now->data;
+			now = now->next;
+		}
+		if (now->data >= pivot && s > now->data)
+			pivot = now->data;
+		s = pivot;
+		i++;
+	}
+	return (s);
+}
+
+void	push_swap_rb_ox(t_stack *b, int pivot2)
 {
 	t_node	*now;
 
 	now = b->top;
 	if (b->size > 1 && (now->data <= pivot2))
 		rb(b);
-}
-
-void	pivot_setting(t_stack *a, t_stack *b)
-{
-	int	p1;
-	int	p2;
-	int	i;
-
-	p1 = ft_pivot(a, b);
-	p2 = ft_pivot2(a, b);
-	i = a->size;
-	while (i--)
-	{
-		if (a->top->data <= p2)
-		{
-			pb(b, a);
-			rb_ox(b, p1);
-		}
-		else
-			ra(a);
-	}
-	while (a->size > 3)
-		pb(b, a);
+	else if (b->size > 1 && (now->data < now->next->data))
+		sb(b);
 }

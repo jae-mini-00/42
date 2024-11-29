@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 17:19:34 by jaejo             #+#    #+#             */
-/*   Updated: 2024/10/04 18:14:06 by jaejo            ###   ########.fr       */
+/*   Created: 2024/10/06 14:20:16 by jaejo             #+#    #+#             */
+/*   Updated: 2024/10/06 14:55:07 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	i;
+	int	a;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	if (fd <= 0)
+		return ;
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		n *= -1;
+	}
+	if (n == -2147483648)
+	{
+		write (fd, "2147483648", 10);
+		return ;
+	}	
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	a = n % 10 + 48;
+	write (fd, &a, 1);
 }
