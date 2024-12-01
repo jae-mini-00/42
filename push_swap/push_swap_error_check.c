@@ -51,7 +51,10 @@ void	ft_ascending_order_check(t_stack *a, t_stack *b)
 		now = now->next;
 	}
 	if (!(now->next) && now->data > i)
-		ft_stack_free(a, b);
+	{
+		ft_end_free(a, b);
+		exit(2);
+	}
 }
 
 void	ft_same_data_check(t_node *now, t_stack *a, t_stack *b)
@@ -84,7 +87,7 @@ void	push_swap_error_check(t_stack *a, t_stack *b, char **data)
 
 	ft_data_free(data);
 	if (a->size < 2)
-		ft_stack_free(a, b);
+		ft_end_free(a, b);
 	ft_ascending_order_check(a, b);
 	ft_same_data_check(a->top, a, b);
 }

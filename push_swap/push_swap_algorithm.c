@@ -56,7 +56,7 @@ void	push_swap_hard_hard_coding(t_stack *a, t_stack *b)
 		sa(a);
 }
 
-void	greedy(t_stack *a, t_stack *b)
+/*void	greedy(t_stack *a, t_stack *b)
 {
 	while (b->size)
 	{
@@ -70,7 +70,7 @@ void	greedy(t_stack *a, t_stack *b)
 	}
 	while (a->bottom->data < a->top->data)
 		rra(a);
-}
+}*/
 
 void	push_swap_algorithm(t_stack *a, t_stack *b)
 {

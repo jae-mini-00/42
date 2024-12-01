@@ -43,6 +43,7 @@ void		push_swap_pivot_setting2(t_stack *a, t_stack *b);
 void		push_swap_algorithm(t_stack *a, t_stack *b);
 void		push_swap_stack_add(t_stack *a, t_stack *b, char **data);
 void		push_swap_error_check(t_stack *a, t_stack *b, char **data);
+void		ft_data_free(char **data);
 void		ft_stack_free(t_stack *list, t_stack *b);
 void		ft_end_free(t_stack *list, t_stack *b);
 void		bottom_push(t_stack *list, t_node *data);

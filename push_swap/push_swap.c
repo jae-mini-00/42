@@ -50,6 +50,7 @@ void	ft_end_free(t_stack *list, t_stack *b)
 	}
 	free(list);
 	free(b);
+	exit(3);
 }
 
 int	main(int ac, char **av)
@@ -68,22 +69,28 @@ int	main(int ac, char **av)
 	push_swap_stack_add(a, b, data);
 	push_swap_error_check(a, b, data);
 	push_swap_algorithm(a, b);
+	/*printf("------------------------------\n");
 	t_node *now;
-	printf("------------------------------\n");
+	t_node *now2;
+	int	d;
 	now = a->top;
-	while (now->next)
+	now2 = b->top;
+	d = 1;
+	while (a->size - d + 1 > 0 || b->size - d + 1> 0)
 	{
-		printf("a :%d\n", now->data);
-		now = now->next;
+		if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
+			printf("%d = b :%d    a :%d\n",d, now2->data, now->data);
+		else if (a->size - d + 1 > 0)
+			printf("%d = b :     a :%d\n",d, now->data);
+		else if (b->size - d + 1 > 0)
+			printf("%d = b :%d    a :\n",d, now2->data);
+		d++;
+		if (now)
+			now = now->next;
+		if (now2)
+			now2 = now2->next;
 	}
-	printf("a :%d\n", now->data);
 	printf("------------------------------\n");
-	now = b->top;
-	while (now->next)
-	{
-		printf("b :%d\n", now->data);
-		now = now->next;
-	}
-	printf("b :%d\n", now->data);
+	*/
 	ft_end_free(a, b);
 }

@@ -24,7 +24,10 @@ void	push_swap_stack_add(t_stack *a, t_stack *b, char **data)
 	{
 		temp = push_swap_atoi(data[i]);
 		if (temp < -2147483648)
-			push_swap_error_check(a, b, data);
+		{
+			ft_data_free(data);
+			ft_stack_free(b, a);
+		}
 		push(b, push_swap_node_create((int)temp));
 		i++;
 	}
@@ -54,6 +57,7 @@ long long	push_swap_atoi(char *av)
 		temp = (temp * 10) + av[i] - 48;
 		i++;
 	}
+	temp *= flag;
 	if ((temp > 2147483647 || temp < -2147483648 || av[i] != '\0') && \
 		av[i] != ' ')
 		return (-2147483649);
