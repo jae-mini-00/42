@@ -20,11 +20,7 @@ void	push_swap_atob(t_stack *a, t_stack *b)
 	while (a->size > 3)
 	{
 		if (a->top->data < p1)
-		{
 			pb(b, a);
-			if (b->size > 1 && (b->top->data < b->top->next->data))
-				sb(b);
-		}
 		else
 			ra(a);
 	}
@@ -64,8 +60,7 @@ void	push_swap_pivot_setting2(t_stack *a, t_stack *b)
 		if (a->top->data <= p1)
 		{
 			pb(b, a);
-			if (b->size > 1 && (b->top->data < b->top->next->data))
-				sb(b);
+			rb(b);
 		}
 		else
 			ra(a);

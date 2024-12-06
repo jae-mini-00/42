@@ -103,6 +103,4 @@ void	push_swap_rb_ox(t_stack *b, int pivot2)
 	now = b->top;
 	if (b->size > 1 && (now->data <= pivot2))
 		rb(b);
-	else if (b->size > 1 && (now->data < now->next->data))
-		sb(b);
 }

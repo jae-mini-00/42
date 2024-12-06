@@ -6,7 +6,7 @@
 /*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:17:07 by jaejo             #+#    #+#             */
-/*   Updated: 2024/11/19 13:32:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:42:24 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../ft_printf/libft/libft.h"
+# include "./ft_printf/ft_printf.h"
 
 typedef struct s_node
 {
@@ -33,9 +33,15 @@ typedef struct s_stack
 
 int			ft_pivot(t_stack *a);
 int			ft_pivot2(t_stack *a);
+int			push_swap_hard_pivot(t_stack *a);
+int			push_swap_ra_cost(t_stack *a, t_node *b_now);
+int			push_swap_rra_cost(t_stack *a, t_node *b_now);
+int			push_swap_ra_minimum_cost1(t_stack *a, t_stack *b, int *ra_flag);
+int			push_swap_ra_minimum_cost2(t_stack *a, t_stack *b, int *ra_flag);
+int			push_swap_rra_minimum_cost1(t_stack *a, t_stack *b, int *rra_flag);
+int			push_swap_rra_minimum_cost2(t_stack *a, t_stack *b, int *rra_flag);
 void		push(t_stack *list, t_node *data);
 void		push_swap_greedy(t_stack *a, t_stack *b);
-int			push_swap_hard_pivot(t_stack *a);
 void		push_swap_atob(t_stack *a, t_stack *b);
 void		push_swap_rb_ox(t_stack *b, int pivot2);
 void		push_swap_pivot_setting1(t_stack *a, t_stack *b);

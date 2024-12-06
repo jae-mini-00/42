@@ -11,7 +11,54 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
+int	push_swap_ra_cost(t_stack *a, t_node *b_now)
+{
+	int		ra_cost;
+	t_node	*a_now;
+
+	ra_cost = 0;
+	a_now = a->top;
+	if (a_now->data > b_now->data && \
+		((a->bottom->data > a->bottom->prev->data && \
+		a->bottom->data > a_now->data) || a->bottom->data < b_now->data))
+		return (0);
+	while (1)
+	{
+		ra_cost++;
+		a_now = a_now->next;
+		if (!a_now->next)
+			return (ra_cost);
+		else if (a_now->data > b_now->data && a_now->prev->data < b_now->data)
+			return (ra_cost);
+		else if (a_now->data > a_now->next->data && \
+				b_now->data < a->bottom->data && \
+				a_now->next->data > b_now->data)
+			return (ra_cost + 1);
+	}
+	return (ra_cost);
+}
+
+int	push_swap_rra_cost(t_stack *a, t_node *b_now)
+{
+	int		rra_cost;
+	t_node	*a_now;
+
+	rra_cost = 0;
+	a_now = a->bottom;
+	while (1)
+	{
+		if (!a_now->prev)
+			return (0);
+		else if (a_now->data > b_now->data && a_now->prev->data < b_now->data)
+			return (++rra_cost);
+		else if (a_now->data > b_now->data && a_now->data < a_now->prev->data)
+			return (++rra_cost);
+		rra_cost++;
+		a_now = a_now->prev;
+	}
+	return (rra_cost);
+}
 
 void	push_swap_hard_coding(t_stack *a)
 {
@@ -56,22 +103,6 @@ void	push_swap_hard_hard_coding(t_stack *a, t_stack *b)
 		sa(a);
 }
 
-/*void	greedy(t_stack *a, t_stack *b)
-{
-	while (b->size)
-	{
-		while (b->size > 0 && (a->top->data < b->top->data))
-			ra(a);
-		if (b->top->data < a->top->data)
-			pa(a, b);
-		while (b->size > 0 && (a->bottom->data < a->top->data) && \
-			(a->bottom->data > b->top->data))
-			rra(a);
-	}
-	while (a->bottom->data < a->top->data)
-		rra(a);
-}*/
-
 void	push_swap_algorithm(t_stack *a, t_stack *b)
 {
 	if (a->size < 6)
@@ -85,7 +116,6 @@ void	push_swap_algorithm(t_stack *a, t_stack *b)
 	{
 		push_swap_pivot_setting2(a, b);
 		push_swap_hard_coding(a);
-		//greedy(a, b);
 		push_swap_greedy(a, b);
 	}
 }

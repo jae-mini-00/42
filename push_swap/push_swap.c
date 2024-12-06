@@ -6,7 +6,7 @@
 /*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:55:21 by jaejo             #+#    #+#             */
-/*   Updated: 2024/11/19 13:55:23 by jaejo            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:26:34 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,26 @@ void	ft_end_free(t_stack *list, t_stack *b)
 	exit(3);
 }
 
+void	ft_end_stack(t_stack *a)
+{
+	t_node	*now;
+	int		i;
+
+	i = 0;
+	now = a->top;
+	while (now->data > now->next->data)
+	{
+		i++;
+		now = now->next;
+	}
+	if (i < a->size / 2)
+		while (a->top->data > a->bottom->data)
+			ra(a);
+	else
+		while (a->bottom->data < a->top->next->data)
+			rra(a);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -69,28 +89,6 @@ int	main(int ac, char **av)
 	push_swap_stack_add(a, b, data);
 	push_swap_error_check(a, b, data);
 	push_swap_algorithm(a, b);
-	/*printf("------------------------------\n");
-	t_node *now;
-	t_node *now2;
-	int	d;
-	now = a->top;
-	now2 = b->top;
-	d = 1;
-	while (a->size - d + 1 > 0 || b->size - d + 1> 0)
-	{
-		if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
-			printf("%d = b :%d    a :%d\n",d, now2->data, now->data);
-		else if (a->size - d + 1 > 0)
-			printf("%d = b :     a :%d\n",d, now->data);
-		else if (b->size - d + 1 > 0)
-			printf("%d = b :%d    a :\n",d, now2->data);
-		d++;
-		if (now)
-			now = now->next;
-		if (now2)
-			now2 = now2->next;
-	}
-	printf("------------------------------\n");
-	*/
+	ft_end_stack(a);
 	ft_end_free(a, b);
 }

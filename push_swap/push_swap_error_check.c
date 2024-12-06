@@ -82,9 +82,6 @@ void	ft_same_data_check(t_node *now, t_stack *a, t_stack *b)
 
 void	push_swap_error_check(t_stack *a, t_stack *b, char **data)
 {
-	t_node	*now;
-	int		i;
-
 	ft_data_free(data);
 	if (a->size < 2)
 		ft_end_free(a, b);
