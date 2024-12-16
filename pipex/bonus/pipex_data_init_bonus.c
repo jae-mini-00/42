@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	**ft_full_path(char **data)
 {
@@ -49,8 +49,9 @@ char	**ft_path_split(char **envp)
 	return (path_split);
 }
 
-void	pipexdata_init(t_pipexdata *data, int ac, char **av, char **envp)
+void	pipexdata_init(t_bonusdata *data, int ac, char **av, char **envp)
 {
+	data->i = 2;
 	data->in_file = open(av[1], O_RDONLY);
 	if (data->in_file == -1)
 		ft_perror("file_open_err", errno);
@@ -58,5 +59,5 @@ void	pipexdata_init(t_pipexdata *data, int ac, char **av, char **envp)
 	if (data->out_file == -1)
 		ft_perror("file_open_err", errno);
 	data->path_split = ft_path_split(envp);
-	data->cmd = cmd_init(data->cmd, ac, av, data->path_split);
+	data->cmd = cmd_init(data, ac, av, data->path_split);
 }

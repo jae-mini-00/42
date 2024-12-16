@@ -13,25 +13,30 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
 
-EXEC = pipex.a
-
 NAME = pipex
 
-SRCS = pipex.c pipex_data_init.c \
+SRCS = pipex.c pipex_data_init.c pipex_cmd_init.c pipex_free_and_err.c \
+
+B_SRCS = pipex_bonus.c pipex_data_init_bonus.c pipex_cmd_init_bonus.c \
+         pipex_free_and_err_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 
+B_OBJS = $(B_SRCS:.c=.o)
+
 all : $(NAME)
 
-$(EXEC) : $(OBJS)
+$(NAME) : $(OBJS)
 	$(MAKE) -C ./ft_printf
-	cp ./ft_printf/libftprintf.a ./
-	mv libftprintf.a pipex.a
-	ar rcs $(EXEC) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -o $(NAME)
 
-$(NAME) : $(EXEC)
-	$(CC) $(CFLAGS) $(EXEC) -o $(NAME)
-	rm -f pipex.a
+make_bonus : $(B_OBJS)
+	$(MAKE) -C ./ft_printf
+	$(CC) $(CFLAGS) $(B_OBJS) -L./ft_printf -lftprintf -o $(NAME)
+	touch $@
+	rm make_bonus
+
+bonus : make_bonus
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
