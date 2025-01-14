@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror -I.
 
 NAME = fdf
 
-SRCS =  \
+SRCS =  fdf.c \
 
 B_SRCS =  \
 
@@ -27,14 +27,14 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C ./ft_printf 
-	$(MAKE) -C ./minilib-linux
-	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -L./minilibx-linux -lmlx -o $(NAME)
+	$(MAKE) -C ./minilibx-linux
+	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -L./minilibx-linux -lmlx -lXext -lX11 -o $(NAME)
 
 make_bonus : $(B_OBJS)
 	touch $@
 	$(MAKE) -C ./ft_printf
 	$(MAKE) -C ./minilib-linux
-	$(CC) $(CFLAGS) $(B_OBJS) -L./ft_printf -lftprintf -L./minilibx-linux -lmlx -o $(NAME)
+	$(CC) $(CFLAGS) $(B_OBJS) -L./ft_printf -lftprintf -L./minilibx-linux -lmlx -lXext -lX11 -o $(NAME)
 
 bonus : make_bonus
 
