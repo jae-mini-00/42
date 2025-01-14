@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
-#include "./minilibx/mlx.h"
+#include "./minilibx-linux/mlx.h"
 #include "./ft_printf/ft_printf.h"
 
 # endif
