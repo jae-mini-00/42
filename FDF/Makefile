@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror -I.
 
 NAME = fdf
 
-SRCS =  fdf.c \
+SRCS =  fdf.c fdf_hook.c  fdf_free_n_err.c fdf_file_check.c \
 
 B_SRCS =  \
 
