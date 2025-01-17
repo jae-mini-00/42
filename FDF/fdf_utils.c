@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_hook.c                                         :+:      :+:    :+:   */
+/*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 15:38:01 by jaejo             #+#    #+#             */
-/*   Updated: 2025/01/16 15:38:03 by jaejo            ###   ########.fr       */
+/*   Created: 2025/01/17 23:04:05 by jaejo             #+#    #+#             */
+/*   Updated: 2025/01/17 23:04:07 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	x_hook(t_content *c_data)
+int	create_trgb(int t, int r, int g, int b)
 {
-	if (c_data->img)
-		mlx_destroy_image(c_data->mlx, c_data->img);
-	mlx_destroy_window(c_data->mlx, c_data->win);
-	mlx_destroy_display(c_data->mlx);
-	free(c_data->mlx);
-	exit(0);
-	return (0);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	key_hook(int keycode, t_content *c_data)
+void	my_mlx_pixel_put(t_content *data, int x, int y, int color)
 {
-	if (keycode == key_esc)
-		x_hook (c_data);
-	return (0);
+	char	*dst;
+
+	dst = data->img_addr + (y * data->width + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }

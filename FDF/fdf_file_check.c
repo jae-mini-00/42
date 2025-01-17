@@ -12,16 +12,17 @@
 
 #include "fdf.h"
 
-static void	map_data_check(char *data)
+static void	map_data_check(char *data, char **full_data)
 {
 	int	i;
 
 	i = 0;
 	while (data[i] && data[i] >= '0' && data[i] <= '9')
 		i++;
-	if (!data[i])
+	if (!data[i] || data[i] == '\n')
 		return ;
-	//ft_perror("Data is not number", 22);
+	ft_split_free(full_data);
+	ft_perror("Data is not number", 22);
 }
 
 static int	width_len(char **data)
@@ -31,7 +32,7 @@ static int	width_len(char **data)
 	i = 0;
 	while (data[i] != NULL)
 	{
-			map_data_check(data[i]);
+		map_data_check(data[i], data);
 		i++;
 	}
 	ft_split_free(data);
@@ -41,22 +42,21 @@ static int	width_len(char **data)
 static void	ft_map_size(int fd, t_map *m_data)
 {
 	int		width;
-	//int		height;
 	char	*str;
 	char	**data;
 
 	str = get_next_line(fd);
 	if (!str)
 		ft_perror("gnl get NULL", 9);
-	//height = 1;
 	data = ft_split(str, ' ');
 	if (!data)
 		ft_perror("split error", 128);
-	free(str);
 	width = width_len(data);
 	m_data->map_width = width;
-	while (width)
+	m_data->map_height = 1;
+	while (str)
 	{
+		free(str);
 		str = get_next_line(fd);
 		if (!str)
 			return ;
@@ -64,10 +64,11 @@ static void	ft_map_size(int fd, t_map *m_data)
 		width = width_len(data);
 		if (m_data->map_width != width)
 			ft_perror("map data error", 8);
+		m_data->map_height += 1;
 	}
 }
 
-static void  fdf_file_data_check(char *file, t_map *m_data)
+static void	fdf_file_data_check(char *file, t_map *m_data)
 {
 	int	fd;
 

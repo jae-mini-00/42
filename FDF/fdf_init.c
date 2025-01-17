@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_hook.c                                         :+:      :+:    :+:   */
+/*   fdf_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 15:38:01 by jaejo             #+#    #+#             */
-/*   Updated: 2025/01/16 15:38:03 by jaejo            ###   ########.fr       */
+/*   Created: 2025/01/17 23:16:39 by jaejo             #+#    #+#             */
+/*   Updated: 2025/01/17 23:16:41 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	x_hook(t_content *c_data)
+void	fdf_init(t_content *c_data, t_map *m_data)
 {
-	if (c_data->img)
-		mlx_destroy_image(c_data->mlx, c_data->img);
-	mlx_destroy_window(c_data->mlx, c_data->win);
-	mlx_destroy_display(c_data->mlx);
-	free(c_data->mlx);
-	exit(0);
-	return (0);
-}
-
-int	key_hook(int keycode, t_content *c_data)
-{
-	if (keycode == key_esc)
-		x_hook (c_data);
-	return (0);
+	c_data->mlx = mlx_init();
+	c_data->win = mlx_new_window (c_data->mlx, 1920, 1080, "fdf");
+	c_data->color = create_trgb(255, 255, 255, 255);
+	c_data->img = mlx_new_image(c_data->mlx, 1920, 1080);
+	c_data->img_addr = mlx_get_data_addr(c_data->img, &c_data->bpp, \
+											&c_data->width, &c_data->endian);
+	m_data->x_offset = 500;
+	m_data->y_offset = 200;
+	m_data->scale = 50;
 }

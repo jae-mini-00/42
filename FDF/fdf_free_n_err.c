@@ -24,32 +24,10 @@ void	ft_split_free(char **data)
 	int	i;
 
 	i = 0;
-	while(data[i])
+	while (data[i])
 	{
 		free(data[i]);
 		i++;
 	}
 	free(data);
 }
-/*
-void	file_check(char *file, int ac)
-{
-	char **file_name;
-	int		i;
-
-	i = 0;
-	if (ac != 2)
-		ft_perror ("Invalid number of arguments", 22);
-	file_name = ft_split(file, '.');
-	if (!file_name)
-		ft_perror("split error", errno);
-	while (file_name[i])
-		i++;
-	if (ft_strncmp(file_name[i - 1], "fdf", 4) == 0)
-	{
-		ft_split_free(file_name);
-		return ;
-	}
-	ft_split_free(file_name);
-	ft_perror("Not .fdf", 9);
-}*/
