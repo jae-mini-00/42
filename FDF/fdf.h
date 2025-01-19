@@ -35,6 +35,16 @@ typedef struct s_content
 	void	*img_addr;
 } t_content;
 
+typedef struct s_pos
+{
+	float	x;
+	float	y;
+	float	z;
+	struct s_pos	*new;
+	struct s_pos	*next;
+} t_pos;
+
+/*
 typedef struct s_map
 {
 	int		map_width;
@@ -46,14 +56,26 @@ typedef struct s_map
 	float	y;
 	float	z;
 } t_map;
+*/
+
+typedef struct s_map
+{
+	int		map_width;
+	int		map_height;
+	int		x_offset;
+	int		y_offset;
+	int		scale;
+	t_pos	*p_data;
+} t_map;
 
 int		x_hook(t_content *c_data);
 int		key_hook(int keycode, t_content *c_data);
 int		create_trgb(int t, int r, int g, int b);
 void	ft_split_free(char **data);
 void	ft_perror(char *err, int num);
-void	fdf_init(t_content *c_data, t_map *m_data);
+void    fdf_pos_init(t_pos *data, int fd);
 void	fdf_file_check(char *file, int ac, t_map *m_data);
+void	fdf_init(t_content *c_data, t_map *m_data, char *file);
 void	my_mlx_pixel_put(t_content *data, int x, int y, int color);
 
 #endif
