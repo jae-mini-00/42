@@ -12,8 +12,13 @@
 
 #include "fdf.h"
 
-void	fdf_init(t_content *c_data, t_map *m_data)
+void	fdf_init(t_content *c_data, t_map *m_data, char *file)
 {
+	int	fd;
+
+	fd = open(file, O_RDONLY)
+	if (fd < 1)
+		ft_perror("open err", errno);
 	c_data->mlx = mlx_init();
 	c_data->win = mlx_new_window (c_data->mlx, 1920, 1080, "fdf");
 	c_data->color = create_trgb(255, 255, 255, 255);
@@ -23,4 +28,6 @@ void	fdf_init(t_content *c_data, t_map *m_data)
 	m_data->x_offset = 500;
 	m_data->y_offset = 200;
 	m_data->scale = 50;
+	fdf_pos_init(m_data->p_data, fd);
+	close (fd);
 }

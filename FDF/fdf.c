@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	t_map	m_data;
 
 	fdf_file_check(av[1], ac, &m_data);
-	fdf_init(&c_data, &m_data);
+	fdf_init(&c_data, &m_data, av[1]);
 	
 	int i = 10;
 	int j = 0;
