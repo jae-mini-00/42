@@ -16,7 +16,7 @@ void	fdf_init(t_content *c_data, t_map *m_data, char *file)
 {
 	int	fd;
 
-	fd = open(file, O_RDONLY)
+	fd = open(file, O_RDONLY);
 	if (fd < 1)
 		ft_perror("open err", errno);
 	c_data->mlx = mlx_init();
@@ -27,7 +27,7 @@ void	fdf_init(t_content *c_data, t_map *m_data, char *file)
 											&c_data->width, &c_data->endian);
 	m_data->x_offset = 500;
 	m_data->y_offset = 200;
-	m_data->scale = 50;
-	fdf_pos_init(m_data->p_data, fd);
+	m_data->scale = 40;
+	m_data->p_data = fdf_pos_init(m_data->p_data, fd);
 	close (fd);
 }

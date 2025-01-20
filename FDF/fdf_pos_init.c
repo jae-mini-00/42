@@ -37,7 +37,7 @@ void    pos_add_back(t_pos *data, t_pos *back)
     now->next = back;
 }
 
-void    fdf_pos_init(t_pos *data, int fd)
+t_pos    *fdf_pos_init(t_pos *data, int fd)
 {
     char *str;
     char **s_data;
@@ -46,7 +46,7 @@ void    fdf_pos_init(t_pos *data, int fd)
 
     str = get_next_line(fd);
     s_data = ft_split(str, ' ');
-    *data = pos_create(0, 0, s_data[0]);
+    data = pos_create(0, 0, s_data[0]);
     i = 1;
     j = 0;
     while (1)
@@ -54,15 +54,17 @@ void    fdf_pos_init(t_pos *data, int fd)
         while(s_data[i])
         {
             data->new = pos_create(i, j , s_data[i]);
-            pos_add_back(data, new);
+            pos_add_back(data, data->new);
             i++;
         }
         ft_split_free(s_data);
+		free(str);
         i = 0;
         j++;
         str = get_next_line(fd);
         if (!str)
-            return ;
+            break ;
         s_data = ft_split(str, ' ');
     }
+	return (data) ;
 }
