@@ -37,8 +37,8 @@ typedef struct s_content
 	float	d_x;
 	float	d_y;
 	float	step;
-	float abs_dx;
-    float abs_dy;
+	float	abs_dx;
+	float	abs_dy;
 	float	xinc;
 	float	yinc;
 }	t_content;
