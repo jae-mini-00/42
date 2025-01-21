@@ -12,44 +12,42 @@
 
 #include "fdf.h"
 
-void	make_line(t_pos *data, float d_x, float d_y, float step, t_content *c_data)
+void	make_line(t_pos *data, t_content *c_data)
 {
-	float	xinc;
-	float	yinc;
 	float	x;
 	float	y;
 	int		i;
 
 	i = 0;
-	xinc = d_x / step;
-    yinc = d_y / step;
+	c_data->xinc = c_data->d_x / c_data->step;
+    c_data->yinc = c_data->d_y / c_data->step;
 	x = data->x;
 	y = data->y;
-	while ((float)i <= step)
+	while ((float)i <= c_data->step)
 	{
 		if (x > 0 && x <= 1920 && y > 0 && y <= 1080)
 			my_mlx_pixel_put(c_data, x, y, c_data->color);
-		x = x + xinc;
-		y = y + yinc;
+		x = x + c_data->xinc;
+		y = y + c_data->yinc;
 		i++;
 	}
 }
 
 void	make_image_line(t_pos *data, t_pos *next_data, t_content *c_data)
 {
-	float	d_x;
-	float	d_y;
-	float	step;
-	float abs_dx;
-    float abs_dy;
-
-	d_x = next_data->x - data->x;
-	d_y = next_data->y - data->y;
-	abs_dx = d_x < 0 ? -d_x : d_x;
-	abs_dy = d_y < 0 ? -d_y : d_y;
-	if (abs_dx > abs_dy)
-		step = abs_dx;
+	c_data->d_x = next_data->x - data->x;
+	c_data->d_y = next_data->y - data->y;
+	if (c_data->d_x < 0)
+		c_data->abs_dx = c_data->d_x * -1;
 	else
-		step = abs_dy;
-	make_line(data, d_x, d_y, step, c_data);
+		c_data->abs_dx = c_data->d_x;
+	if (c_data->d_y < 0)
+		c_data->abs_dy = c_data->d_y * -1;
+	else
+		c_data->abs_dy = c_data->d_y;
+	if (c_data->abs_dx > c_data->abs_dy)
+		c_data->step = c_data->abs_dx;
+	else
+		c_data->step = c_data->abs_dy;
+	make_line(data, c_data);
 }
