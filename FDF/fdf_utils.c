@@ -12,6 +12,13 @@
 
 #include "fdf.h"
 
+t_pos	*next_height_pos(t_pos *data, int pass)
+{
+	while (pass--)
+		data = data->next;
+	return (data);
+}
+
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);

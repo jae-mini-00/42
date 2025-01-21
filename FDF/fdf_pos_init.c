@@ -22,49 +22,45 @@ t_pos	*pos_create(int i, int j, char *data)
 	new->x = i;
 	new->y = j;
 	new->z = ft_atoi(data);
-    new->new = NULL;
-    new->next = NULL;
+	new->new = NULL;
+	new->next = NULL;
 	return (new);
 }
 
-void    pos_add_back(t_pos *data, t_pos *back)
+void	pos_add_back(t_pos *data, t_pos *back)
 {
-    t_pos *now;
+	t_pos	*now;
 
-    now = data;
-    while (now->next)
-        now = now->next;
-    now->next = back;
+	now = data;
+	while (now->next)
+		now = now->next;
+	now->next = back;
 }
 
-t_pos    *fdf_pos_init(t_pos *data, int fd)
+t_pos	*fdf_pos_init(t_pos *data, int fd, int x, int y)
 {
-    char *str;
-    char **s_data;
-    int i;
-    int j;
+	char	*str;
+	char	**s_data;
 
-    str = get_next_line(fd);
-    s_data = ft_split(str, ' ');
-    data = pos_create(0, 0, s_data[0]);
-    i = 1;
-    j = 0;
-    while (1)
-    {
-        while(s_data[i])
-        {
-            data->new = pos_create(i, j , s_data[i]);
-            pos_add_back(data, data->new);
-            i++;
-        }
-        ft_split_free(s_data);
+	str = get_next_line(fd);
+	s_data = ft_split(str, ' ');
+	data = pos_create(0, 0, s_data[0]);
+	while (1)
+	{
+		while (s_data[x])
+		{
+			data->new = pos_create(x, y, s_data[x]);
+			pos_add_back(data, data->new);
+			x++;
+		}
+		ft_split_free(s_data);
 		free(str);
-        i = 0;
-        j++;
-        str = get_next_line(fd);
-        if (!str)
-            break ;
-        s_data = ft_split(str, ' ');
-    }
-	return (data) ;
+		x = 0;
+		y++;
+		str = get_next_line(fd);
+		if (!str)
+			break ;
+		s_data = ft_split(str, ' ');
+	}
+	return (data);
 }
