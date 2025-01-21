@@ -20,7 +20,7 @@ void	make_line(t_pos *data, t_content *c_data)
 
 	i = 0;
 	c_data->xinc = c_data->d_x / c_data->step;
-    c_data->yinc = c_data->d_y / c_data->step;
+	c_data->yinc = c_data->d_y / c_data->step;
 	x = data->x;
 	y = data->y;
 	while ((float)i <= c_data->step)
