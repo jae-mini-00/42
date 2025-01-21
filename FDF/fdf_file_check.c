@@ -21,7 +21,7 @@ static void	map_data_check(char *data, char **full_data)
 		i++;
 	while (data[i] && data[i] >= '0' && data[i] <= '9')
 		i++;
-	if (!data[i] || data[i] == '\n')
+	if (!data[i] || (data[i] == '\n' && i != 0))
 		return ;
 	ft_split_free(full_data);
 	ft_perror("Data is not number", 22);
