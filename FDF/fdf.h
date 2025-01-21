@@ -34,6 +34,13 @@ typedef struct s_content
 	void	*win;
 	void	*img;
 	void	*img_addr;
+	float	d_x;
+	float	d_y;
+	float	step;
+	float abs_dx;
+    float abs_dy;
+	float	xinc;
+	float	yinc;
 }	t_content;
 
 typedef struct s_pos
@@ -61,14 +68,12 @@ int		create_trgb(int t, int r, int g, int b);
 void	pos_free(t_pos *data);
 void	ft_split_free(char **data);
 void	ft_perror(char *err, int num);
+void	make_line(t_pos *data, t_content *c_data);
 void	make_image(t_content *c_data, t_map *m_data);
 void	fdf_file_check(char *file, int ac, t_map *m_data);
 void	fdf_init(t_content *c_data, t_map *m_data, char *file);
 void	my_mlx_pixel_put(t_content *data, int x, int y, int color);
-//void	make_image_line(t_pos *data, t_pos *next_data, t_content *c_data, t_map *m_data);
-void	make_line(t_pos *data, float d_x, float d_y, float step, t_content *c_data);
 void	make_image_line(t_pos *data, t_pos *next_data, t_content *c_data);
-//void	make_line(t_pos *data, t_content *c_data, t_map *m_data);
 t_pos	*fdf_pos_init(t_pos *data, int fd, int x, int y);
 t_pos	*next_height_pos(t_pos *data, int pass);
 t_pos	*fdf_pos_init(t_pos *data, int fd, int x, int y);

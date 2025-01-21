@@ -84,7 +84,6 @@ void	make_image(t_content *c_data, t_map *m_data)
 		now->y = y;
 		now = now->next;
 	}
-  (void)c_data;
 	make_pixel(c_data, m_data);
 	make_width_line(c_data, m_data);
 	make_height_line(c_data, m_data);
