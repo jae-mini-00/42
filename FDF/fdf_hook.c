@@ -25,7 +25,7 @@ int	x_hook(t_content *c_data)
 
 int	key_hook(int keycode, t_content *c_data)
 {
-	if (keycode == key_esc)
+	if (keycode == KEY_ESC)
 		x_hook (c_data);
 	return (0);
 }

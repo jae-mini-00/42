@@ -32,15 +32,15 @@ void	ft_split_free(char **data)
 	free(data);
 }
 
-void  pos_free(t_pos *data)
+void	pos_free(t_pos *data)
 {
-  t_pos *next;
+	t_pos	*next;
 
-  next = data->next;
-  while (data)
-  {
-    next = data->next;
-    free(data);
-    data = next;
-  }
+	next = data->next;
+	while (data)
+	{
+		next = data->next;
+		free(data);
+		data = next;
+	}
 }

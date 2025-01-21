@@ -12,40 +12,18 @@
 
 #include "fdf.h"
 
-void  make_pixel(t_content *c_data, t_map *m_data)
-{
-	t_pos	*now;
-	float	x;
-	float	y;
-
-
-	now = m_data->p_data;
-	while(now)
-	{
-		x = (now->x - now->y) * 0.866;
-		y = (now->x + now->y) * 0.5 - now->z;
-		my_mlx_pixel_put(c_data, 800 + x * m_data->scale , 400 + y * m_data->scale, c_data->color);
-		now = now->next;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_content	c_data;
-	t_map	m_data;
+	t_map		m_data;
 
-	fdf_file_check(av[1], ac, &m_data);
-	fdf_init(&c_data, &m_data, av[1]);
-	
-  
-	make_pixel(&c_data, &m_data);
-	pos_free(m_data.p_data);
-	mlx_put_image_to_window(c_data.mlx, c_data.win, c_data.img, 0, 0);
-	
-	mlx_key_hook(c_data.win, key_hook, &c_data);
-	mlx_hook(c_data.win, 17, 0, x_hook, &c_data);
-	
-	mlx_loop(c_data.mlx);
-  
+	fdf_file_check (av[1], ac, &m_data);
+	fdf_init (&c_data, &m_data, av[1]);
+	make_image (&c_data, &m_data);
+	mlx_put_image_to_window (c_data.mlx, c_data.win, c_data.img, 0, 0);
+	pos_free (m_data.p_data);
+	mlx_key_hook (c_data.win, key_hook, &c_data);
+	mlx_hook (c_data.win, 17, 0, x_hook, &c_data);
+	mlx_loop (c_data.mlx);
 	return (0);
 }

@@ -17,6 +17,8 @@ static void	map_data_check(char *data, char **full_data)
 	int	i;
 
 	i = 0;
+	if (data[i] == '-' || data[i] == '+')
+		i++;
 	while (data[i] && data[i] >= '0' && data[i] <= '9')
 		i++;
 	if (!data[i] || data[i] == '\n')
