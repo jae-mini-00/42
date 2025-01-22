@@ -19,6 +19,7 @@
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
 # define KEY_DOWN 65364
+# define KEY_ONE 49
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -97,5 +98,10 @@ void	fdf_left(t_content *c_data);
 void	fdf_right(t_content *c_data);
 void	fdf_up(t_content *c_data);
 void	fdf_down(t_content *c_data);
+void	fdf_different_make(t_content *c_data, t_map *m_data, float sin, float cos);
+void	fdf_different_one(t_content *c_data);
+void	make_pixel(t_content *c_data, t_map *m_data);
+void	make_width_line(t_content *c_data, t_map *m_data);
+void	make_height_line(t_content *c_data, t_map *m_data);
 
 #endif

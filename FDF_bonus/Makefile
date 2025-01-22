@@ -15,8 +15,10 @@ CFLAGS = -Wall -Wextra -Werror -I.
 
 NAME = fdf
 
-SRCS =  fdf.c fdf_hook.c  fdf_free_n_err.c fdf_file_check.c  fdf_utils.c \
-				fdf_init.c  fdf_pos_init.c fdf_make_line.c  fdf_make_image.c fdf_p_m_bonus.c \
+SRCS =  fdf_bonus.c fdf_hook_bonus.c  fdf_free_n_err_bonus.c fdf_file_check_bonus.c \
+				fdf_utils_bonus.c fdf_init_bonus.c  fdf_pos_init_bonus.c fdf_make_line_bonus.c \
+				fdf_make_image_bonus.c fdf_p_m_bonus.c fdf_init2_bonus.c fdf_map_move_bonus.c \
+				fdf_make_different_bonus.c \
 
 B_SRCS =  \
 
@@ -45,7 +47,6 @@ bonus : make_bonus
 clean :
 	rm -f $(OBJS) $(B_OBJS)
 	rm -f make_bonus
-	$(MAKE) clean -C ./ft_printf
 	$(MAKE) clean -C ./ft_printf
 
 fclean : clean

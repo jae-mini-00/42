@@ -40,5 +40,7 @@ int	key_hook(int keycode, t_content *c_data)
 		fdf_up (c_data);
 	else if (keycode == KEY_DOWN)
 		fdf_down (c_data);
+	else if (keycode == KEY_ONE)
+		fdf_different_one(c_data);
 	return (0);
 }
