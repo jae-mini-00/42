@@ -25,8 +25,14 @@ void	make_line(t_pos *data, t_content *c_data)
 	y = data->y;
 	while ((float)i <= c_data->step)
 	{
-		if (x > 0 && x <= 1920 && y > 0 && y <= 1080)
-			my_mlx_pixel_put(c_data, x, y, c_data->color);
+		if (data->color == 0)
+		{
+			if (x > 0 && x <= 1920 && y > 0 && y <= 1080)
+				my_mlx_pixel_put(c_data, x, y, c_data->color);
+		}
+		else
+			if (x > 0 && x <= 1920 && y > 0 && y <= 1080)
+				my_mlx_pixel_put(c_data, x, y, data->color);
 		x = x + c_data->xinc;
 		y = y + c_data->yinc;
 		i++;
