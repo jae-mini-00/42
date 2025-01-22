@@ -31,7 +31,7 @@ void	fdf_init(t_content *c_data, t_map *m_data, char *file)
 											&c_data->width, &c_data->endian);
 	m_data->x_offset = 500;
 	m_data->y_offset = 200;
-	m_data->scale = 30;
+	m_data->scale = 3;
 	m_data->p_data = fdf_pos_init(m_data->p_data, fd, x, y);
 	close (fd);
 }

@@ -13,6 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 # define KEY_ESC 65307
+# define KEY_PLUS 65451
+# define KEY_MINUS 65453
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -45,6 +47,7 @@ typedef struct s_content
 
 typedef struct s_pos
 {
+	int				color;
 	float			x;
 	float			y;
 	float			z;

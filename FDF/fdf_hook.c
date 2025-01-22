@@ -25,7 +25,12 @@ int	x_hook(t_content *c_data)
 
 int	key_hook(int keycode, t_content *c_data)
 {
+	printf("keycod :%d\n", keycode);
 	if (keycode == KEY_ESC)
+		x_hook (c_data);
+	else if (keycode == KEY_PLUS)
+		x_hook (c_data);
+	else if (keycode == KEY_MINUS)
 		x_hook (c_data);
 	return (0);
 }

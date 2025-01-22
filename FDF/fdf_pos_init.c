@@ -12,9 +12,39 @@
 
 #include "fdf.h"
 
+int	pos_color(char *hex)
+{
+	int	color;
+	int	temp;
+	int	i;
+
+	i = 0;
+	temp = 0;
+	color = 0;
+	while (*hex && hex[i] == '0' && hex[i + 1] == 'x')
+		i += 2;
+	if (!hex[i + 1])
+		return (0);
+	while (hex[i] != '\0')
+	{
+		if (hex[i] >= '0' && hex[i] <= '9')
+			temp = hex[i] - '0';
+		else if (hex[i] >= 'A' && hex[i] <= 'F')
+			temp = hex[i] - 'A' + 10;
+		else if (hex[i] >= 'a' && hex[i] <= 'f')
+			temp = hex[i] - 'a' + 10;
+		else
+			return (0);
+		color = color * 16 + temp;
+		i++;
+	}
+	return (color);
+}
+
 t_pos	*pos_create(int i, int j, char *data)
 {
 	t_pos	*new;
+	char	*color;
 
 	new = (t_pos *)malloc(sizeof(t_pos));
 	if (!new)
@@ -22,6 +52,11 @@ t_pos	*pos_create(int i, int j, char *data)
 	new->x = i;
 	new->y = j;
 	new->z = ft_atoi(data);
+	color = ft_strchr(data, ',');
+	if (color)
+		new->color = pos_color(color + 1);
+	else
+		new->color = 0;
 	new->new = NULL;
 	new->next = NULL;
 	return (new);
