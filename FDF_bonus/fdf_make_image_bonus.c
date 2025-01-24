@@ -78,6 +78,8 @@ void	make_image(t_content *c_data, t_map *m_data)
 	now = m_data->p_data;
 	while (now)
 	{
+		now->x = now->x - m_data->map_width / 2;
+		now->y = now->y - m_data->map_height / 2;
 		x = ((now->x - now->y) * 0.866) * m_data->scale + m_data->x_offset;
 		y = ((now->x + now->y) * 0.5 - now->z) * m_data->scale;
 		y += m_data->y_offset;

@@ -30,14 +30,14 @@ void	fdf_init(t_content *c_data, t_map *m_data, char *file)
 	c_data->img = mlx_new_image(c_data->mlx, 1920, 1080);
 	c_data->img_addr = mlx_get_data_addr(c_data->img, &c_data->bpp, \
 											&c_data->width, &c_data->endian);
-	m_data->x_offset = 800;
-	m_data->y_offset = 400;
-	m_data->scale = 40;
+	m_data->x_offset = 1920 / 2;
+	m_data->y_offset = 1080 / 2;
+	m_data->scale = 35;
 	m_data->p_data = fdf_pos_init(m_data->p_data, fd, x, y);
 	close (fd);
 }
 
-void	fdf_init_bonuse(t_content *c_data, t_map *m_data, char *file, int scale)
+void	fdf_init_scale(t_content *c_data, t_map *m_data, char *file, int scale)
 {
 	int	fd;
 	int	x;
@@ -48,12 +48,11 @@ void	fdf_init_bonuse(t_content *c_data, t_map *m_data, char *file, int scale)
 	fd = open(file, O_RDONLY);
 	if (fd < 1)
 		ft_perror("open err", errno);
-	c_data->color = create_trgb(255, 255, 255, 255);
+	if (c_data->color == -1)
+		c_data->color = create_trgb(255, 255, 255, 255);
 	c_data->img = mlx_new_image(c_data->mlx, 1920, 1080);
 	c_data->img_addr = mlx_get_data_addr(c_data->img, &c_data->bpp, \
 											&c_data->width, &c_data->endian);
-	m_data->x_offset = 800;
-	m_data->y_offset = 400;
 	if (scale > 0)
 		m_data->scale = scale;
 	m_data->p_data = fdf_pos_init(m_data->p_data, fd, x, y);
