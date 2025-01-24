@@ -15,7 +15,7 @@
 void	fdf_plus(t_content *c_data)
 {
 	mlx_destroy_image(c_data->mlx, c_data->img);
-	fdf_init_bonuse (c_data, &c_data->m_data, c_data->file, \
+	fdf_init_scale (c_data, &c_data->m_data, c_data->file, \
 					c_data->m_data.scale + 1);
 	make_image (c_data, &c_data->m_data);
 	pos_free (c_data->m_data.p_data);
@@ -25,7 +25,7 @@ void	fdf_plus(t_content *c_data)
 void	fdf_minus(t_content *c_data)
 {
 	mlx_destroy_image(c_data->mlx, c_data->img);
-	fdf_init_bonuse (c_data, &c_data->m_data, c_data->file, \
+	fdf_init_scale (c_data, &c_data->m_data, c_data->file, \
 					c_data->m_data.scale - 1);
 	make_image (c_data, &c_data->m_data);
 	pos_free (c_data->m_data.p_data);

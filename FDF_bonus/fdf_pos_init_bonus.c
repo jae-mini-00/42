@@ -51,7 +51,7 @@ t_pos	*pos_create(int i, int j, char *data)
 		return (0);
 	new->x = i;
 	new->y = j;
-	new->z = ft_atoi(data);
+	new->z = ft_atoi(data) - 5;
 	color = ft_strchr(data, ',');
 	if (color)
 		new->color = pos_color(color + 1);

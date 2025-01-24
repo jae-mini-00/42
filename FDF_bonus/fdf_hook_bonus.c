@@ -25,7 +25,6 @@ int	x_hook(t_content *c_data)
 
 int	key_hook(int keycode, t_content *c_data)
 {
-	//printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 		x_hook (c_data);
 	else if (keycode == KEY_PLUS)
@@ -42,5 +41,9 @@ int	key_hook(int keycode, t_content *c_data)
 		fdf_down (c_data);
 	else if (keycode == KEY_ONE)
 		fdf_different_one(c_data);
+	else if (keycode == KEY_R)
+		fdf_rotation(c_data);
+	else if (keycode == KEY_TWO)
+		fdf_colorfull(c_data);
 	return (0);
 }

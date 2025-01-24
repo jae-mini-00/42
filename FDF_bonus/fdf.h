@@ -20,6 +20,8 @@
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 # define KEY_ONE 49
+# define KEY_TWO 50
+# define KEY_R 114
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -69,7 +71,7 @@ typedef struct s_content
 	float	abs_dy;
 	float	xinc;
 	float	yinc;
-  t_map m_data;
+	t_map	m_data;
 }	t_content;
 
 int		x_hook(t_content *c_data);
@@ -87,7 +89,7 @@ void	make_image_line(t_pos *data, t_pos *next_data, t_content *c_data);
 t_pos	*fdf_pos_init(t_pos *data, int fd, int x, int y);
 t_pos	*next_height_pos(t_pos *data, int pass);
 t_pos	*fdf_pos_init(t_pos *data, int fd, int x, int y);
-void	fdf_init_bonuse(t_content *c_data, t_map *m_data, char *file, int scale);
+void	fdf_init_scale(t_content *c_data, t_map *m_data, char *file, int scale);
 void	fdf_init_left(t_content *c_data, t_map *m_data, char *file, int scale);
 void	fdf_init_right(t_content *c_data, t_map *m_data, char *file, int scale);
 void	fdf_init_up(t_content *c_data, t_map *m_data, char *file, int scale);
@@ -98,10 +100,14 @@ void	fdf_left(t_content *c_data);
 void	fdf_right(t_content *c_data);
 void	fdf_up(t_content *c_data);
 void	fdf_down(t_content *c_data);
-void	fdf_different_make(t_content *c_data, t_map *m_data, float sin, float cos);
+void	fdf_different_make(t_content *c_data, t_map *m_data);
 void	fdf_different_one(t_content *c_data);
 void	make_pixel(t_content *c_data, t_map *m_data);
 void	make_width_line(t_content *c_data, t_map *m_data);
 void	make_height_line(t_content *c_data, t_map *m_data);
+void	fdf_rotation_make(t_content *c_data, t_map *m_data, float sin, float cos);
+void	fdf_rotation(t_content *c_data);
+void	fdf_colorfull_make(t_content *c_data, t_map *m_data);
+void	fdf_colorfull(t_content *c_data);
 
 #endif

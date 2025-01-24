@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	fdf_init_different(t_content *c_data, t_map *m_data, char *file)
+void	fdf_init_rotation(t_content *c_data, t_map *m_data, char *file)
 {
 	int	fd;
 	int	x;
@@ -32,7 +32,7 @@ void	fdf_init_different(t_content *c_data, t_map *m_data, char *file)
 	close (fd);
 }
 
-void	fdf_different_make(t_content *c_data, t_map *m_data)
+void	fdf_rotation_make(t_content *c_data, t_map *m_data, float s, float c)
 {
 	t_pos	*now;
 	float	x;
@@ -41,10 +41,12 @@ void	fdf_different_make(t_content *c_data, t_map *m_data)
 	now = m_data->p_data;
 	while (now)
 	{
-		now->x = now->x - m_data->map_width / 2;
-		now->y = now->y - m_data->map_height / 2;
+		x = now->x - m_data->map_width / 2;
+		y = now->y - m_data->map_height / 2;
+		now->x = (x * c) - (y * s);
+		now->y = (x * s) + (y * c);
 		x = ((now->x - now->y) * 0.866) * m_data->scale + m_data->x_offset;
-		y = ((now->x + now->y) * 0.5 - now->z) * (m_data->scale / 2);
+		y = ((now->x + now->y) * 0.5 - now->z) * m_data->scale;
 		y += m_data->y_offset;
 		now->x = x;
 		now->y = y;
@@ -55,11 +57,22 @@ void	fdf_different_make(t_content *c_data, t_map *m_data)
 	make_height_line(c_data, m_data);
 }
 
-void	fdf_different_one(t_content *c_data)
+void	fdf_rotation(t_content *c_data)
 {
+	static double	angle = 0;
+	double			radian;
+	double			a_sin;
+	double			a_cos;
+
+	angle += 10;
+	if (angle >= 370)
+		angle = 0;
+	radian = angle * M_PI / 180.0;
+	a_sin = sin(radian);
+	a_cos = cos(radian);
 	mlx_destroy_image(c_data->mlx, c_data->img);
-	fdf_init_different (c_data, &c_data->m_data, c_data->file);
-	fdf_different_make (c_data, &c_data->m_data);
+	fdf_init_rotation (c_data, &c_data->m_data, c_data->file);
+	fdf_rotation_make (c_data, &c_data->m_data, (float)a_sin, (float)a_cos);
 	pos_free(c_data->m_data.p_data);
 	mlx_put_image_to_window (c_data->mlx, c_data->win, c_data->img, 0, 0);
 }
