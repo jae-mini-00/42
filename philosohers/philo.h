@@ -24,7 +24,12 @@ typedef struct s_data
 {
 	pthread_t *thread;
     pthread_mutex_t mutex;
-    char *fork;
+    int *fork;
+    int eat_flag;
+    int time_to_eat;
+    int time_to_sleep;
+    int how_many_people;
+    int die_flag;
     int i;
 }	t_data;
 
