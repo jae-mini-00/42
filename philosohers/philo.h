@@ -20,19 +20,35 @@
 #include <sys/time.h>
 #include <pthread.h>
 
-typedef struct s_data
+typedef struct s_philo_brain
 {
-	pthread_t *thread;
+    pthread_t thread;
+    int idx;
+    int *left_fork;
+    int *right_fork;
+    int eat_flag;
+    int least_eat;
+    int time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
+    int last_eat_time;
+    int die_flag;
+} t_philo_brain;
+
+typedef struct s_philo
+{
+	t_philo_brain *person;
     pthread_mutex_t mutex;
     int *fork;
     int eat_flag;
+    int least_eat;
+    int time_to_die;
     int time_to_eat;
     int time_to_sleep;
-    int how_many_people;
+    int count_philo;
     int die_flag;
-    int i;
-}	t_data;
+}	t_philo;
 
-int	ft_atoi(const char *str);
+unsigned int	ft_atoi(const char *str);
 
 #endif

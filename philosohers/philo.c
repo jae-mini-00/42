@@ -12,55 +12,6 @@
 
 #include "philo.h"
 
-void *philo_life(void *arg)
-{
-    int turn;
-    //int eat_flag;
-
-    //eat_flag = 0;
-    t_data *num = (t_data *)arg;
-    while (1)
-    {
-        pthread_mutex_lock(&num->mutex);
-        turn = num->i++;
-        if (turn != 0)
-        {
-            if (num->fork[turn] && num->fork[turn - 1])
-            {
-                //eat_flag = 1;
-                num->fork[turn] -= 1;
-                num->fork[turn - 1] -= 1;
-            }
-            else
-                printf("%d i don't have fork\n", turn + 1);
-            printf("%d has taken a fork\nright :%d left :%d\n\n", turn + 1, num->fork[turn], num->fork[turn - 1]);
-        }
-        else
-        {
-            if (num->fork[turn] && num->fork[num->how_many_people - 1])
-            {
-                //eat_flag = 1;
-                num->fork[turn] -= 1;
-                num->fork[num->how_many_people - 1] -= 1;
-            }
-            else
-                printf("%d i don't have fork\n", turn + 1);
-            printf("%d has taken a fork\nright :%d left :%d\n\n", turn + 1, num->fork[turn], num->fork[num->how_many_people - 1]);
-        }
-        pthread_mutex_unlock(&num->mutex);
-        /*if (eat_flag)
-        {
-            ft_eat();
-            ft_sleeping();
-        }
-        else
-        {
-            ft_thinking();
-        }*/
-        return NULL;
-    }
-}
-
 void *int_memset(int *fork, int size)
 {
     int i;
@@ -73,39 +24,65 @@ void *int_memset(int *fork, int size)
     return (fork);
 }
 
-void *philo_init(t_data *philo, char **data)
+int parse_data(t_philo *data)
 {
-    philo->i = 0;
-    philo->die_flag = 0;
-    philo->how_many_people = ft_atoi(data[1]);
-    philo->time_to_eat = ft_atoi(data[2]);
-    philo->time_to_sleep = ft_atoi(data[3]);
-    if (data[4])
-        philo->eat_flag = ft_atoi(data[4]);
+    int flag;
+
+    flag = 0;
+    if (!data->count_philo)
+        flag = 1;
+    else if (!data->time_to_die)
+        flag = 1;
+    else if (!data->time_to_eat)
+        flag = 1;
+    else if (!data->time_to_sleep)
+        flag = 1;
+    else if (data->eat_flag)
+    {
+        if (!data->least_eat)
+            flag = 1;
+    }
+    return (flag);
+}
+
+void *philo_init(t_philo *data, int ac, char **av)
+{
+    if (ac < 5)
+        return ("1");
+    data->die_flag = 0;
+    data->count_philo = ft_atoi(av[1]);
+    data->time_to_die = ft_atoi(av[2]);
+    data->time_to_eat = ft_atoi(av[3]);
+    data->time_to_sleep = ft_atoi(av[4]);
+    if (ac == 6)
+    {
+        data->least_eat = ft_atoi(av[5]);
+        data->eat_flag = 1;
+    }
     else
-        philo->eat_flag = 0;
-    pthread_mutex_init(&philo->mutex, NULL);
-    philo->fork = (int *)malloc(sizeof(int) * ft_atoi(data[1]));
-    philo->fork = int_memset(philo->fork, philo->how_many_people );
-    philo->thread = (pthread_t *)malloc(sizeof(pthread_t) * ft_atoi(data[1]));
-    if (!philo->thread || !philo->fork)
-        return (free(philo.thread), free(philo.fork),"1");
+        data->eat_flag = 0;
+    if (parse_data(data))
+        return ("1");
+    //pthread_mutex_init(&data->mutex, NULL);
+    data->fork = (int *)malloc(sizeof(int) * ft_atoi(av[1]));
+    data->fork = int_memset(data->fork, data->count_philo );
+    data->person = (t_philo_brain *)malloc(sizeof(t_philo_brain) * ft_atoi(av[1]));
+    if (!data->person || !data->fork)
+        return (free(data->person), free(data->fork),"1");
     return (0);
 }
 
-
-
-
 int main(int ac, char **av)
 {
-    t_data philo;
-    int i = 0;
+    t_philo data;
 
-    if ((ac != 6 && ac != 5) || ft_atoi(av[1]) < 2)
-        return (0);
-    if (philo_init(&philo, av))
-        return (0);
-    while (i < philo.how_many_people)
+    if (philo_init(&data, ac, av))
+    {
+        printf ("arguments should be greater than 0 or few arguments\n");
+        return (1);
+    }
+    if (philo_brain_init(&data))
+    /*while (i < philo.how_many_people)
     {
         if (pthread_create(philo.thread + i, NULL, philo_life, &philo) != 0)
         {
@@ -117,7 +94,7 @@ int main(int ac, char **av)
     while (--i > -1)
         pthread_join(philo.thread[i], NULL);
     free(philo.thread);
-    free(philo.fork);
+    free(philo.fork);*/
     printf("메인 스레드 종료\n");
     return 0;
 }
