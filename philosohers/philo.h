@@ -32,7 +32,6 @@ typedef struct s_philo_brain
     int time_to_eat;
     int time_to_sleep;
     int last_eat_time;
-    int die_flag;
 } t_philo_brain;
 
 typedef struct s_philo
@@ -49,6 +48,17 @@ typedef struct s_philo
     int die_flag;
 }	t_philo;
 
+/* init */
+void *philo_brain_init(t_philo *data);
+void *philo_init(t_philo *data, int ac, char **av);
+
+/* utils */
 unsigned int	ft_atoi(const char *str);
+void *int_memset(int *fork, int size);
+int parse_data(t_philo *data);
+
+/* time_tamp */
+void time_stamp_init(void);
+long long get_time_stamp_ms(void);
 
 #endif
