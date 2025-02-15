@@ -13,52 +13,51 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 typedef struct s_philo_brain
 {
-    pthread_t thread;
-    int idx;
-    int *left_fork;
-    int *right_fork;
-    int eat_flag;
-    int least_eat;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int last_eat_time;
-} t_philo_brain;
+	pthread_t		thread;
+	pthread_mutex_t	right_fork_mutex;
+	pthread_mutex_t	left_fork_mutex;
+	int				idx;
+	int				*left_fork;
+	int				*right_fork;
+	int				eat_flag;
+	int				least_eat;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				last_eat_time;
+}	t_philo_brain;
 
 typedef struct s_philo
 {
-	t_philo_brain *person;
-    pthread_mutex_t mutex;
-    int *fork;
-    int eat_flag;
-    int least_eat;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int count_philo;
-    int die_flag;
+	t_philo_brain		*person;
+	pthread_mutex_t		*fork_mutex;
+	int					*fork;
+	int					eat_flag;
+	int					least_eat;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					count_philo;
+	int					die_flag;
 }	t_philo;
-
 /* init */
-void *philo_brain_init(t_philo *data);
-void *philo_init(t_philo *data, int ac, char **av);
-
+void			*philo_brain_init(t_philo *data);
+void			*philo_init(t_philo *data, int ac, char **av);
 /* utils */
 unsigned int	ft_atoi(const char *str);
-void *int_memset(int *fork, int size);
-int parse_data(t_philo *data);
-
+void			*int_memset(int *fork, int size);
+int				parse_data(t_philo *data);
 /* time_tamp */
-void time_stamp_init(void);
-long long get_time_stamp_ms(void);
+void			time_stamp_init(void);
+long long		get_time_stamp_ms(void);
 
 #endif

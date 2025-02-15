@@ -1,57 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
+/*   Updated: 2024/12/11 16:40:28 by jaejo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
-void *philo_init(t_philo *data, int ac, char **av)
+void	philo_fork_init(t_philo *data, int i)
 {
-    if (ac < 5)
-        return ("1");
-    data->die_flag = 0;
-    data->count_philo = ft_atoi(av[1]);
-    data->time_to_die = ft_atoi(av[2]);
-    data->time_to_eat = ft_atoi(av[3]);
-    data->time_to_sleep = ft_atoi(av[4]);
-    if (ac == 6)
-    {
-        data->least_eat = ft_atoi(av[5]);
-        data->eat_flag = 1;
-    }
-    else
-        data->eat_flag = 0;
-    if (parse_data(data))
-        return ("1");
-    return (0);
-    //pthread_mutex_init(&data->mutex, NULL);
+	if (i == 0)
+	{
+		data->person[i].right_fork = &data->fork[i];
+		data->person[i].left_fork = &data->fork[data->count_philo - 1];
+	}
+	else
+	{
+		data->person[i].right_fork = &data->fork[i];
+		data->person[i].left_fork = &data->fork[i - 1];
+	}
+	if (i == 0)
+	{
+		data->person[i].right_fork_mutex = data->fork_mutex[i];
+		data->person[i].left_fork_mutex = \
+			data->fork_mutex[data->count_philo - 1];
+	}
+	else
+	{
+		data->person[i].right_fork_mutex = data->fork_mutex[i];
+		data->person[i].left_fork_mutex = data->fork_mutex[i - 1];
+	}
 }
 
-void *philo_brain_init(t_philo *data)
+void	*philo_init(t_philo *data, int ac, char **av)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    data->fork = (int *)malloc(sizeof(int) * data->count_philo);
-    data->fork = int_memset(data->fork, data->count_philo );
-    data->person = (t_philo_brain *)malloc(sizeof(t_philo_brain) * data->count_philo);
-    if (!data->person || !data->fork)
-        return (free(data->person), free(data->fork),"1");
-    while (i < data->count_philo)
-    {
-        data->person[i].idx = i + 1;
-        data->person[i].time_to_die = data->time_to_die;
-        data->person[i].time_to_eat = data->time_to_eat;
-        data->person[i].time_to_sleep = data->time_to_sleep;
-        if (data->eat_flag)
-            data->person[i].least_eat = data->least_eat;
-        if (i == 0)
-        {
-            data->person[i].right_fork = &data->fork[i];
-            data->person[i].left_fork = &data->fork[data->count_philo - 1];
-        }
-        else
-        {
-            data->person[i].right_fork = &data->fork[i];
-            data->person[i].left_fork = &data->fork[i - 1];
-        }
-        i++;
-    }
-    return (0);
+	i = 0;
+	if (ac < 5)
+		return ("1");
+	data->die_flag = 0;
+	data->count_philo = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+	{
+		data->least_eat = ft_atoi(av[5]);
+		data->eat_flag = 1;
+	}
+	else
+		data->eat_flag = 0;
+	if (parse_data(data))
+		return ("1");
+	data->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
+											data->count_philo);
+	while (i < data->count_philo)
+		pthread_mutex_init(&data->fork_mutex[i++], NULL);
+	return (0);
+}
+
+void	*philo_brain_init(t_philo *data)
+{
+	int	i;
+
+	i = 0;
+	data->fork = (int *)malloc(sizeof(int) * data->count_philo);
+	data->fork = int_memset(data->fork, data->count_philo);
+	data->person = (t_philo_brain *)malloc(sizeof(t_philo_brain) * \
+										data->count_philo);
+	if (!data->person || !data->fork)
+		return (free(data->person), free(data->fork), "1");
+	while (i < data->count_philo)
+	{
+		data->person[i].idx = i + 1;
+		data->person[i].time_to_die = data->time_to_die;
+		data->person[i].time_to_eat = data->time_to_eat;
+		data->person[i].time_to_sleep = data->time_to_sleep;
+		if (data->eat_flag)
+			data->person[i].least_eat = data->least_eat;
+		philo_fork_init(data, i);
+		/*if (i == 0)
+		{
+			data->person[i].right_fork = &data->fork[i];
+			data->person[i].left_fork = &data->fork[data->count_philo - 1];
+		}
+		else
+		{
+			data->person[i].right_fork = &data->fork[i];
+			data->person[i].left_fork = &data->fork[i - 1];
+		}*/
+		i++;
+	}
+	return (0);
 }
