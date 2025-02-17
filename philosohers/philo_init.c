@@ -42,9 +42,9 @@ void	*philo_init(t_philo *data, int ac, char **av)
 	int	i;
 
 	i = 0;
-	if (ac != 5 && ac != 6)
-		return ("1");
+	data->eat_flag = 0;
 	data->die_flag = 0;
+	data->finish_flag = 0;
 	data->count_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
@@ -54,10 +54,10 @@ void	*philo_init(t_philo *data, int ac, char **av)
 		data->least_eat = ft_atoi(av[5]);
 		data->eat_flag = 1;
 	}
-	else
-		data->eat_flag = 0;
-	if (parse_data(data))
+	if (parse_data(data) || (ac != 5 && ac != 6))
 		return ("1");
+	data->finish_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(&data->finish_mutex[0], NULL);
 	data->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
 											data->count_philo);
 	while (i < data->count_philo)
@@ -72,7 +72,7 @@ void	*philo_brain_init(t_philo *data)
 	i = 0;
 	data->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(&data->print_mutex[i], NULL);
-	data->fork = (int *)malloc(sizeof(int) * data->count_philo);
+	data->fork = (int *)malloc(sizeof(int) * data->count_philo); //int_memset에서 malloc 변경할것
 	data->fork = int_memset(data->fork, data->count_philo);
 	data->person = (t_philo_brain *)malloc(sizeof(t_philo_brain) * \
 										data->count_philo);
@@ -80,8 +80,10 @@ void	*philo_brain_init(t_philo *data)
 		return (free(data->person), free(data->fork), "1");
 	while (i < data->count_philo)
 	{
-		data->person[i].print_mutex = &data->print_mutex[0];
 		data->person[i].idx = i + 1;
+		data->person[i].finish_flag = &data->finish_flag;
+		data->person[i].print_mutex = &data->print_mutex[0];
+		data->person[i].finish_mutex = &data->finish_mutex[0];
 		data->person[i].time_to_die = data->time_to_die;
 		data->person[i].time_to_eat = data->time_to_eat;
 		data->person[i].time_to_sleep = data->time_to_sleep;
