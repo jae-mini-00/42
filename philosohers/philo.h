@@ -23,8 +23,9 @@
 typedef struct s_philo_brain
 {
 	pthread_t		thread;
-	pthread_mutex_t	right_fork_mutex;
-	pthread_mutex_t	left_fork_mutex;
+	pthread_mutex_t	*right_fork_mutex;
+	pthread_mutex_t	*left_fork_mutex;
+	pthread_mutex_t	*print_mutex;
 	int				idx;
 	int				*left_fork;
 	int				*right_fork;
@@ -40,6 +41,7 @@ typedef struct s_philo
 {
 	t_philo_brain		*person;
 	pthread_mutex_t		*fork_mutex;
+	pthread_mutex_t		*print_mutex;
 	int					*fork;
 	int					eat_flag;
 	int					least_eat;
