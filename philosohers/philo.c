@@ -12,6 +12,45 @@
 
 #include "philo.h"
 
+void	*philo_life(void *philo)
+{
+	t_philo_brain *data = (t_philo_brain *)philo;
+	
+	pthread_mutex_lock(data->print_mutex);
+	printf("철학자 :%d\n", data->idx);
+	printf("안녕하세요!\n");
+	printf("bye!\n\n");
+	pthread_mutex_unlock(data->print_mutex);
+	return (0);
+}
+
+void	*start_philo(t_philo *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->count_philo)
+	{
+        if (pthread_create(&data->person[i].thread, NULL, philo_life, &data->person[i]) != 0)
+        {
+            printf("pthread_create error\n");
+			return (free(data), "1");
+        }
+        i += 2;
+    }
+	i = 1;
+	while (i < data->count_philo)
+	{
+        if (pthread_create(&data->person[i].thread, NULL, philo_life, &data->person[i]) != 0)
+        {
+            printf("pthread_create error\n");
+			return (free(data), "1");
+        }
+        i += 2;
+    }
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_philo	data;
@@ -21,9 +60,10 @@ int	main(int ac, char **av)
 		printf ("arguments should be greater than 0 or few arguments\n");
 		return (1);
 	}
-	if (philo_brain_init(&data))
-		return (1);
+	philo_brain_init(&data);
+	//	return (1);
 	time_stamp_init();
+	start_philo(&data);
 	/*while (i < philo.how_many_people)
 	{
         if (pthread_create(philo.thread + i, NULL, philo_life, &philo) != 0)
@@ -32,12 +72,16 @@ int	main(int ac, char **av)
             return 0;
         }
         i++;
-    }
+    }*/
+	int i = data.count_philo;
     while (--i > -1)
-        pthread_join(philo.thread[i], NULL);
-    free(philo.thread);
-    free(philo.fork);*/
-	int i;
+	{
+        pthread_join(data.person[i].thread, NULL);
+	}
+	printf ("메인 스레드 종료\n");
+	return 0;
+}
+	/*int i;
 	
 	i = 0;
 	while (i < data.count_philo)
@@ -51,7 +95,6 @@ int	main(int ac, char **av)
 		i++;
 	}
 	i = 0;
-	data.person[2].right_fork[0] = 0;
 	printf ("\n\n");
 	while (i < data.count_philo)
 	{
@@ -62,7 +105,4 @@ int	main(int ac, char **av)
 		else
 			printf("철학자 :%d, 오른손 :%d 왼손 :%d\n", i + 1, data.fork[i], data.fork[i + 1]);
 		i++;
-	}
-	printf ("메인 스레드 종료\n");
-	return 0;
-}
+	}*/
