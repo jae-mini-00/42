@@ -39,11 +39,14 @@ void	*int_memset(int *fork, int size)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (!fork)
 		return (NULL);
-	while (++i < size)
+	while (i < size)
+	{
 		fork[i] = 1;
+		i++;
+	}
 	return (fork);
 }
 
