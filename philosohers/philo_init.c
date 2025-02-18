@@ -54,7 +54,7 @@ void	*philo_init(t_philo *data, int ac, char **av)
 		data->least_eat = ft_atoi(av[5]);
 		data->eat_flag = 1;
 	}
-	if (parse_data(data) || (ac != 5 && ac != 6))
+	if (parse_data(data) && (ac != 5 && ac != 6))
 		return ("1");
 	data->finish_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(&data->finish_mutex[0], NULL);
@@ -72,10 +72,9 @@ void	*philo_brain_init(t_philo *data)
 	i = 0;
 	data->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(&data->print_mutex[i], NULL);
-	data->fork = (int *)malloc(sizeof(int) * data->count_philo); //int_memset에서 malloc 변경할것
+	data->fork = (int *)malloc(sizeof(int) * data->count_philo);
 	data->fork = int_memset(data->fork, data->count_philo);
-	data->person = (t_philo_brain *)malloc(sizeof(t_philo_brain) * \
-										data->count_philo);
+	data->person = malloc(sizeof(t_philo_brain) * data->count_philo);
 	if (!data->person || !data->fork)
 		return (free(data->person), free(data->fork), "1");
 	while (i < data->count_philo)

@@ -70,3 +70,46 @@ int	parse_data(t_philo *data)
 	}
 	return (flag);
 }
+
+void	ft_msleep(long long ms)
+{
+	const long long		begin = get_time_stamp_ms();
+	long long			left_time;
+
+	while (1)
+	{
+		left_time = get_time_stamp_ms() - begin;
+		if (left_time >= ms)
+			break ;
+		if (ms - left_time > 9)
+			usleep(((ms - left_time) * 1000) / 4);
+		else
+			usleep(9);
+	}
+}
+
+int check_die(t_philo_brain *data, long long time_to)
+{
+	const long long now = get_time_stamp_ms();
+
+	pthread_mutex_lock(&data->finish_mutex[0]);
+	if (data->finish_flag[0])
+	{
+		pthread_mutex_unlock(&data->finish_mutex[0]);
+		return (1);
+	}
+	else
+	{
+		if (now >= data->time_to_die + time_to)
+		{
+			pthread_mutex_lock(&data->finish_mutex[0]);
+			data->finish_flag[0] = 1;
+			pthread_mutex_unlock(&data->finish_mutex[0]);
+			pthread_mutex_lock(&data->print_mutex[0]);
+			printf("%lld %d is died\n", get_time_stamp_ms(), data->idx);
+			pthread_mutex_unlock(&data->print_mutex[0]);
+			return (1);
+		}
+	}
+	return (0);
+}

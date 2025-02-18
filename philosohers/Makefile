@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror -I. -pthread
 
 NAME = philo
 
-SRCS =  philo.c philo_utils.c philo_init.c philo_time_stamp.c \
+SRCS =  philo.c philo_utils.c philo_init.c philo_time_stamp.c philo_eat.c philo_print.c \
 
 B_SRCS =  \
 
