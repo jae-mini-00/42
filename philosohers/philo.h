@@ -62,8 +62,8 @@ void			*philo_init(t_philo *data, int ac, char **av);
 unsigned int	ft_atoi(const char *str);
 void			*int_memset(int *fork, int size);
 int				parse_data(t_philo *data);
-void			ft_msleep(long long ms);
-int				check_die(t_philo_brain *data, long long time_to);
+void			ft_msleep(long long ms, t_philo_brain *data);
+int				check_die(t_philo_brain *data);
 /* time_tamp */
 void			time_stamp_init(void);
 long long		get_time_stamp_ms(void);
@@ -72,9 +72,12 @@ int				try_fork(pthread_mutex_t *mutex, int *fork);
 int				retry_fork(t_philo_brain *data, \
 		pthread_mutex_t *mutex, int *fork, int idx);
 int				try_eat(t_philo_brain *data);
-int			philo_eating(t_philo_brain *data);
+int				philo_eating(t_philo_brain *data);
 /* print */
 void			print_think(t_philo_brain *data);
 void			print_sleep(t_philo_brain *data);
+/* start */
+void			*start_philo(t_philo *data);
+void			end_free(t_philo *data);
 
 #endif
