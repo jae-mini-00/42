@@ -55,6 +55,20 @@ int	try_eat(t_philo_brain *data)
 	return (0);
 }
 
+void	check_least_eat(t_philo_brain *data)
+{
+	pthread_mutex_lock(&data->count_eat_mutex[0]);
+	if (data->count_eat == data->least_eat + 1)
+		data->count_eat_flag[0] += 1;
+	if (data->count_eat_flag[0] == data->count_philo)
+	{
+		pthread_mutex_lock(&data->finish_mutex[0]);
+		data->finish_flag[0] = 1;
+		pthread_mutex_unlock(&data->finish_mutex[0]);
+	}
+	pthread_mutex_unlock(&data->count_eat_mutex[0]);
+}
+
 int	philo_eating(t_philo_brain *data)
 {
 	if (retry_fork(data, data->right_fork_mutex, data->right_fork, data->idx))
@@ -70,5 +84,7 @@ int	philo_eating(t_philo_brain *data)
 	pthread_mutex_lock(data->right_fork_mutex);
 	data->right_fork[0] = 1;
 	pthread_mutex_unlock(data->right_fork_mutex);
+	if (data->least_eat)
+		check_least_eat(data);
 	return (0);
 }

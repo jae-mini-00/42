@@ -27,11 +27,14 @@ typedef struct s_philo_brain
 	pthread_mutex_t	*left_fork_mutex;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*finish_mutex;
+	pthread_mutex_t	*count_eat_mutex;
 	int				*left_fork;
 	int				*right_fork;
 	int				*finish_flag;
+	int				*count_eat_flag;
 	int				idx;
 	int				count_eat;
+	int				count_philo;
 	int				least_eat;
 	long long		time_to_die;
 	long long		time_to_eat;
@@ -45,14 +48,15 @@ typedef struct s_philo
 	pthread_mutex_t		*fork_mutex;
 	pthread_mutex_t		*print_mutex;
 	pthread_mutex_t		*finish_mutex;
+	pthread_mutex_t		*count_eat_mutex;
 	int					*fork;
+	int					count_eat_flag;
 	int					eat_flag;
 	int					least_eat;
 	long long			time_to_die;
 	long long			time_to_eat;
 	long long			time_to_sleep;
 	int					count_philo;
-	int					die_flag;
 	int					finish_flag;
 }	t_philo;
 /* init */
