@@ -43,7 +43,7 @@ void	*philo_init(t_philo *data, int ac, char **av)
 
 	i = 0;
 	data->eat_flag = 0;
-	data->die_flag = 0;
+	data->count_eat_flag = 0;
 	data->finish_flag = 0;
 	data->count_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
@@ -70,6 +70,8 @@ void	*philo_brain_init(t_philo *data)
 	int	i;
 
 	i = 0;
+	data->count_eat_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(&data->count_eat_mutex[i], NULL);
 	data->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(&data->print_mutex[i], NULL);
 	data->fork = (int *)malloc(sizeof(int) * data->count_philo);
@@ -80,7 +82,10 @@ void	*philo_brain_init(t_philo *data)
 	while (i < data->count_philo)
 	{
 		data->person[i].idx = i + 1;
+		data->person[i].count_philo = data->count_philo;
 		data->person[i].finish_flag = &data->finish_flag;
+		data->person[i].count_eat_flag = &data->count_eat_flag;
+		data->person[i].count_eat_mutex = &data->count_eat_mutex[0];
 		data->person[i].print_mutex = &data->print_mutex[0];
 		data->person[i].finish_mutex = &data->finish_mutex[0];
 		data->person[i].time_to_die = data->time_to_die;
