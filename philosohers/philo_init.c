@@ -65,6 +65,23 @@ void	*philo_init(t_philo *data, int ac, char **av)
 	return (0);
 }
 
+void	philo_brain_init2(t_philo *data, int i)
+{
+	data->person[i].idx = i + 1;
+	data->person[i].count_philo = data->count_philo;
+	data->person[i].finish_flag = &data->finish_flag;
+	data->person[i].count_eat_flag = &data->count_eat_flag;
+	data->person[i].count_eat_mutex = &data->count_eat_mutex[0];
+	data->person[i].print_mutex = &data->print_mutex[0];
+	data->person[i].finish_mutex = &data->finish_mutex[0];
+	data->person[i].time_to_die = data->time_to_die;
+	data->person[i].time_to_eat = data->time_to_eat;
+	data->person[i].last_eat_time = 0;
+	data->person[i].time_to_sleep = data->time_to_sleep;
+	if (data->eat_flag)
+		data->person[i].least_eat = data->least_eat;
+}
+
 void	*philo_brain_init(t_philo *data)
 {
 	int	i;
@@ -81,19 +98,7 @@ void	*philo_brain_init(t_philo *data)
 		return (free(data->person), free(data->fork), "1");
 	while (i < data->count_philo)
 	{
-		data->person[i].idx = i + 1;
-		data->person[i].count_philo = data->count_philo;
-		data->person[i].finish_flag = &data->finish_flag;
-		data->person[i].count_eat_flag = &data->count_eat_flag;
-		data->person[i].count_eat_mutex = &data->count_eat_mutex[0];
-		data->person[i].print_mutex = &data->print_mutex[0];
-		data->person[i].finish_mutex = &data->finish_mutex[0];
-		data->person[i].time_to_die = data->time_to_die;
-		data->person[i].time_to_eat = data->time_to_eat;
-		data->person[i].last_eat_time = 0;
-		data->person[i].time_to_sleep = data->time_to_sleep;
-		if (data->eat_flag)
-			data->person[i].least_eat = data->least_eat;
+		philo_brain_init2(data, i);
 		philo_fork_init(data, i++);
 	}
 	return (0);
