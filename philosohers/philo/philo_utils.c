@@ -32,6 +32,8 @@ unsigned int	ft_atoi(const char *str)
 		n = (n * 10) + (str[i] - '0');
 		i++;
 	}
+	if (str[i])
+		return (0);
 	return (n);
 }
 

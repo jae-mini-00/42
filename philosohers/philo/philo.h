@@ -77,6 +77,7 @@ int				retry_fork(t_philo_brain *data, \
 		pthread_mutex_t *mutex, int *fork, int idx);
 int				try_eat(t_philo_brain *data);
 int				philo_eating(t_philo_brain *data);
+void			check_least_eat(t_philo_brain *data);
 /* print */
 void			print_think(t_philo_brain *data);
 void			print_sleep(t_philo_brain *data);

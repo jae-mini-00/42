@@ -31,6 +31,8 @@ void	*philo_life(void *philo)
 			return ("1");
 		print_sleep(data);
 		ft_msleep(data->time_to_sleep, data);
+		if (data->least_eat)
+			check_least_eat(data);
 		print_think(data);
 	}
 	return (0);
