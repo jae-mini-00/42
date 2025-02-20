@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I. -pthread
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = philo
 

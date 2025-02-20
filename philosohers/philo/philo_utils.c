@@ -75,24 +75,24 @@ int	check_die(t_philo_brain *data)
 {
 	const long long	now = get_time_stamp_ms();
 
-	pthread_mutex_lock(&data->finish_mutex[0]);
-	if (data->finish_flag[0])
+	pthread_mutex_lock(data->finish_mutex);
+	if (*data->finish_flag)
 	{
-		pthread_mutex_unlock(&data->finish_mutex[0]);
+		pthread_mutex_unlock(data->finish_mutex);
 		return (1);
 	}
 	else
 	{
 		if (now >= data->time_to_die + data->last_eat_time)
 		{
-			data->finish_flag[0] = 1;
-			pthread_mutex_unlock(&data->finish_mutex[0]);
-			pthread_mutex_lock(&data->print_mutex[0]);
+			*data->finish_flag = 1;
+			pthread_mutex_unlock(data->finish_mutex);
+			pthread_mutex_lock(data->print_mutex);
 			printf("%lld %d died\n", get_time_stamp_ms(), data->idx);
-			pthread_mutex_unlock(&data->print_mutex[0]);
+			pthread_mutex_unlock(data->print_mutex);
 			return (1);
 		}
-		pthread_mutex_unlock(&data->finish_mutex[0]);
+		pthread_mutex_unlock(data->finish_mutex);
 	}
 	return (0);
 }

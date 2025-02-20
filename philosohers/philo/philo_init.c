@@ -18,20 +18,14 @@ void	philo_fork_init(t_philo *data, int i)
 	{
 		data->person[i].right_fork = &data->fork[i];
 		data->person[i].left_fork = &data->fork[data->count_philo - 1];
-	}
-	else
-	{
-		data->person[i].right_fork = &data->fork[i];
-		data->person[i].left_fork = &data->fork[i - 1];
-	}
-	if (i == 0)
-	{
 		data->person[i].right_fork_mutex = &data->fork_mutex[i];
 		data->person[i].left_fork_mutex = \
 			&data->fork_mutex[data->count_philo - 1];
 	}
 	else
 	{
+		data->person[i].right_fork = &data->fork[i];
+		data->person[i].left_fork = &data->fork[i - 1];
 		data->person[i].right_fork_mutex = &data->fork_mutex[i];
 		data->person[i].left_fork_mutex = &data->fork_mutex[i - 1];
 	}
@@ -71,15 +65,17 @@ void	philo_brain_init2(t_philo *data, int i)
 	data->person[i].count_philo = data->count_philo;
 	data->person[i].finish_flag = &data->finish_flag;
 	data->person[i].count_eat_flag = &data->count_eat_flag;
-	data->person[i].count_eat_mutex = &data->count_eat_mutex[0];
-	data->person[i].print_mutex = &data->print_mutex[0];
-	data->person[i].finish_mutex = &data->finish_mutex[0];
+	data->person[i].count_eat_mutex = data->count_eat_mutex;
+	data->person[i].print_mutex = data->print_mutex;
+	data->person[i].finish_mutex = data->finish_mutex;
 	data->person[i].time_to_die = data->time_to_die;
 	data->person[i].time_to_eat = data->time_to_eat;
 	data->person[i].last_eat_time = 0;
 	data->person[i].time_to_sleep = data->time_to_sleep;
 	if (data->eat_flag)
 		data->person[i].least_eat = data->least_eat;
+	else
+		data->person[i].least_eat = 0;
 }
 
 void	*philo_brain_init(t_philo *data)
