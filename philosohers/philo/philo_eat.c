@@ -58,7 +58,7 @@ int	try_eat(t_philo_brain *data)
 void	check_least_eat(t_philo_brain *data)
 {
 	pthread_mutex_lock(data->count_eat_mutex);
-	if (data->count_eat == data->least_eat + 1)
+	if (data->count_eat == data->least_eat)
 		*data->count_eat_flag += 1;
 	if (*data->count_eat_flag == data->count_philo)
 	{
