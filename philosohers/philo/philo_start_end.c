@@ -20,13 +20,13 @@ void	*philo_life(void *philo)
 	data->count_eat = 0;
 	while (1)
 	{
-		pthread_mutex_lock(&data->finish_mutex[0]);
-		if (data->finish_flag[0])
+		pthread_mutex_lock(data->finish_mutex);
+		if (*data->finish_flag)
 		{
-			pthread_mutex_unlock(&data->finish_mutex[0]);
+			pthread_mutex_unlock(data->finish_mutex);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&data->finish_mutex[0]);
+		pthread_mutex_unlock(data->finish_mutex);
 		if (philo_eating(data))
 			return ("1");
 		print_sleep(data);
@@ -75,4 +75,6 @@ void	end_free(t_philo *data)
 	free(data->print_mutex);
 	free(data->finish_mutex);
 	free(data->fork);
+	if (data->count_eat_mutex)
+		free(data->count_eat_mutex);
 }
