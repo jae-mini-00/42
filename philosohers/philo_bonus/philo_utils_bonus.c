@@ -54,38 +54,26 @@ int	parse_data(t_philo *data)
 		flag = 0;
 	return (flag);
 }
-/*
-int	check_die(t_philo_brain *data)
+
+int	check_die(t_philo_brain *person, t_philo *data)
 {
 	const long long	now = get_time_stamp_ms();
 
-	pthread_mutex_lock(data->finish_mutex);
-	if (*data->finish_flag)
+	if (now >= data->time_to_die + person->last_eat_time)
 	{
-		pthread_mutex_unlock(data->finish_mutex);
-		return (1);
-	}
-	else
-	{
-		if (now >= data->time_to_die + data->last_eat_time)
-		{
-			*data->finish_flag = 1;
-			pthread_mutex_unlock(data->finish_mutex);
-			pthread_mutex_lock(data->print_mutex);
-			printf("%lld %d died\n", get_time_stamp_ms(), data->idx);
-			pthread_mutex_unlock(data->print_mutex);
-			return (1);
-		}
-		pthread_mutex_unlock(data->finish_mutex);
+		sem_wait(data->print_sem);
+		printf("%lld %d died\n", get_time_stamp_ms(), person->idx);
+		sem_post(data->print_sem);
+		all_free(data);
+		exit (0);
 	}
 	return (0);
 }
-*/
-void	ft_msleep(long long ms, t_philo_brain *data)
+
+void	ft_msleep(long long ms, t_philo_brain *person, t_philo *data)
 {
 	const long long		begin = get_time_stamp_ms();
 	long long			left_time;
-	(void)data;
 
 	while (1)
 	{
@@ -96,7 +84,7 @@ void	ft_msleep(long long ms, t_philo_brain *data)
 			usleep(((ms - left_time) * 1000) / 4);
 		else
 			usleep(8000);
-		//if (check_die(data))
-		//	return ;
+		if (check_die(person, data))
+			return ;
 	}
 }

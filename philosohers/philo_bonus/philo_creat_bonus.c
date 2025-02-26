@@ -16,16 +16,16 @@ void	philo_life(t_philo *data, t_philo_brain *person)
 {
 	while (1)
 	{
-		sem_wait(data->finish_sem);
-		if (person->finish_flag)
-		{
-			sem_post(data->finish_sem);
-			return ;
-		}
-		sem_post(data->finish_sem);
+		check_die(person, data);
+		usleep(200);
 		philo_eat(data, person);
+		if (person->count_eat == data->least_eat + 1)
+		{
+			all_free(data);
+			exit(1);
+		}
 		print_sleep(data, person);
-		ft_msleep(data->time_to_sleep, person);
+		ft_msleep(data->time_to_sleep, person, data);
 		print_think(data, person);
 	}
 }
@@ -34,19 +34,19 @@ void	philo_start(t_philo *data, int i)
 {
 	while (i < data->count_philo)
 	{
-		data->pid = fork();
-		if (data->pid == 0)
-			i += 2;
-		else
+		data->pid[i] = fork();
+		if (data->pid[i] == 0)
 		{
 			philo_life(data, &data->person[i]);
-			break ;
+			return ;
 		}
+		else
+			i += 2;
 	}
-	waitpid(data->pid, NULL, 0);
+	return ;
 }
 
-void	creat_philo(t_philo *data)
+int	creat_philo(t_philo *data)
 {
 	int	i;
 
@@ -57,6 +57,7 @@ void	creat_philo(t_philo *data)
 	else
 		usleep(data->time_to_die * 500);
 	i = 1;
-	if (data->pid == 0)
-		philo_start(data, i);
+	philo_start(data, i);
+	kill_philo(data);
+	return (0);
 }

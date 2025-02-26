@@ -35,11 +35,9 @@ typedef struct s_philo_brain
 typedef struct s_philo
 {
 	t_philo_brain		*person;
-	pid_t				pid;
+	pid_t				*pid;
 	sem_t				*fork_sem;
 	sem_t				*print_sem;
-	sem_t				*finish_sem;
-	sem_t				*count_eat_sem;
 	int					least_eat;
 	int					count_philo;
 	long long			time_to_die;
@@ -54,15 +52,20 @@ int				philo_brain_init(t_philo *data);
 long long		get_time_stamp_ms(void);
 void			time_stamp_init(void);
 /* creat_philo */
-void			creat_philo(t_philo *data);
+int				creat_philo(t_philo *data);
 /* utils */
 unsigned int	ft_atoi(const char *str);
 int				parse_data(t_philo *data);
-void			ft_msleep(long long ms, t_philo_brain *data);
+void			ft_msleep(long long ms, t_philo_brain *person, t_philo *data);
+int				check_die(t_philo_brain *person, t_philo *data);
 /* eat */
 void			philo_eat(t_philo *data, t_philo_brain *person);
 /* print */
 void			print_sleep(t_philo *data, t_philo_brain *person);
 void			print_think(t_philo *data, t_philo_brain *person);
+/* end_free */
+void			kill_philo(t_philo *data);
+void			all_free(t_philo *data);
+void			all_free_sem(void);
 
 #endif

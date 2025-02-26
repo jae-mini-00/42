@@ -13,19 +13,12 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
 
-NAME = libftprintf.a
+NAME = pipex
 
-LIBFT = libft
+SRCS = pipex.c pipex_data_init.c pipex_cmd_init.c pipex_free_and_err.c \
 
-SRCS = ft_printf.c ft_flag_setting.c ft_specifier_setting.c ft_print_chars.c \
-       ft_print_c.c ft_str_dot.c ft_str_mdot.c ft_print_null.c ft_print_s.c \
-       ft_print_id.c ft_id_width.c ft_m_id_width.c ft_id_dot_div.c ft_print_percent.c\
-       ft_id_mdot_div.c ft_mid_dot_div.c ft_mid_mdot_div.c ft_print_u.c \
-       ft_u_dot_div.c ft_u_mdot_div.c ft_print_x.c ft_x_dot_div.c ft_x_mdot_div.c \
-       ft_print_ux.c ft_ux_dot_div.c ft_ux_mdot_div.c ft_print_p.c  ft_print_hash.c \
-
-
-B_SRCS = 
+B_SRCS = pipex_bonus.c pipex_data_init_bonus.c pipex_cmd_init_bonus.c \
+         pipex_free_and_err_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,14 +27,14 @@ B_OBJS = $(B_SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(MAKE) -C ./libft
-	cp ./libft/libft.a ./
-	mv libft.a libftprintf.a
-	ar rcs $(NAME) $(OBJS)
+	$(MAKE) -C ./ft_printf
+	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -o $(NAME)
 
 make_bonus : $(B_OBJS)
-	ar rcs $(NAME) $(B_OBJS)
+	$(MAKE) -C ./ft_printf
+	$(CC) $(CFLAGS) $(B_OBJS) -L./ft_printf -lftprintf -o $(NAME)
 	touch $@
+	rm make_bonus
 
 bonus : make_bonus
 
@@ -50,11 +43,11 @@ bonus : make_bonus
 
 clean :
 	rm -f $(OBJS) $(B_OBJS)
-	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C ./ft_printf
 
 fclean : clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C ./ft_printf
 
 re : fclean all
 

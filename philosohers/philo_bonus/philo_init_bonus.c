@@ -16,12 +16,8 @@ void	semaphore_init(t_philo *data)
 {
 	sem_unlink("/fork");
 	sem_unlink("/print");
-	sem_unlink("/finish");
-	sem_unlink("/count_eat");
 	data->fork_sem = sem_open("/fork", O_CREAT, 0644, data->count_philo);
 	data->print_sem = sem_open("/print", O_CREAT, 0644, 1);
-	data->finish_sem = sem_open("/finish", O_CREAT, 0644, 1);
-	data->count_eat_sem = sem_open("/count_eat", O_CREAT, 0644, 1);
 }
 
 int	philo_init(t_philo *data, int ac, char **av)
@@ -39,6 +35,7 @@ int	philo_init(t_philo *data, int ac, char **av)
 	if (!parse_data(data))
 		return (false);
 	data->person = malloc(sizeof(t_philo_brain) * ft_atoi(av[1]));
+	data->pid = malloc(sizeof(pid_t) * ft_atoi(av[1]));
 	semaphore_init(data);
 	return (true);
 }
@@ -53,7 +50,6 @@ int	philo_brain_init(t_philo *data)
 		data->person[i].idx = i + 1;
 		data->person[i].count_eat = 0;
 		data->person[i].last_eat_time = 0;
-		data->person[i].finish_flag = 0;
 	}
 	return (true);
 }
