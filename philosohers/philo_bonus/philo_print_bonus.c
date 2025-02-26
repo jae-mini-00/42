@@ -14,6 +14,7 @@
 
 void	print_sleep(t_philo *data, t_philo_brain *person)
 {
+	check_die(person, data);
 	sem_wait(data->print_sem);
 	printf("%lld %d is sleeping\n", get_time_stamp_ms(), person->idx);
 	sem_post(data->print_sem);
@@ -21,6 +22,7 @@ void	print_sleep(t_philo *data, t_philo_brain *person)
 
 void	print_think(t_philo *data, t_philo_brain *person)
 {
+	check_die(person, data);
 	sem_wait(data->print_sem);
 	printf("%lld %d is thinking\n", get_time_stamp_ms(), person->idx);
 	sem_post(data->print_sem);

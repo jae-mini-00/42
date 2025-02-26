@@ -28,5 +28,7 @@ int	main(int ac, char **av)
 	}
 	time_stamp_init();
 	creat_philo(&data);
+	all_free(&data);
+	all_free_sem();
 	return (0);
 }

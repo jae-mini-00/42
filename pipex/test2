@@ -1,16 +1,1 @@
-bonus
-ft_printf
-Makefile
-pipex
-pipex.c
-pipex_cmd_init.c
-pipex_cmd_init.o
-pipex_data_init.c
-pipex_data_init.o
-pipex_free_and_err.c
-pipex_free_and_err.o
-pipex.h
-pipex.h.gch
-pipex.o
-test1
-test2
+hi

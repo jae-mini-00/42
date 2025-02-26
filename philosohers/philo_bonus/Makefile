@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = philo_bonus
 
 SRCS =  philo_bonus.c philo_utils_bonus.c philo_init_bonus.c philo_time_stamp_bonus.c \
-		philo_start_bonus.c philo_eating_bonus.c philo_print_bonus.c \
+		philo_creat_bonus.c philo_eating_bonus.c philo_print_bonus.c philo_end_free_bonus.c \
 		
 OBJS = $(SRCS:.c=.o)
 
