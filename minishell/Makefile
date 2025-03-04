@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejo <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2024/10/29 14:44:00 by jaejo            ###   ########.fr        #
+#    Updated: 2025/03/04 23:43:50 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = minishell
 
-SRCS =  minishell.c minishell_init.c minishell_free.c minishell_cmd_check.c \
-		minishell_fork.c \
+SRCS =  minishell.c minishell_init.c minishell_free.c minishell_fork.c minishell_builtin.c \
+		minishell_check.c \
 
 OBJS = $(SRCS:.c=.o)
 

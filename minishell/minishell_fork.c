@@ -3,48 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fork.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 17:26:23 by jaejo             #+#    #+#             */
-/*   Updated: 2025/02/28 17:26:25 by jaejo            ###   ########.fr       */
+/*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
+/*   Updated: 2025/03/04 22:43:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	access_path(t_path *data)
+void	make_fork(t_data *minishell, char **envp)
 {
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (data->path[i])
+	if (access(minishell->o_cmd_split[0], X_OK) == 0)
 	{
-		temp = ft_strjoin(data->path[i], data->cmd[0]);
-		if (access(temp, X_OK) == 0)
+		minishell->pid = fork();
+		if (minishell->pid == 0)
 		{
-			free(data->cmd[0]);
-			data->cmd[0] = ft_strdup(temp);
-			free(temp);
-			return ;
+			execve(minishell->o_cmd_split[0], minishell->o_cmd_split, envp);
+			if (minishell->o_cmd_split[2])
+				printf ("cd: Too many args for cd command\n");
+			else
+				printf ("%s: No such file or directory\n", minishell->o_cmd_split[0]);
+			//minishell_free(minishell);
 		}
-		free(temp);
-		i++;
-	}
-}
-
-void	make_fork(t_path *data, char **envp)
-{
-	data->pid = fork();
-	if (data->pid == 0)
-	{
-		access_path(data);
-		if (data->cmd_flag)
-			execve(data->o_cmd_split[0], data->o_cmd_split, envp);
 		else
-			execve(data->cmd[0], data->cmd, envp);
-		printf("%s: command not found\n", data->o_cmd_split[0]);
+			waitpid(minishell->pid, NULL, 0);
 	}
 	else
-		waitpid(data->pid, NULL, 0);
+		printf ("%s: command not found\n", minishell->o_cmd_split[0]);
 }

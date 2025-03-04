@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2024/12/11 16:40:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/04 23:48:03 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,31 @@
 # include <sys/wait.h>
 # include "./ft_printf/ft_printf.h"
 
-typedef struct s_path
+typedef struct s_data
 {
 	pid_t	pid;
-	int		cmd_flag;
+	int		pipe_flag;
+	int		builtin_flag;
 	char	*o_cmd;
-	char	**path;
 	char	**o_cmd_split;
-	char	**cmd;
-} t_path;
+	char	**env;
+	char	**path;
+}	t_data;
 
 /* init */
-char	**path_init(char **envp);
+void	minishell_init(t_data *minishell, char **envp);
+void	o_cmd_split_init(t_data *minishell);
 
 /* free */
 void	split_free(char **split);
 
-/* cmd check */
-void	cmd_check(t_path *data, char *cmd);
-
 /* fork */
-void	make_fork(t_path *data, char **envp);
+void	make_fork(t_data *minishell, char **envp);
+
+/* check */
+void	builtin_check(t_data *minishell);
+
+/* builtin */
+void	ft_env(char **env);
 
 #endif
