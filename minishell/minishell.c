@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/02/27 15:57:08 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/04 23:50:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	t_path data;
+	t_data minishell;
 
-
+	(void)av;
 	if (ac > 1)
 		return (0);
-	data.path = path_init(envp);
-	(void)av;
+	minishell_init(&minishell, envp);
 	while (1)
 	{
-		data.o_cmd = readline("minishell> ");
-		add_history(data.o_cmd);
-		if (data.o_cmd)
+		minishell.o_cmd = readline("minishell> ");
+		o_cmd_split_init(&minishell);
+		if (minishell.o_cmd_split != NULL && !minishell.builtin_flag)
 		{
-			cmd_check(&data, data.o_cmd);
-			if (data.cmd)
-				make_fork(&data, envp);
-			free(data.o_cmd);
+			make_fork(&minishell, envp);
 		}
+		add_history(minishell.o_cmd);
+		split_free(minishell.o_cmd_split);
+		free(minishell.o_cmd);
 	}
 	rl_clear_history();
-	split_free(data.path);
-	split_free(data.cmd);
-	return (0);
+	split_free(minishell.path);
 }

@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_free.c                                   :+:      :+:    :+:   */
+/*   minishell_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 22:27:52 by jaejo            ###   ########.fr       */
+/*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
+/*   Updated: 2025/03/04 23:52:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	split_free(char **split)
+void	builtin_check(t_data *minishell)
 {
-	int	i;
-
-	i = 0;
-	if (!split)
-		return ;
-	while (split[i])
+	if (ft_strncmp(minishell->o_cmd_split[0], "env", 4) == 0 && !minishell->o_cmd_split[1])
 	{
-		free(split[i]);
-		i++;
+		minishell->builtin_flag = 1;
+		ft_env(minishell->env);
 	}
-	free(split);
 }

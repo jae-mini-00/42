@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_free.c                                   :+:      :+:    :+:   */
+/*   minishell_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 22:27:52 by jaejo            ###   ########.fr       */
+/*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
+/*   Updated: 2025/03/04 23:43:30 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	split_free(char **split)
+void	ft_env(char **env)
 {
 	int	i;
 
 	i = 0;
-	if (!split)
-		return ;
-	while (split[i])
+	while (env[i])
 	{
-		free(split[i]);
+		printf("%s\n", env[i]);
 		i++;
 	}
-	free(split);
+	return ;
 }
