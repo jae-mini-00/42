@@ -38,6 +38,7 @@ void	o_cmd_split_init(t_data *minishell);
 
 /* free */
 void	split_free(char **split);
+void	minishell_free(t_data *minishell);
 
 /* fork */
 void	make_fork(t_data *minishell, char **envp);
@@ -47,7 +48,12 @@ void	builtin_check(t_data *minishell);
 int		echo_flag_check(char *str);
 
 /* builtin */
-void	ft_env(char **env);
-void	ft_echo(char **o_cmd_split);
+void	ft_env(t_data *minishell);
+void	ft_echo(t_data *minishell);
+void	ft_cd(char **data);
+
+/* builtin utils */
+int		split_last(char **split);
+void	echo_print(t_data *minishell, int i, int flag);
 
 #endif

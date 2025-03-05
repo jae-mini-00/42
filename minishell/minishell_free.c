@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+void	minishell_free(t_data *minishell)
+{
+	free(minishell->o_cmd);
+	split_free(minishell->env);
+	split_free(minishell->path);
+	split_free(minishell->o_cmd_split);
+}
+
 void	split_free(char **split)
 {
 	int	i;
