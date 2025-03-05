@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	t_data minishell;
+	t_data	minishell;
 
 	(void)av;
 	if (ac > 1)
