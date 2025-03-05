@@ -14,7 +14,7 @@
 
 static char	**ft_full_path_split(char **path_split)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = 0;
@@ -30,9 +30,9 @@ static char	**ft_full_path_split(char **path_split)
 
 static char	**path_init(char **envp)
 {
-	int	i;
-	char *path;
-	char **path_split;
+	int		i;
+	char	*path;
+	char	**path_split;
 
 	i = 0;
 	while (envp[i])
@@ -49,6 +49,7 @@ static char	**path_init(char **envp)
 	path_split = ft_full_path_split(path_split);
 	return (path_split);
 }
+
 static void	access_path(t_data *minishell)
 {
 	int		i;
@@ -69,9 +70,10 @@ static void	access_path(t_data *minishell)
 		i++;
 	}
 }
+
 void	o_cmd_split_init(t_data *minishell)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (minishell->o_cmd[i] == ' ')
@@ -82,18 +84,20 @@ void	o_cmd_split_init(t_data *minishell)
 		return ;
 	}
 	minishell->o_cmd_split = ft_split(&minishell->o_cmd[i], ' ');
-	if (minishell->o_cmd[i] == '~' || minishell->o_cmd[i] == '.' || minishell->o_cmd[i] == '/')
+	if (minishell->o_cmd[i] == '~' || minishell->o_cmd[i] == '.' || \
+		minishell->o_cmd[i] == '/')
 		return ;
 	else
 		access_path(minishell);
 	builtin_check(minishell);
 }
+
 void	minishell_init(t_data *minishell, char **envp)
 {
 	int	i;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 		i++;
 	minishell->builtin_flag = 0;
 	minishell->pipe_flag = 0;

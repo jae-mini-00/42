@@ -44,8 +44,10 @@ void	make_fork(t_data *minishell, char **envp);
 
 /* check */
 void	builtin_check(t_data *minishell);
+int		echo_flag_check(char *str);
 
 /* builtin */
 void	ft_env(char **env);
+void	ft_echo(char **o_cmd_split);
 
 #endif

@@ -23,8 +23,8 @@ void	make_fork(t_data *minishell, char **envp)
 			if (minishell->o_cmd_split[2])
 				printf ("cd: Too many args for cd command\n");
 			else
-				printf ("%s: No such file or directory\n", minishell->o_cmd_split[0]);
-			//minishell_free(minishell);
+				printf ("%s: No such file or directory\n", \
+						minishell->o_cmd_split[0]);
 		}
 		else
 			waitpid(minishell->pid, NULL, 0);

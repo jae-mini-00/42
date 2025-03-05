@@ -24,3 +24,30 @@ void	ft_env(char **env)
 	}
 	return ;
 }
+
+void	ft_echo(char **o_cmd_split)
+{
+	int	i;
+	int	flag;
+
+	i = 1;
+	if (o_cmd_split[i])
+		flag = echo_flag_check(o_cmd_split[i]);
+	else
+	{
+		printf("\n");
+		return ;
+	}
+	if (flag)
+		i++;
+	while (o_cmd_split[i])
+	{
+		if (o_cmd_split[i + 1])
+			printf("%s ", o_cmd_split[i]);
+		else if (!flag)
+			printf("%s\n", o_cmd_split[i]);
+		else
+			printf("%s", o_cmd_split[i]);
+		i++;
+	}
+}
