@@ -12,42 +12,61 @@
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+void	ft_env(t_data *minishell)
 {
 	int	i;
 
 	i = 0;
-	while (env[i])
+	if (!minishell->o_cmd_split[1])
 	{
-		printf("%s\n", env[i]);
-		i++;
+		minishell->builtin_flag = 1;
+		while (minishell->env[i])
+		{
+			printf("%s\n", minishell->env[i]);
+			i++;
+		}
 	}
 	return ;
 }
 
-void	ft_echo(char **o_cmd_split)
+void	ft_echo(t_data *minishell)
 {
 	int	i;
 	int	flag;
 
 	i = 1;
-	if (o_cmd_split[i])
-		flag = echo_flag_check(o_cmd_split[i]);
-	else
+	if (access(minishell->o_cmd_split[0], X_OK) == 0)
 	{
-		printf("\n");
-		return ;
-	}
-	if (flag)
-		i++;
-	while (o_cmd_split[i])
-	{
-		if (o_cmd_split[i + 1])
-			printf("%s ", o_cmd_split[i]);
-		else if (!flag)
-			printf("%s\n", o_cmd_split[i]);
+		if (minishell->o_cmd_split[i])
+			flag = echo_flag_check(minishell->o_cmd_split[i]);
 		else
-			printf("%s", o_cmd_split[i]);
-		i++;
+		{
+			printf("\n");
+			return ;
+		}
+		if (flag)
+			i++;
+		echo_print(minishell, i, flag);
 	}
+	else
+		printf("%s: No such file or directory\n", minishell->o_cmd_split[0]);
+}
+
+void	ft_cd(char **data)
+{
+	if (data[1] && !data[2])
+	{
+		if (chdir(data[1]) == 0)
+			return ;
+		else
+			printf("cd: %s: No such file or directory\n", data[1]);
+	}
+	else if (!data[1])
+	{
+		if (chdir("home") == 0)
+			return ;
+	}
+	else
+		printf("cd: too many arguments\n");
+	return ;
 }

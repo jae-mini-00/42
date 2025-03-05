@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static char	**ft_full_path_split(char **path_split)
+static void	ft_full_path_split(char **path_split)
 {
 	int		i;
 	char	*temp;
@@ -25,7 +25,6 @@ static char	**ft_full_path_split(char **path_split)
 		free(temp);
 		i++;
 	}
-	return (path_split);
 }
 
 static char	**path_init(char **envp)
@@ -46,7 +45,7 @@ static char	**path_init(char **envp)
 		i++;
 	}
 	free(path);
-	path_split = ft_full_path_split(path_split);
+	ft_full_path_split(path_split);
 	return (path_split);
 }
 
@@ -84,10 +83,8 @@ void	o_cmd_split_init(t_data *minishell)
 		return ;
 	}
 	minishell->o_cmd_split = ft_split(&minishell->o_cmd[i], ' ');
-	if (minishell->o_cmd[i] == '~' || minishell->o_cmd[i] == '.' || \
-		minishell->o_cmd[i] == '/')
-		return ;
-	else
+	if (minishell->o_cmd[i] != '~' || minishell->o_cmd[i] != '.' || \
+		minishell->o_cmd[i] != '/')
 		access_path(minishell);
 	builtin_check(minishell);
 }
