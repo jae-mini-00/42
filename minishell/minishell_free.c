@@ -14,6 +14,7 @@
 
 void	minishell_free(t_data *minishell)
 {
+	free(minishell->now);
 	free(minishell->o_cmd);
 	split_free(minishell->env);
 	split_free(minishell->path);

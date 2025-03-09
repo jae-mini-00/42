@@ -36,9 +36,11 @@ make_bonus : $(B_OBJS)
 
 clean :
 	rm -f $(OBJS) $(B_OBJS)
+	$(MAKE) clean -C ./ft_printf
 
 fclean : clean
 	rm -f $(NAME)
+	$(MAKE) clean -C ./ft_printf
 
 re : fclean all
 

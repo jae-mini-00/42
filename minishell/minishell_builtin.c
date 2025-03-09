@@ -58,15 +58,39 @@ void	ft_cd(char **data)
 	{
 		if (chdir(data[1]) == 0)
 			return ;
-		else
+		else if (access(data[1], F_OK) == -1)
 			printf("cd: %s: No such file or directory\n", data[1]);
+		else
+			printf("cd: %s: Permission denied\n", data[1]);
 	}
 	else if (!data[1])
 	{
-		if (chdir("home") == 0)
+		if (chdir("/home/jaejo") == 0)
 			return ;
 	}
 	else
 		printf("cd: too many arguments\n");
 	return ;
+}
+
+void	ft_pwd(char **data)
+{
+	char	*now;
+	int		i;
+
+	i = 0;
+	while (data[i])
+		i++;
+	if (i > 1)
+	{
+		if (data[1][0] != '-')
+			printf("pwd: too many arguments\n");
+		else
+			printf("pwd: %s: invalid option\n", data[1]);
+		return ;
+	}
+	now = getcwd(NULL, 0);
+	if (now)
+		printf("%s\n", now);
+	free(now);
 }

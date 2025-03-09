@@ -98,6 +98,7 @@ void	minishell_init(t_data *minishell, char **envp)
 		i++;
 	minishell->builtin_flag = 0;
 	minishell->pipe_flag = 0;
+	minishell->now = NULL;
 	minishell->o_cmd = NULL;
 	minishell->o_cmd_split = NULL;
 	minishell->path = path_init(envp);

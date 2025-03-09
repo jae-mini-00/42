@@ -23,7 +23,7 @@ static void	builtin_check2(t_data *minishell)
 			printf("exit: Argument '%s' is not a valid integer\n", \
 					minishell->o_cmd_split[1]);
 		minishell_free(minishell);
-		exit(0);
+		exit(1);
 	}
 	else if (!ft_strncmp(minishell->o_cmd_split[0], "cd", 3))
 	{
@@ -47,11 +47,11 @@ void	builtin_check(t_data *minishell)
 		ft_echo(minishell);
 		minishell->builtin_flag = 1;
 	}
-	/*else if (!ft_strncmp(temp[i], "pwd", 4))
+	else if (!ft_strncmp(temp[i], "pwd", 4))
 	{
-		ft_pwd(minishell);
+		ft_pwd(minishell->o_cmd_split);
 		minishell->builtin_flag = 1;
-	}*/
+	}
 	split_free(temp);
 	builtin_check2(minishell);
 }

@@ -26,6 +26,7 @@ typedef struct s_data
 	pid_t	pid;
 	int		pipe_flag;
 	int		builtin_flag;
+	char	*now;
 	char	*o_cmd;
 	char	**o_cmd_split;
 	char	**env;
@@ -51,6 +52,7 @@ int		echo_flag_check(char *str);
 void	ft_env(t_data *minishell);
 void	ft_echo(t_data *minishell);
 void	ft_cd(char **data);
+void	ft_pwd(char **data);
 
 /* builtin utils */
 int		split_last(char **split);
