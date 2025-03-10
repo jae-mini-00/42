@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+//extern char **environ;
+
+static void	builtin_check3(t_data *minishell)
+{
+	if (!ft_strncmp(minishell->o_cmd_split[0], "export", 7))
+	{
+		for (int i = 0; environ[i] != NULL; i++) {
+        printf("%s\n", environ[i]);
+    	}
+		//ft_export(minishell);
+		minishell->builtin_flag = 1;
+	}
+}
+
 static void	builtin_check2(t_data *minishell)
 {
 	if (!ft_strncmp(minishell->o_cmd_split[0], "exit", 5))
@@ -30,6 +44,8 @@ static void	builtin_check2(t_data *minishell)
 		ft_cd(minishell->o_cmd_split);
 		minishell->builtin_flag = 1;
 	}
+	else
+		builtin_check3(minishell);
 }
 
 void	builtin_check(t_data *minishell)
@@ -52,8 +68,9 @@ void	builtin_check(t_data *minishell)
 		ft_pwd(minishell->o_cmd_split);
 		minishell->builtin_flag = 1;
 	}
+	else
+		builtin_check2(minishell);
 	split_free(temp);
-	builtin_check2(minishell);
 }
 
 int	echo_flag_check(char *str)
