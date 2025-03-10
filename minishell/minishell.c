@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **envp)
 		o_cmd_split_init(&minishell);
 		if (minishell.o_cmd_split != NULL && !minishell.builtin_flag)
 		{
-			//printf("fork\n");
+			// printf("fork\n");
 			make_fork(&minishell, envp);
 		}
 		add_history(minishell.o_cmd);
