@@ -26,7 +26,7 @@ typedef struct s_data
 	pid_t	pid;
 	int		pipe_flag;
 	int		builtin_flag;
-	char	*now;
+	char	*prompt;
 	char	*o_cmd;
 	char	**o_cmd_split;
 	char	**env;

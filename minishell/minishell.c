@@ -49,8 +49,8 @@ int	main(int ac, char **av, char **envp)
 	minishell_init(&minishell, envp);
 	while (1)
 	{
-		minishell.now = make_prompt(av[1]);
-		minishell.o_cmd = readline(minishell.now);
+		minishell.prompt = make_prompt(av[1]);
+		minishell.o_cmd = readline(minishell.prompt);
 		o_cmd_split_init(&minishell);
 		if (minishell.o_cmd_split != NULL && !minishell.builtin_flag)
 		{
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 		add_history(minishell.o_cmd);
 		split_free(minishell.o_cmd_split);
 		free(minishell.o_cmd);
-		free(minishell.now);
+		free(minishell.prompt);
 	}
 	rl_clear_history();
 	split_free(minishell.path);
