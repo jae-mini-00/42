@@ -53,6 +53,10 @@ void	ft_env(t_data *minishell);
 void	ft_echo(t_data *minishell);
 void	ft_cd(char **data);
 void	ft_pwd(char **data);
+void	ft_export(t_data *minishell);
+
+/* export utils */
+void	make_env(t_data *minishell);
 
 /* builtin utils */
 int		split_last(char **split);

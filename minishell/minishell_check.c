@@ -12,16 +12,13 @@
 
 #include "minishell.h"
 
-//extern char **environ;
+extern char **environ;
 
 static void	builtin_check3(t_data *minishell)
 {
 	if (!ft_strncmp(minishell->o_cmd_split[0], "export", 7))
 	{
-		for (int i = 0; environ[i] != NULL; i++) {
-        printf("%s\n", environ[i]);
-    	}
-		//ft_export(minishell);
+		ft_export(minishell);
 		minishell->builtin_flag = 1;
 	}
 }
