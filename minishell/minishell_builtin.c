@@ -94,3 +94,15 @@ void	ft_pwd(char **data)
 		printf("%s\n", now);
 	free(now);
 }
+
+void	ft_export(t_data *minishell)
+{
+	int		i;
+
+	i = 0;
+	if (!minishell->o_cmd_split[1])
+		while (minishell->env[i])
+			printf("declare -x %s\n", minishell->env[i++]);
+	else
+		make_env(minishell);
+}
