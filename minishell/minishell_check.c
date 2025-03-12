@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-extern char **environ;
-
 static void	builtin_check3(t_data *minishell)
 {
 	if (!ft_strncmp(minishell->o_cmd_split[0], "export", 7))
@@ -23,7 +21,7 @@ static void	builtin_check3(t_data *minishell)
 	}
 }
 
-static void	builtin_check2(t_data *minishell)
+static void	builtin_check2(t_data *minishell, char **temp)
 {
 	if (!ft_strncmp(minishell->o_cmd_split[0], "exit", 5))
 	{
@@ -33,6 +31,7 @@ static void	builtin_check2(t_data *minishell)
 		else if (minishell->o_cmd_split[1] && !minishell->o_cmd_split[2])
 			printf("exit: Argument '%s' is not a valid integer\n", \
 					minishell->o_cmd_split[1]);
+		split_free(temp);
 		minishell_free(minishell);
 		exit(1);
 	}
@@ -66,7 +65,9 @@ void	builtin_check(t_data *minishell)
 		minishell->builtin_flag = 1;
 	}
 	else
-		builtin_check2(minishell);
+	{
+		builtin_check2(minishell, temp);
+	}
 	split_free(temp);
 }
 
