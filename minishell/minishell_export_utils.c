@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	dot_check(char *str)
+int	double_quote_check(char *str)
 {
 	int	i;
 	int	flag;
@@ -28,7 +28,7 @@ int	dot_check(char *str)
 	return (flag);
 }
 
-char	*remove_export(char *str)
+char	*remove_double_quote_export(char *str)
 {
 	int	i;
 	int	j;
@@ -40,9 +40,13 @@ char	*remove_export(char *str)
 		i++;
 	while (str[i] == ' ')
 		i++;
-	temp = malloc(sizeof(char) * (ft_strlen(&str[i]) + 1));
+	temp = malloc(sizeof(char) * (ft_strlen(&str[i]) - 1));
 	while (str[i + j])
 	{
+		if (str[i + j] == '"')
+			i++;
+		if (!str[i + j])
+			break ;
 		temp[j] = str[i + j];
 		j++;
 	}
@@ -50,53 +54,76 @@ char	*remove_export(char *str)
 	return (temp);
 }
 
-char	*remove_dot(char *str)
+char	*env_name(char *str)
 {
-	int		i;
-	int		j;
-	char	*temp;
+	int	i;
+	char	*name;
 
-	j = 0;
 	i = 0;
-	temp = malloc(sizeof(char) * (ft_strlen(str) - dot_check(str) + 1));
-	while (str[i + j])
+	while (str[i] != '=')
+		i++;
+	name = (char *)malloc(sizeof(char) * (i + 2));
+	i = 0;
+	while (str[i] != '=')
 	{
-		if (str[i + j] == '"')
-			j++;
-		temp[i] = str[i + j];
+		name[i] = str[i];
 		i++;
 	}
-	temp[i] = '\0';
-	return (temp);
+	name[i++] = '=';
+	name[i] = '\0';
+	return (name);
 }
 
 void	path_export(t_data *minishell)
 {
 	int		i;
-	char	*save;
 	char	*temp;
+	char	*name;
 	char	**new_env;
 
-	i = 0;
-	new_env = (char **)malloc(sizeof(char *) * (split_last(minishell->env) + 2));
-	temp = remove_export(minishell->o_cmd);
-	save = remove_dot(temp);
-	free(temp);
-	while (minishell->env[i])
+	i = -1;
+	name = env_name(minishell->o_cmd_split[1]);
+	new_env = (char **)malloc(sizeof(char *) * (split_last(minishell->env) + 3));
+	temp = remove_double_quote_export(minishell->o_cmd);
+	while (minishell->env[++i])
 	{
-		new_env[i] = ft_strdup(minishell->env[i]);
-		i++;
+		if (ft_strncmp(minishell->env[i], name, ft_strlen(name)))
+			new_env[i] = ft_strdup(minishell->env[i]);
+		else
+		{
+			new_env[i] = ft_strdup(temp);
+			free(temp);
+			temp = NULL;
+		}
 	}
-	new_env[i++] = save;
+	if (temp)
+		new_env[i++] = temp;
 	new_env[i] = NULL;
 	split_free(minishell->env);
 	minishell->env = new_env;
+	free(name);
 }
 
 void	make_env(t_data *minishell)
 {
-	if (dot_check(minishell->o_cmd) == 2 && ft_strchr(minishell->o_cmd, '='))
+	int	i;
+
+	i = 0;
+	while (minishell->o_cmd[i] != '=' && minishell->o_cmd[i])
+		i++;
+	if (!minishell->o_cmd[i])
+		return ;
+	if (minishell->o_cmd_split[1][0] >= '0' && minishell->o_cmd_split[1][0] <= '9')
+		return ;
+	if (minishell->o_cmd[i] == '=' && minishell->o_cmd[i + 1] == '"' \
+		&& minishell->o_cmd[ft_strlen(minishell->o_cmd) - 1] == '"' && \
+		double_quote_check(minishell->o_cmd) == 2)
 		path_export(minishell);
 	else
-		printf("export: '%s': not a valid identifier\n", minishell->o_cmd_split[1]);
+	{
+		if (minishell->o_cmd_split[2])
+			printf("export: '%s': not a valid identifier\n", minishell->o_cmd_split[2]);
+		else	
+			printf("export: '%s': not a valid identifier\n", minishell->o_cmd_split[1]);
+	}
 }

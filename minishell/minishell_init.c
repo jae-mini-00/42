@@ -86,6 +86,8 @@ void	o_cmd_split_init(t_data *minishell)
 	if (minishell->o_cmd[i] != '~' || minishell->o_cmd[i] != '.' || \
 		minishell->o_cmd[i] != '/')
 		access_path(minishell);
+	split_free(minishell->path);
+	minishell->path = path_init(minishell->env);
 	builtin_check(minishell);
 }
 
