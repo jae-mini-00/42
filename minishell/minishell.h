@@ -21,6 +21,23 @@
 # include <sys/wait.h>
 # include "./ft_printf/ft_printf.h"
 
+typedef enum s_type
+{
+	COMMAND,
+	ARGUMENT,
+	REDIRECTION,
+	HERE_DOC,
+	PIPE,
+	ENV
+}	t_type;
+
+typedef struct s_token
+{
+	char			*value;
+	t_type			type;
+	struct s_token *next;
+}	t_token;
+
 typedef struct s_data
 {
 	pid_t	pid;
@@ -31,6 +48,7 @@ typedef struct s_data
 	char	**o_cmd_split;
 	char	**env;
 	char	**path;
+	t_token	*cmd;
 }	t_data;
 
 /* init */
