@@ -24,7 +24,8 @@
 typedef enum s_type
 {
 	COMMAND,
-	ARGUMENT,
+	BUILTIN,
+	ARG,
 	REDIRECTION,
 	HERE_DOC,
 	PIPE,
@@ -41,14 +42,11 @@ typedef struct s_token
 typedef struct s_data
 {
 	pid_t	pid;
-	int		pipe_flag;
-	int		builtin_flag;
 	char	*prompt;
 	char	*o_cmd;
-	char	**o_cmd_split;
 	char	**env;
 	char	**path;
-	t_token	*cmd;
+	t_token	*token;
 }	t_data;
 
 /* init */
@@ -80,4 +78,5 @@ void	make_env(t_data *minishell);
 int		split_last(char **split);
 void	echo_print(t_data *minishell, int i, int flag);
 
+char	**minishell_split(char const *str);
 #endif

@@ -49,27 +49,6 @@ static char	**path_init(char **envp)
 	return (path_split);
 }
 
-static void	access_path(t_data *minishell)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (minishell->path[i])
-	{
-		temp = ft_strjoin(minishell->path[i], minishell->o_cmd_split[0]);
-		if (access(temp, X_OK) == 0)
-		{
-			free(minishell->o_cmd_split[0]);
-			minishell->o_cmd_split[0] = ft_strdup(temp);
-			free(temp);
-			return ;
-		}
-		free(temp);
-		i++;
-	}
-}
-
 void	o_cmd_split_init(t_data *minishell)
 {
 	int	i;
@@ -82,13 +61,9 @@ void	o_cmd_split_init(t_data *minishell)
 		minishell->o_cmd_split = NULL;
 		return ;
 	}
-	minishell->o_cmd_split = ft_split(&minishell->o_cmd[i], ' ');
-	if (minishell->o_cmd[i] != '~' || minishell->o_cmd[i] != '.' || \
-		minishell->o_cmd[i] != '/')
-		access_path(minishell);
 	split_free(minishell->path);
 	minishell->path = path_init(minishell->env);
-	builtin_check(minishell);
+	minishell->token = make_token(minishell->o_cmd, minishell);
 }
 
 void	minishell_init(t_data *minishell, char **envp)
@@ -98,11 +73,9 @@ void	minishell_init(t_data *minishell, char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	minishell->builtin_flag = 0;
-	minishell->pipe_flag = 0;
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
-	minishell->o_cmd_split = NULL;
+	minishell->token = NULL;
 	minishell->path = path_init(envp);
 	minishell->env = (char **)malloc(sizeof(char *) * (i + 1));
 	minishell->env[i--] = NULL;

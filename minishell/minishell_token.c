@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_token *new_token(char *cmd, t_type type)
+static t_token	*new_token(char *cmd, t_type type)
 {
 	t_token	*token;
 
@@ -23,7 +23,7 @@ t_token *new_token(char *cmd, t_type type)
 	return (token);
 }
 
-void add_token(t_token **head, char *value, t_type type)
+static void	add_token(t_token **head, char *value, t_type type)
 {
     t_token *new;
 	t_token *temp;
@@ -40,14 +40,54 @@ void add_token(t_token **head, char *value, t_type type)
     }
 }
 
-t_token	*make_token(char *str)
+static int	type_check2(char **str, t_data *minishell)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (minishell->path[i])
+	{
+		temp = ft_strjoin(minishell->path[i], str[0]);
+		if (access(temp, X_OK) == 0)
+		{
+			free(str[0]);
+			str[0] = ft_strdup(temp);
+			free(temp);
+			return (0);
+		}
+		free(temp);
+		i++;
+	}
+	return (2);
+}
+
+static int	type_check(char **str, t_data *minishell)
+{
+	if (!ft_strncmp(str[0], "env", 4))
+		return (1);
+	else if (!ft_strncmp(str[0], "echo", 5))
+		return (1);
+	else if (!ft_strncmp(str[0], "pwd", 4))
+		return (1);
+	else if (!ft_strncmp(str[0], "exit", 5))
+		return (1);
+	else if (!ft_strncmp(str[0], "cd", 3))
+		return (1);
+	else if (!ft_strncmp(str[0], "export", 7))
+		return (1);
+	else if (!ft_strncmp(str[0], "unset", 6))
+		return (1);
+}
+
+t_token	*make_token(char *str, t_data *minishell)
 {
 	int		i;
 	char	**data;
 	t_token	*token;
 
 	i = 0;
-	data = minishell_split(str);
+	data = minishell_make_split(new_str);
 	while (data[i])
 	{
 		if (ft_strncmp(data[i], "|") == 0)
@@ -56,8 +96,15 @@ t_token	*make_token(char *str)
 			add_token(&token, data[i], REDIRECTION);
 		else if (ft_strncmp(data[i], ">>", 3) == 0 || ft_strncmp(data[i], "<<", 3) == 0)
 			add_token(&token, data[i], HERE_DOC);
-		else if (ft_strncmp(data[i], "$", 2) == 0)
-			add_token(&token, data[i], PIPE);
+		else if (ft_strncmp(data[i], "$", 1) == 0)
+			add_token(&token, data[i], ENV);
+		else if (type_check(data[i], minishell) == 0)
+			add_token(&token, data[i], COMMAND);
+		else if (type_check(&data[i], minishell) == 1)
+			add_token(&token, data[i], BUILTIN);
+		else
+			add_token(&token, data[i], ARG);
 	}
 	split_free(data);
+	return (token);
 }
