@@ -30,9 +30,7 @@ static void	add_token(t_token **head, char *value, t_type type)
 
 	new = new_token(value, type);
     if (*head == NULL)
-	{
         *head = new;
-	}
     else
 	{
 		temp = *head;
