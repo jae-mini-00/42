@@ -56,6 +56,7 @@ void	o_cmd_split_init(t_data *minishell);
 /* free */
 void	split_free(char **split);
 void	minishell_free(t_data *minishell);
+void	token_free(t_token *data);
 
 /* fork */
 void	make_fork(t_data *minishell, char **envp);
@@ -78,5 +79,8 @@ void	make_env(t_data *minishell);
 int		split_last(char **split);
 void	echo_print(t_data *minishell, int i, int flag);
 
+t_token	*make_token(char *str, t_data *minishell);
 char	**minishell_split(char const *str);
+char	**minishell_make_split(char *str);
+
 #endif

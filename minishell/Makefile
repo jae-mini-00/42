@@ -15,8 +15,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = minishell
 
-SRCS =  minishell.c minishell_init.c minishell_free.c minishell_fork.c minishell_builtin.c \
-		minishell_check.c minishell_builtin_utils.c minishell_export_utils.c \
+SRCS =  minishell.c minishell_init.c minishell_free.c minishell_split.c \
+		minishell_token.c minishell_space_plus_str.c \
 
 OBJS = $(SRCS:.c=.o)
 

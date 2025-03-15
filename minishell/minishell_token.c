@@ -30,7 +30,9 @@ static void	add_token(t_token **head, char *value, t_type type)
 
 	new = new_token(value, type);
     if (*head == NULL)
+	{
         *head = new;
+	}
     else
 	{
 		temp = *head;
@@ -78,6 +80,8 @@ static int	type_check(char **str, t_data *minishell)
 		return (1);
 	else if (!ft_strncmp(str[0], "unset", 6))
 		return (1);
+	else
+		return (type_check2(str, minishell));
 }
 
 t_token	*make_token(char *str, t_data *minishell)
@@ -87,10 +91,12 @@ t_token	*make_token(char *str, t_data *minishell)
 	t_token	*token;
 
 	i = 0;
-	data = minishell_make_split(new_str);
+	token = NULL;
+	data = minishell_make_split(str);
 	while (data[i])
 	{
-		if (ft_strncmp(data[i], "|") == 0)
+		//printf("token[%d] data :%s\n", i, data[i]);
+		if (ft_strncmp(data[i], "|", 2) == 0)
 			add_token(&token, data[i], PIPE);
 		else if (ft_strncmp(data[i], ">", 2) == 0 || ft_strncmp(data[i], "<", 2) == 0)
 			add_token(&token, data[i], REDIRECTION);
@@ -98,12 +104,13 @@ t_token	*make_token(char *str, t_data *minishell)
 			add_token(&token, data[i], HERE_DOC);
 		else if (ft_strncmp(data[i], "$", 1) == 0)
 			add_token(&token, data[i], ENV);
-		else if (type_check(data[i], minishell) == 0)
+		else if (type_check(&data[i], minishell) == 0)
 			add_token(&token, data[i], COMMAND);
 		else if (type_check(&data[i], minishell) == 1)
 			add_token(&token, data[i], BUILTIN);
 		else
 			add_token(&token, data[i], ARG);
+		i++;
 	}
 	split_free(data);
 	return (token);
