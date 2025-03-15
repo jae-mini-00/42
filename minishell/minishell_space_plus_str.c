@@ -76,7 +76,7 @@ char	**minishell_make_split(char *str)
 	quote = 0;
 	i = space_plus_len(str);
 	if (!i)
-		return (ft_split(str));
+		return (ft_split(str, ' '));
 	new_str = space_plus_str_copy(str, 0, 0, quote);
 	split = minishell_split(new_str);
 	free(new_str);

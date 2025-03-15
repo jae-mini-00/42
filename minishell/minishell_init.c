@@ -57,10 +57,7 @@ void	o_cmd_split_init(t_data *minishell)
 	while (minishell->o_cmd[i] == ' ')
 		i++;
 	if (minishell->o_cmd[i] == '\n' || minishell->o_cmd[i] == '\0')
-	{
-		minishell->o_cmd_split = NULL;
 		return ;
-	}
 	split_free(minishell->path);
 	minishell->path = path_init(minishell->env);
 	minishell->token = make_token(minishell->o_cmd, minishell);

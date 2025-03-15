@@ -20,6 +20,21 @@ void	minishell_free(t_data *minishell)
 	split_free(minishell->path);
 }
 
+void	token_free(t_token *data)
+{
+	t_token	*temp;
+
+	if (!data)
+		return ;
+	while (data)
+	{
+		temp = data;
+		free(data->value);
+		data = data->next;
+		free(temp);
+	}
+}
+
 void	split_free(char **split)
 {
 	int	i;
