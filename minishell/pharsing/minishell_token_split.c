@@ -1,52 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   minishell_token_split.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:07:25 by jaejo             #+#    #+#             */
-/*   Updated: 2024/10/15 21:04:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 21:53:22 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_pharsing.h"
 
 static int	ft_count(char const *s, int count, char quote)
 {
 	while (*s)
 	{
-		if (*s == ' ')
+		while (*s == ' ')
 			s++;
-		else
+		if (*s != ' ')
 		{
-			if (*s == '"' || *s == '\'')
+			while (*s && *s != ' ')
 			{
-				quote = *s++;
-				while (*s && *s != quote)
-					s++;
+				if (*s == '"' || *s == '\'')
+				{
+					quote = *s++;
+					while (*s && *s != quote)
+						s++;
+					if (!*s)
+						return (-1);
+					quote = 0;
+				}
 				s++;
-				quote = 0;
 			}
-			else
-				while (*s && *s != ' ' && *s != '\'' && *s != '"')
-					s++;
 			count++;
 		}
 	}
-	if (quote != 0)
-		return (-1);
 	return (count);
 }
 
-static char	*ft_word_start(char const *s, char *quote)
+static char	*ft_word_start(char const *s)
 {
 	while (*s && *s == ' ')
 		s++;
-	if (*s == '\'' || *s == '"')
-		*quote = *s;
-	else
-		*quote = 0;
 	return ((char *)s);
 }
 
@@ -59,16 +55,16 @@ static int	ft_len(char const *s)
 	quote = 0;
 	if (*s)
 	{
-		if (s[i] == '"' || s[i] == '\'')
+		while (s[i] && s[i] != ' ')
 		{
-			quote = s[i++];
-			while (s[i] && s[i] != quote)
-				i++;
+			if (s[i] == '"' || s[i] == '\'')
+			{
+				quote = s[i++];
+				while (s[i] && s[i] != quote)
+					i++;
+			}
 			i++;
 		}
-		else
-			while (s[i] && s[i] != ' ' && s[i] != '\'' && s[i] != '"')
-				i++;
 	}
 	return (i);
 }
@@ -84,24 +80,24 @@ static char	*word_copy(char const *s, int i, char quote)
 	i = 0;
 	if (*s)
 	{
-		if (s[i] == '"' || s[i] == '\'')
+		while (*s && *s != ' ')
 		{
-			quote = *s;
-			temp[i++] = *s++;
-			while (*s && *s != quote)
+			if (*s == '"' || *s == '\'')
+			{
+				quote = *s;
 				temp[i++] = *s++;
+				while (*s && *s != quote)
+					temp[i++] = *s++;
+			}
 			temp[i++] = *s++;
 		}
-		else
-			while (*s && *s != ' ' && *s != '\'' && *s != '"')
-				temp[i++] = *s++;
 	}
 	else
 		return (NULL);
 	return (temp);
 }
 
-char	**minishell_split(char const *s)
+char	**token_split(char const *s)
 {
 	char	**temp;
 	int		i;
@@ -120,7 +116,7 @@ char	**minishell_split(char const *s)
 	temp[count] = NULL;
 	while (j < count)
 	{
-		s = ft_word_start(s, &quote);
+		s = ft_word_start(s);
 		i = ft_len(s);
 		temp[j] = word_copy(s, i, quote);
 		s = s + i;

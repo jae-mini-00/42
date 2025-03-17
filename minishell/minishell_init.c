@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 23:48:46 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:50:26 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	o_cmd_split_init(t_data *minishell)
 		return ;
 	split_free(minishell->path);
 	minishell->path = path_init(minishell->env);
-	minishell->token = make_token(minishell->o_cmd, minishell);
+	minishell->token = token_init(minishell->o_cmd, minishell);
 }
 
 void	minishell_init(t_data *minishell, char **envp)

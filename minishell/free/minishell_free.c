@@ -6,20 +6,36 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 22:27:52 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:40:56 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_free.h"
 
 void	minishell_free(t_data *minishell)
 {
 	free(minishell->prompt);
 	free(minishell->o_cmd);
+	split_free(minishell->path);
+	token_free(minishell->token);
+	minishell->prompt = NULL;
+	minishell->o_cmd = NULL;
+	minishell->path = NULL;
+	minishell->token = NULL;
+}
+void	exit_free(t_data *minishell)
+{
+	free(minishell->prompt);
+	free(minishell->o_cmd);
 	split_free(minishell->env);
 	split_free(minishell->path);
+	token_free(minishell->token);
+	minishell->prompt = NULL;
+	minishell->o_cmd = NULL;
+	minishell->path = NULL;
+	minishell->token = NULL;
+	minishell->env = NULL;
 }
-
 void	token_free(t_token *data)
 {
 	t_token	*temp;

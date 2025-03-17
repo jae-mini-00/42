@@ -6,7 +6,7 @@
 #    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/03/04 23:43:50 by jaejo            ###   ########.fr        #
+#    Updated: 2025/03/17 21:52:51 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = minishell
 
-SRCS =  minishell.c minishell_init.c minishell_free.c minishell_split.c \
-		minishell_token.c minishell_space_plus_str.c \
+FREE_SRCS = ./free/minishell_free.c \
+
+PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_data.c \
+				./pharsing/minishell_data_split.c \
+
+FORK_SRCS = ./fork/minishell_fork.c \
+
+SRCS =  $(FREE_SRCS) $(PHARSING_SRCS) $(FORK_SRCS) \
+		minishell.c minishell_init.c \
 
 OBJS = $(SRCS:.c=.o)
 

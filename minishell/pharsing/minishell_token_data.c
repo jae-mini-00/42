@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_fork.c                                   :+:      :+:    :+:   */
+/*   minishell_token_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 22:43:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 21:53:42 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_pharsing.h"
 
 static int	space_plus_len(char *str)
 {
@@ -66,7 +66,7 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 	return (new_str);
 }
 
-char	**minishell_make_split(char *str)
+char	**minishell_token_data(char *str)
 {
 	int		i;
 	char	*new_str;
@@ -78,7 +78,7 @@ char	**minishell_make_split(char *str)
 	if (!i)
 		return (ft_split(str, ' '));
 	new_str = space_plus_str_copy(str, 0, 0, quote);
-	split = minishell_split(new_str);
+	split = token_split(new_str);
 	free(new_str);
 	return (split);
 }

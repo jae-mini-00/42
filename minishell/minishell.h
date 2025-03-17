@@ -6,57 +6,19 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 23:48:03 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:49:49 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdbool.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "./ft_printf/ft_printf.h"
-
-typedef enum s_type
-{
-	COMMAND,
-	BUILTIN,
-	ARG,
-	REDIRECTION,
-	HERE_DOC,
-	PIPE,
-	ENV
-}	t_type;
-
-typedef struct s_token
-{
-	char			*value;
-	t_type			type;
-	struct s_token *next;
-}	t_token;
-
-typedef struct s_data
-{
-	pid_t	pid;
-	char	*prompt;
-	char	*o_cmd;
-	char	**env;
-	char	**path;
-	t_token	*token;
-}	t_data;
+# include "./free/minishell_free.h"
+# include "./pharsing/minishell_pharsing.h"
 
 /* init */
 void	minishell_init(t_data *minishell, char **envp);
 void	o_cmd_split_init(t_data *minishell);
-
-/* free */
-void	split_free(char **split);
-void	minishell_free(t_data *minishell);
-void	token_free(t_token *data);
 
 /* fork */
 void	make_fork(t_data *minishell, char **envp);
@@ -65,22 +27,19 @@ void	make_fork(t_data *minishell, char **envp);
 void	builtin_check(t_data *minishell);
 int		echo_flag_check(char *str);
 
-/* builtin */
+/* builtin
 void	ft_env(t_data *minishell);
 void	ft_echo(t_data *minishell);
 void	ft_cd(char **data);
 void	ft_pwd(char **data);
 void	ft_export(t_data *minishell);
 
-/* export utils */
+export utils 
 void	make_env(t_data *minishell);
 
-/* builtin utils */
+builtin utils 
 int		split_last(char **split);
 void	echo_print(t_data *minishell, int i, int flag);
-
-t_token	*make_token(char *str, t_data *minishell);
-char	**minishell_split(char const *str);
-char	**minishell_make_split(char *str);
+*/
 
 #endif
