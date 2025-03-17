@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_fork.c                                   :+:      :+:    :+:   */
+/*   minishell_token_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 22:43:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 21:15:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_pharsing.h"
 
 static t_token	*new_token(char *cmd, t_type type)
 {
@@ -46,6 +46,10 @@ static int	type_check2(char **str, t_data *minishell)
 	char	*temp;
 
 	i = 0;
+	if (access(str[0], X_OK) == 0)
+		return (0);
+	else if (str[0][0] == '.' || str[0][0] == '/' || str[0][0] == '~')
+		return (0);
 	while (minishell->path[i])
 	{
 		temp = ft_strjoin(minishell->path[i], str[0]);
@@ -82,18 +86,17 @@ static int	type_check(char **str, t_data *minishell)
 		return (type_check2(str, minishell));
 }
 
-t_token	*make_token(char *str, t_data *minishell)
+t_token	*token_init(char *str, t_data *minishell)
 {
 	int		i;
 	char	**data;
 	t_token	*token;
 
-	i = 0;
+	i = -1;
 	token = NULL;
-	data = minishell_make_split(str);
-	while (data[i])
+	data = minishell_token_data(str);
+	while (data[++i])
 	{
-		//printf("token[%d] data :%s\n", i, data[i]);
 		if (ft_strncmp(data[i], "|", 2) == 0)
 			add_token(&token, data[i], PIPE);
 		else if (ft_strncmp(data[i], ">", 2) == 0 || ft_strncmp(data[i], "<", 2) == 0)
@@ -108,8 +111,6 @@ t_token	*make_token(char *str, t_data *minishell)
 			add_token(&token, data[i], BUILTIN);
 		else
 			add_token(&token, data[i], ARG);
-		i++;
 	}
-	split_free(data);
-	return (token);
+	return (split_free(data), token);
 }

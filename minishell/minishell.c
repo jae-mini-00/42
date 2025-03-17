@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 23:50:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:43:46 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,35 +60,27 @@ int	main(int ac, char **av, char **envp)
 	if (ac > 2)
 		return (0);
 	minishell_init(&minishell, envp);
-	minishell.o_cmd = readline(minishell.prompt);
-	o_cmd_split_init(&minishell);
-		minishell.prompt = make_prompt(av[1]);
-	/*while (1)
+	while (1)
 	{
 		minishell.prompt = make_prompt(av[1]);
 		minishell.o_cmd = readline(minishell.prompt);
 		o_cmd_split_init(&minishell);
-		if (minishell.o_cmd_split != NULL && !minishell.builtin_flag)
+		/*if (minishell.token != NULL)
 		{
-			// printf("fork\n");
-			make_fork(&minishell, envp);
-		}
+			// printf("run\n");
+			minishell_run(&minishell)
+		}*/
 		add_history(minishell.o_cmd);
-		split_free(minishell.o_cmd_split);
-		free(minishell.o_cmd);
-		free(minishell.prompt);
+		minishell_free(&minishell);
 	}
-	rl_clear_history();
-	split_free(minishell.path);*/
-	t_token *temp = minishell.token;
-	while (minishell.token)
-	{
-		printf("value :%s type :%s\n", minishell.token->value, get_type_string(minishell.token->type));
-		minishell.token = minishell.token->next;
-	}
-	free(minishell.o_cmd);
-	free(minishell.prompt);
-	split_free(minishell.path);
 	split_free(minishell.env);
-	token_free(temp);
+	rl_clear_history();
 }
+/*
+t_token *temp = minishell.token;
+while (minishell.token)
+{
+	printf("value :%s type :%s\n", minishell.token->value, get_type_string(minishell.token->type));
+	minishell.token = minishell.token->next;
+}
+*/
