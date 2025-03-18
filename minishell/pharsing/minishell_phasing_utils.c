@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 22:22:18 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 23:19:55 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,31 @@ int	env_len(char *str)
 void	remove_token(t_data *minishell, t_token *data)
 {
 	t_token *now;
-	t_token *temp;
+	t_token *prev;
 
-	temp = NULL;
+	if (!minishell || !minishell->token || !data)
+		return;
 	now = minishell->token;
+	prev = NULL;
 	if (now == data)
 	{
+		minishell->token = now->next;
 		free(now->value);
 		free(now);
-		minishell->token = NULL;
-		return ;
+		return;
 	}
-	while (now->next != data)
+	while (now && now != data)
+	{
+		prev = now;
 		now = now->next;
-	if (now->next->next)
-		temp = now->next->next;
-	free(now->next->value);
-	free(now->next);
-	now->next = temp;
+	}
+	if (!now)
+		return;
+	prev->next = now->next;
+	free(now->value);
+	free(now);
 }
+
 void	remove_env(t_token *token, char *start)
 {
 	char	*temp;
@@ -66,4 +72,28 @@ void	remove_env(t_token *token, char *start)
 	temp[i] = '\0';
 	free(token->value);
 	token->value = temp;
+}
+void	token_check(t_data *minishell)
+{
+	t_token	*temp;
+	t_token	*next_token;
+
+	while (minishell->token && minishell->token->type == REMOVE)
+	{
+		temp = minishell->token;
+		minishell->token = temp->next;
+		remove_token(minishell, temp);
+	}
+	temp = minishell->token;
+	while (temp && temp->next)
+	{
+		next_token = temp->next;
+		if (next_token->type == REMOVE)
+		{
+			temp->next = next_token->next;
+			remove_token(minishell, next_token);
+		}
+		else
+			temp = temp->next;
+	}
 }
