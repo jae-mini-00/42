@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 18:29:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 19:55:08 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	env_len(char *str)
 	i++;
 	return (i);
 }
-static void	env_init(t_token *token, char *start, char *env, int j)
+void	env_init(t_token *token, char *start, char *env, int j)
 {
 	char	*temp;
 	char	*copy;
@@ -35,19 +35,20 @@ static void	env_init(t_token *token, char *start, char *env, int j)
 		return ;
 	i = 0;
 	copy = token->value;
-	while (copy)
+	while (*copy)
 	{
 		if (copy == start)
 		{
 			while (env[j])
-				temp[i++] = env[j++];	
-			copy = copy + env_len(start);
-		temp[i++] = *copy++;
+				temp[i++] = env[j++];
+			copy = copy + env_len(start + 1) + 1;
 		}
+		if (*copy)
+			temp[i++] = *copy++;
 	}
 	temp[i] = '\0';
-	free(token->value);
 	free(env);
+	free(token->value);
 	token->value = temp;
 }
 static void my_getenv(t_token *token, char *start, char **env)
@@ -58,25 +59,24 @@ static void my_getenv(t_token *token, char *start, char **env)
 	int		j;
 
 	j = -1;
-	i = env_len(start);
+	i = env_len(&start[1]);
 	temp = (char *)malloc(sizeof(char) * (i + 1));
 	if (!temp)
 		return ;
 	temp[i] = '\0';
 	while (++j < i)
-		temp[j] = start[j];
+		temp[j] = start[1 + j];
 	need_env = ft_strjoin(temp, "=");
 	free(temp);
 	temp = NULL;
 	j = -1;
 	while (env[++j])
 		if (ft_strncmp(env[j], need_env, ft_strlen(need_env)) == 0)
-			temp = ft_strdup(env[j] + ft_strlen(need_env));
+			temp = ft_strdup(&env[j][ft_strlen(need_env)]);
 	free(need_env);
 	if (temp)
 		env_init(token, start, temp, 0);
 }
-
 static void	minishell_conversion_env(t_token *data, char **env)
 {
 	t_token	*now;
@@ -88,11 +88,11 @@ static void	minishell_conversion_env(t_token *data, char **env)
 	temp = ft_strjoin(now->value, "=");
 	while (env[i])
 	{
-		if (ft_strncmp(temp, env[i], ft_strlen(temp)) == 0)
+		if (ft_strncmp(&temp[1], env[i], ft_strlen(&temp[1])) == 0)
 		{
-			free(temp);
 			free(now->value);
-			now->value = ft_strdup(env[i]);
+			now->value = ft_strdup(env[i] + ft_strlen(&temp[1]));
+			free(temp);
 			now->type = ARG;
 			return ;
 		}
