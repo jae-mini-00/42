@@ -6,7 +6,7 @@
 #    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/03/18 18:21:46 by jaejo            ###   ########.fr        #
+#    Updated: 2025/03/18 18:29:55 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@ NAME = minishell
 FREE_SRCS = ./free/minishell_free.c \
 
 PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_data.c \
-				./pharsing/minishell_data_split.c ./pharsing/minishell_variable_expansion.c \
+				./pharsing/minishell_token_split.c ./pharsing/minishell_variable_expansion.c \
 
-FORK_SRCS = ./fork/minishell_fork.c \
 
-SRCS =  $(FREE_SRCS) $(PHARSING_SRCS) $(FORK_SRCS) \
+
+SRCS =  $(FREE_SRCS) $(PHARSING_SRCS) \
 		minishell.c minishell_init.c \
 
 OBJS = $(SRCS:.c=.o)

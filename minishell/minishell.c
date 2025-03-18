@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/17 18:43:46 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 18:33:51 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ int	main(int ac, char **av, char **envp)
 			// printf("run\n");
 			minishell_run(&minishell)
 		}*/
+		t_token *temp = minishell.token;
+		while (temp)
+		{
+			printf("value :%s type :%s\n", minishell.token->value, get_type_string(minishell.token->type));
+			temp = temp->next;
+		}
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);
 	}
@@ -77,10 +83,10 @@ int	main(int ac, char **av, char **envp)
 	rl_clear_history();
 }
 /*
-t_token *temp = minishell.token;
-while (minishell.token)
-{
-	printf("value :%s type :%s\n", minishell.token->value, get_type_string(minishell.token->type));
-	minishell.token = minishell.token->next;
-}
+		t_token *temp = minishell.token;
+		while (temp)
+		{
+			printf("value :%s type :%s\n", minishell.token->value, get_type_string(minishell.token->type));
+			temp = temp->next;
+		}
 */

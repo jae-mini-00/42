@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 18:22:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 18:29:35 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	env_init(t_token *token, char *start, char *env, int j)
 	int		i;
 
 	temp = (char *)malloc(sizeof(char) * (ft_strlen(token->value) + ft_strlen(env) - 
-	env_strlen(start) + 1));
+	env_len(start) + 1));
 	if (!temp)
 		return ;
 	i = 0;
@@ -41,7 +41,7 @@ static void	env_init(t_token *token, char *start, char *env, int j)
 		{
 			while (env[j])
 				temp[i++] = env[j++];	
-			copy = copy + env_strlen(start);
+			copy = copy + env_len(start);
 		temp[i++] = *copy++;
 		}
 	}
@@ -101,7 +101,7 @@ static void	minishell_conversion_env(t_token *data, char **env)
 	free(temp);
 	free(now->value);//토큰 제거 해야함.
 }
-static void	*value_check(t_token *token, char **env, int i)
+static void	value_check(t_token *token, char **env, int i)
 {
 	char	quote;
 
@@ -109,33 +109,33 @@ static void	*value_check(t_token *token, char **env, int i)
 	while (token->value[i])
 	{
 		if (!quote && token->value[i] == '$')
-			return (my_getenv(token->value, &token->value[i], env));
+		{
+			my_getenv(token, &token->value[i], env);
+			return ;
+		}
 		else if (token->value[i] == '\'')
 		{
 			quote = token->value[i++];
 			while (token->value[i] && token->value[i] != quote)
 				i++;
 			if (!token->value[i])
-				return (NULL);
+				return ;
 			quote = 0;
 		}
 		i++;
 	}
-	return (NULL);
 }
 void	minishell_variable_expansion(t_token *token, t_data *minishell)
 {
 	t_token *temp;
-	char	*temp_env;
 
-	temp_env = NULL;
 	temp = token;
 	while (temp)
 	{
 		if (temp->type == ENV)
 			minishell_conversion_env(token, minishell->env);
 		else
-			temp_env = value_check(temp, minishell->env, 0);
+			value_check(temp, minishell->env, 0);
 		temp = temp->next;
 	}
 }
