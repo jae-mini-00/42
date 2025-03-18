@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/17 21:53:42 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 15:04:01 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 	new_str[j] = '\0';
 	return (new_str);
 }
-
 char	**minishell_token_data(char *str)
 {
 	int		i;
