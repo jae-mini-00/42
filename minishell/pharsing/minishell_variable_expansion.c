@@ -6,23 +6,12 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 19:55:08 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 22:25:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_pharsing.h"
 
-static int	env_len(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') ||
-	(str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
-	(str[i] == '_')))
-	i++;
-	return (i);
-}
 void	env_init(t_token *token, char *start, char *env, int j)
 {
 	char	*temp;
@@ -76,8 +65,10 @@ static void my_getenv(t_token *token, char *start, char **env)
 	free(need_env);
 	if (temp)
 		env_init(token, start, temp, 0);
+	else
+		remove_env(token, start);
 }
-static void	minishell_conversion_env(t_token *data, char **env)
+static void	minishell_conversion_env(t_data *minishell, t_token *data, char **env)
 {
 	t_token	*now;
 	char	*temp;
@@ -99,7 +90,7 @@ static void	minishell_conversion_env(t_token *data, char **env)
 		i++;
 	}
 	free(temp);
-	free(now->value);//토큰 제거 해야함.
+	remove_token(minishell, data); // 이부분 수정 해야 함.
 }
 static void	value_check(t_token *token, char **env, int i)
 {
@@ -111,7 +102,7 @@ static void	value_check(t_token *token, char **env, int i)
 		if (!quote && token->value[i] == '$')
 		{
 			my_getenv(token, &token->value[i], env);
-			return ;
+			i = 0;
 		}
 		else if (token->value[i] == '\'')
 		{
@@ -133,7 +124,7 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 	while (temp)
 	{
 		if (temp->type == ENV)
-			minishell_conversion_env(token, minishell->env);
+			minishell_conversion_env(minishell, temp, minishell->env);
 		else
 			value_check(temp, minishell->env, 0);
 		temp = temp->next;
