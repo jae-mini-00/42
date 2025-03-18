@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/17 18:41:38 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 22:53:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum s_type
 	REDIRECTION,
 	HERE_DOC,
 	PIPE,
-	ENV
+	ENV,
+	REMOVE
 }	t_type;
 
 typedef struct s_token

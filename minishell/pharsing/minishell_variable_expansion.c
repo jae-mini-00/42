@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 22:25:37 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 23:16:03 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	env_init(t_token *token, char *start, char *env, int j)
 	free(token->value);
 	token->value = temp;
 }
-static void my_getenv(t_token *token, char *start, char **env)
+static void	my_getenv(t_token *token, char *start, char **env)
 {
 	char	*temp;
 	char	*need_env;
@@ -68,7 +68,7 @@ static void my_getenv(t_token *token, char *start, char **env)
 	else
 		remove_env(token, start);
 }
-static void	minishell_conversion_env(t_data *minishell, t_token *data, char **env)
+static void	minishell_conversion_env(t_token *data, char **env)
 {
 	t_token	*now;
 	char	*temp;
@@ -89,8 +89,8 @@ static void	minishell_conversion_env(t_data *minishell, t_token *data, char **en
 		}
 		i++;
 	}
+	now->type = REMOVE;
 	free(temp);
-	remove_token(minishell, data); // 이부분 수정 해야 함.
 }
 static void	value_check(t_token *token, char **env, int i)
 {
@@ -124,9 +124,10 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 	while (temp)
 	{
 		if (temp->type == ENV)
-			minishell_conversion_env(minishell, temp, minishell->env);
+			minishell_conversion_env(temp, minishell->env);
 		else
 			value_check(temp, minishell->env, 0);
 		temp = temp->next;
 	}
+	token_check(minishell);
 }
