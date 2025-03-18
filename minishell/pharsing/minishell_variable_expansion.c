@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 23:16:03 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/18 23:43:07 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,21 @@ static void	minishell_conversion_env(t_token *data, char **env)
 	now->type = REMOVE;
 	free(temp);
 }
-static void	value_check(t_token *token, char **env, int i)
+static void	value_check(t_token *token, char **env, int i, char quote)
 {
-	char	quote;
-
-	quote = 0;
 	while (token->value[i])
 	{
-		if (!quote && token->value[i] == '$')
+		if (token->value[i] == '$')
 		{
 			my_getenv(token, &token->value[i], env);
 			i = 0;
+			continue ;
 		}
-		else if (token->value[i] == '\'')
+		else if (!quote && token->value[i] == '"')
+			quote = token->value[i];
+		else if (quote && token->value[i] == '"')
+			quote = 0;
+		else if (!quote && token->value[i] == '\'')
 		{
 			quote = token->value[i++];
 			while (token->value[i] && token->value[i] != quote)
@@ -126,7 +128,7 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 		if (temp->type == ENV)
 			minishell_conversion_env(temp, minishell->env);
 		else
-			value_check(temp, minishell->env, 0);
+			value_check(temp, minishell->env, 0 , 0);
 		temp = temp->next;
 	}
 	token_check(minishell);
