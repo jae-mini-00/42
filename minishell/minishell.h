@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 18:20:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:17:16 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "./free/minishell_free.h"
 # include "./pharsing/minishell_pharsing.h"
+# include "./signal/minishell_signal.h"
+# include "./run/minishell_run.h"
 
 /* init */
 void	minishell_init(t_data *minishell, char **envp);
