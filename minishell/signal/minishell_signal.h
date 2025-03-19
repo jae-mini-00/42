@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_fork.h                                   :+:      :+:    :+:   */
+/*   minishell_signal.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/17 18:56:07 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:17:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_FORK_H
-# define MINISHELL_FORK_H
+#ifndef MINISHELL_SIGNAL_H
+# define MINISHELL_SIGNAL_H
 
+# include <signal.h>
 # include "../ft_printf/ft_printf.h"
 # include "../free/minishell_free.h"
 
-/* token */
-t_token	*token_init(char *str, t_data *minishell);
-
-/* minishell token data */
-char	**minishell_token_data(char *str);
-
-/* minishell_split */
-char	**minishell_split(char const *str);
+/* signal */
+void	ctrl_d(t_data *minishell);
+void	print_signal(int sig);
 
 #endif
