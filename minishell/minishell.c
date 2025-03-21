@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/19 23:20:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/21 20:58:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(int ac, char **av, char **envp)
 		o_cmd_split_init(&minishell);
 		if (minishell.token != NULL)
 		{
-			printf("run\n");
-			//minishell_run(&minishell)
+			//printf("run\n");
+			minishell_run(&minishell);
 		}
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);

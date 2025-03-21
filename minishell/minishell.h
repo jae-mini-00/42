@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/19 22:17:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/21 21:11:19 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 /* init */
 void	minishell_init(t_data *minishell, char **envp);
 void	o_cmd_split_init(t_data *minishell);
-
-/* fork */
-void	make_fork(t_data *minishell, char **envp);
 
 /* check */
 void	builtin_check(t_data *minishell);
