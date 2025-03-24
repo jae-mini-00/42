@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 20:00:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/24 16:12:32 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_token	*new_token(char *cmd, t_type type)
 	token->next = NULL;
 	return (token);
 }
-
 static void	add_token(t_token **head, char *value, t_type type)
 {
     t_token *new;
@@ -39,17 +38,16 @@ static void	add_token(t_token **head, char *value, t_type type)
 		temp->next = new;
     }
 }
-
-static int	type_check2(char **str, t_data *minishell)
+int	type_init2(char **str, t_data *minishell)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
 	if (access(str[0], X_OK) == 0)
-		return (0);
+		return (2);
 	else if (str[0][0] == '.' || str[0][0] == '/' || str[0][0] == '~')
-		return (0);
+		return (2);
 	while (minishell->path[i])
 	{
 		temp = ft_strjoin(minishell->path[i], str[0]);
@@ -58,15 +56,14 @@ static int	type_check2(char **str, t_data *minishell)
 			free(str[0]);
 			str[0] = ft_strdup(temp);
 			free(temp);
-			return (0);
+			return (2);
 		}
 		free(temp);
 		i++;
 	}
-	return (2);
+	return (0);
 }
-
-static int	type_check(char **str, t_data *minishell)
+int	type_init(char **str, t_data *minishell)
 {
 	if (!ft_strncmp(str[0], "env", 4))
 		return (1);
@@ -83,10 +80,9 @@ static int	type_check(char **str, t_data *minishell)
 	else if (!ft_strncmp(str[0], "unset", 6))
 		return (1);
 	else
-		return (type_check2(str, minishell));
+		return (type_init2(str, minishell));
 }
-
-t_token	*token_init(char *str, t_data *minishell)
+t_token	*token_init(char *str)
 {
 	int		i;
 	char	**data;
@@ -105,10 +101,6 @@ t_token	*token_init(char *str, t_data *minishell)
 			add_token(&token, data[i], HERE_DOC);
 		else if (ft_strncmp(data[i], "$", 1) == 0)
 			add_token(&token, data[i], ENV);
-		else if (type_check(&data[i], minishell) == 0)
-			add_token(&token, data[i], COMMAND);
-		else if (type_check(&data[i], minishell) == 1)
-			add_token(&token, data[i], BUILTIN);
 		else
 			add_token(&token, data[i], ARG);
 	}

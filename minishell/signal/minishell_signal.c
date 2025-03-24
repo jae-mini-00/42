@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/19 22:42:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/23 17:02:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	print_signal(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+}
+void	program_signal(int sig)
+{
+	(void)sig;
+	printf("\n");
 }
 void	ctrl_d(t_data *minishell)
 {
