@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/21 20:58:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/24 13:35:00 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ const char *get_type_string(t_type type)
         case HERE_DOC: return "HERE_DOC";
         case PIPE: return "PIPE";
         case ENV: return "ENV";
+		case IO_FILE: return "IO_FILE";
         default: return "UNKNOWN";
     }
 }
@@ -42,10 +43,16 @@ int	main(int ac, char **av, char **envp)
 		minishell.o_cmd = readline(minishell.prompt);
 		ctrl_d(&minishell);
 		o_cmd_split_init(&minishell);
-		if (minishell.token != NULL)
+		// if (minishell.token != NULL)
+		// {
+		// 	//printf("run\n");
+		// 	minishell_run(&minishell);
+		// }
+		t_token *temp = minishell.token;
+		while (temp)
 		{
-			//printf("run\n");
-			minishell_run(&minishell);
+			printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
+			temp = temp->next;
 		}
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);

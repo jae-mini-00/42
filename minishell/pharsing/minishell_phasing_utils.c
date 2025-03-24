@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 23:19:55 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/24 17:14:39 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,30 @@ void	token_check(t_data *minishell)
 		}
 		else
 			temp = temp->next;
+	}
+}
+void	type_trance(t_token *token, t_data *minishell, int flag)
+{
+	while (token)
+	{
+		if (token->type == HERE_DOC || token->type == REDIRECTION)
+		{
+			if (token->next && token->next->type == ARG)
+				token->next->type = IO_FILE;
+		}
+		else if (token->type == ARG && !flag)
+		{
+			if (token->type == ARG)
+			{
+				flag = type_init(&token->value, minishell);
+				if (flag == 2)
+					token->type = COMMAND;
+				else if (flag == 1)
+					token->type = BUILTIN;
+			}
+		}
+		else if (token->type == PIPE)
+			flag = 0;
+		token = token->next;
 	}
 }

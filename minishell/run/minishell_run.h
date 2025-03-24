@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/21 21:05:39 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/23 17:05:43 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include "../signal/minishell_signal.h" 
 
 /* fork */
-void	make_fork(char **cmd, t_data *minishell);
+void	solo_fork(t_data *minishell, t_token *start, t_token *end);
+void	multi_fork(t_data *minishell, t_token *start, t_token *end);
 
 /* run */
 void	minishell_run(t_data *minishell);
+char	**make_execve_cmd(t_token *start, t_token *end);
 
 /* prompt */
 char	*make_prompt(char *av);

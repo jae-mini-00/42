@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 22:53:33 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/24 16:34:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef enum s_type
 	HERE_DOC,
 	PIPE,
 	ENV,
-	REMOVE
+	REMOVE,
+	IO_FILE
 }	t_type;
 
 typedef struct s_token
@@ -42,6 +43,9 @@ typedef struct s_token
 typedef struct s_data
 {
 	pid_t	pid;
+	// int here
+	// itn pipe
+	// int redirection
 	char	*prompt;
 	char	*o_cmd;
 	char	**env;

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/19 22:17:37 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/23 17:02:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 /* signal */
 void	ctrl_d(t_data *minishell);
 void	print_signal(int sig);
+void	program_signal(int sig);
 
 #endif
