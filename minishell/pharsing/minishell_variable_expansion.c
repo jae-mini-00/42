@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 17:13:53 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/03/24 17:33:41 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	my_getenv(t_token *token, char *start, char **env)
 	while (++j < i)
 		temp[j] = start[1 + j];
 	j = -1;
+	printf("start %s\n", start);
 	while (env[++j])
 		if (ft_strncmp(env[j], temp, ft_strlen(temp)) == 0)
 			need_env = ft_strdup(&env[j][ft_strlen(temp) + 1]);
@@ -63,7 +64,7 @@ static void	my_getenv(t_token *token, char *start, char **env)
 		env_init(token, start, need_env, 0);
 	else
 		remove_env(token, start);
-	free(env);
+	free(need_env);
 	free(temp);
 }
 static void	value_check(t_token *token, char **env, int i, char quote)
