@@ -6,12 +6,34 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 17:33:41 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/04 23:02:55 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_pharsing.h"
 
+static void	remove_env(t_token *token, char *start)
+{
+	char	*temp;
+	char	*now_value;
+	int		i;
+
+	i = 0;
+	now_value = token->value;
+	temp = (char *)malloc(sizeof(char) * (ft_strlen(token->value) - env_len(&start[1])));
+	if (!temp)
+		return ;
+	while (*now_value)
+	{
+		if (now_value == start)
+			now_value = now_value + env_len(&start[1]) + 1;
+		if (*now_value && now_value[0] != 0)
+			temp[i++] = *now_value++;
+	}
+	temp[i] = '\0';
+	free(token->value);
+	token->value = temp;
+}
 void	env_init(t_token *token, char *start, char *env, int j)
 {
 	char	*temp;
@@ -56,10 +78,10 @@ static void	my_getenv(t_token *token, char *start, char **env)
 	while (++j < i)
 		temp[j] = start[1 + j];
 	j = -1;
-	printf("start %s\n", start);
-	while (env[++j])
+	i = ft_strlen(temp);
+	while (env[++j] && i)
 		if (ft_strncmp(env[j], temp, ft_strlen(temp)) == 0)
-			need_env = ft_strdup(&env[j][ft_strlen(temp) + 1]);
+			need_env = ft_strdup(&env[j][i + 1]);
 	if (need_env)
 		env_init(token, start, need_env, 0);
 	else
@@ -67,16 +89,12 @@ static void	my_getenv(t_token *token, char *start, char **env)
 	free(need_env);
 	free(temp);
 }
-static void	value_check(t_token *token, char **env, int i, char quote)
+static char	*value_check(t_token *token, int i, char quote)
 {
 	while (token->value[i])
 	{
-		if (token->value[i] == '$')
-		{
-			my_getenv(token, &token->value[i], env);
-			i = 0;
-			continue ;
-		}
+		if (token->value[i] == '$' && token->value[i + 1])
+			return (&token->value[i]);
 		else if (!quote && token->value[i] == '"')
 			quote = token->value[i];
 		else if (quote && token->value[i] == '"')
@@ -87,47 +105,29 @@ static void	value_check(t_token *token, char **env, int i, char quote)
 			while (token->value[i] && token->value[i] != quote)
 				i++;
 			if (!token->value[i])
-				return ;
+				return (NULL);
 			quote = 0;
 		}
 		i++;
 	}
+	return (NULL);
 }
 void	minishell_variable_expansion(t_token *token, t_data *minishell)
 {
 	t_token *temp;
+	char	*start;
 
 	temp = token;
 	while (temp)
 	{
-		value_check(temp, minishell->env, 0 , 0);
-		if (temp->type == ENV)
+		start = value_check(temp, 0 , 0);
+		if (start)
+		{
+			my_getenv(temp, start, minishell->env);
 			temp->type = ARG;
+		}
 		temp = temp->next;
 	}
+	remove_quite(token);
 	token_check(minishell);
 }
-// static void	minishell_conversion_env(t_token *data, char **env, int len)
-// {
-// 	char	*temp;
-// 	int 	i;
-
-// 	i = 0;
-// 	temp = (char *)malloc(sizeof(char) * len);
-// 	if (!temp)
-// 		return ;
-// 	while (env[i])
-// 	{
-// 		if (ft_strncmp(&temp[1], env[i], ft_strlen(&temp[1])) == 0)
-// 		{
-// 			free(data->value);
-// 			data->value = ft_strdup(env[i] + ft_strlen(&temp[1]));
-// 			free(temp);
-// 			data->type = ARG;
-// 			return ;
-// 		}
-// 		i++;
-// 	}
-// 	data->type = REMOVE;
-// 	free(temp);
-// }
