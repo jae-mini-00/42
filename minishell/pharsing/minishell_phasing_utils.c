@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/04 23:06:41 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/05 18:22:17 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,23 @@ int	env_len(char *str)
 }
 void	remove_quite(t_token *token)
 {
-	if (!*token->value || !token->value[0])
-		token->type = REMOVE;
+	int flag;
+	char *temp;
+
+	flag = 0;
+	while (token)
+	{
+		flag = check_quite(token->value);
+		if (!flag)
+			token = token->next;
+		else
+		{
+			temp = token->value;
+			token->value = new_value(token->value, flag, 0, 0);
+			free(temp);
+			token = token->next;
+		}
+	}
 }
 void	remove_token(t_data *minishell, t_token *data)
 {
@@ -60,7 +75,7 @@ void	token_check(t_data *minishell)
 	t_token	*temp;
 	t_token	*next_token;
 
-	while (minishell->token && minishell->token->type == REMOVE)
+	while (minishell->token && (minishell->token->type == REMOVE || !minishell->token->value[0]))
 	{
 		temp = minishell->token;
 		minishell->token = temp->next;
@@ -70,7 +85,7 @@ void	token_check(t_data *minishell)
 	while (temp && temp->next)
 	{
 		next_token = temp->next;
-		if (next_token->type == REMOVE)
+		if (next_token->type == REMOVE || !next_token->value[0])
 		{
 			temp->next = next_token->next;
 			remove_token(minishell, next_token);
