@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/04 23:02:55 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/05 18:22:16 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	remove_env(t_token *token, char *start)
 	free(token->value);
 	token->value = temp;
 }
-void	env_init(t_token *token, char *start, char *env, int j)
+static void	env_init(t_token *token, char *start, char *env, int j)
 {
 	char	*temp;
 	char	*copy;
