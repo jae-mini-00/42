@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 16:12:32 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 17:22:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ t_token	*token_init(char *str)
 	{
 		if (ft_strncmp(data[i], "|", 2) == 0)
 			add_token(&token, data[i], PIPE);
-		else if (ft_strncmp(data[i], ">", 2) == 0 || ft_strncmp(data[i], "<", 2) == 0)
+		else if (ft_strncmp(data[i], ">", 2) == 0 || ft_strncmp(data[i], ">>", 3) == 0 || \
+				ft_strncmp(data[i], "<", 2) == 0)
 			add_token(&token, data[i], REDIRECTION);
-		else if (ft_strncmp(data[i], ">>", 3) == 0 || ft_strncmp(data[i], "<<", 3) == 0)
+		else if (ft_strncmp(data[i], "<<", 3) == 0)
 			add_token(&token, data[i], HERE_DOC);
 		else if (ft_strncmp(data[i], "$", 1) == 0)
 			add_token(&token, data[i], ENV);

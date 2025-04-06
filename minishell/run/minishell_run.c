@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/23 18:44:03 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 18:02:54 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**make_execve_cmd(t_token *start, t_token *end)
 	}
 	return (cmd);
 }
-static int	check_pipe(t_data *minishell)
+/* static */int	check_pipe(t_data *minishell)
 {
 	t_token *temp;
 
@@ -55,39 +55,21 @@ static int	check_pipe(t_data *minishell)
 }
 void	minishell_run(t_data *minishell)
 {
-	int check;
+	minishell_here_doc_check(minishell);
+	// int check;
 
-	//here_doc 처리 먼저
-	check = check_pipe(minishell);
-	if (check)
-		multi_fork(minishell, minishell->token, NULL);
-	else
-		solo_fork(minishell, minishell->token, NULL);
+	// //here_doc 처리 먼저
+	// check = check_pipe(minishell);
+	// if (check)
+	// 	multi_fork(minishell, minishell->token, NULL);
 	// else
-	// 	builtin(minishell);
-	if (minishell->pid)
-	{
-		signal (SIGINT, program_signal);
-		waitpid(minishell->pid, NULL, 0);
-		signal (SIGINT, print_signal);
-	}
+	// 	solo_fork(minishell, minishell->token, NULL);
+	// // else
+	// // 	builtin(minishell);
+	// if (minishell->pid)
+	// {
+	// 	signal (SIGINT, program_signal);
+	// 	waitpid(minishell->pid, NULL, 0);
+	// 	signal (SIGINT, print_signal);
+	// }
 }
-// void	minishell_run(t_data *minishell, t_token *start, t_token *end)
-// {
-// 	t_token *temp;
-// 	char **cmd;
-
-// 	temp = minishell->token;
-// 	while (temp)
-// 	{
-// 		while (temp && temp->type != PIPE && temp->type != HERE_DOC && temp->type != REDIRECTION)
-// 			temp = temp->next;
-// 		end = temp;
-// 		cmd = make_execve_cmd(start, end);
-// 		make_fork(cmd, minishell);
-// 		if (temp)
-// 			temp = temp->next;
-// 		start = temp;
-// 		split_free(cmd);
-// 	}
-// }
