@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 18:01:47 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 22:55:13 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 void	solo_fork(t_data *minishell, t_token *start, t_token *end);
 void	multi_fork(t_data *minishell, t_token *start, t_token *end);
 
+/* fork utils */
+char	**make_execve_cmd(t_token *start, t_token *end);
+
 /* run */
 void	minishell_run(t_data *minishell);
-char	**make_execve_cmd(t_token *start, t_token *end);
 
 /* prompt */
 char	*make_prompt(char *av);
