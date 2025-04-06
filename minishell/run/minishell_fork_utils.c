@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_signal.c                                 :+:      :+:    :+:   */
+/*   minishell_fork_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 22:47:48 by jaejo            ###   ########.fr       */
+/*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
+/*   Updated: 2025/04/06 22:53:05 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_signal.h"
+#include "minishell_run.h"
 
-void	print_signal(int sig)
+char	**make_execve_cmd(t_token *start, t_token *end)
 {
-	(void)sig;
-	printf("\n");
-	if (rl_on_new_line() == 0)
+	int		i;
+	t_token *temp;
+	char	**cmd;
+
+	i = 0;
+	temp = start;
+	while (temp != end)
 	{
-		rl_replace_line("", 0);
-		rl_redisplay();
+		temp = temp->next;
+		i++;
 	}
-}
-void	here_doc_signal(int sig) // 수정 해야함
-{
-	(void)sig;
-	signal_condition = 1;
-}
-void	program_signal(int sig)
-{
-	(void)sig;
-	printf("\n");
-}
-void	ctrl_d(t_data *minishell)
-{
-	if (!minishell->o_cmd)
+	cmd = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!cmd)
+		return (NULL);
+	cmd[i] = NULL;
+	i = 0;
+	while (start != end)
 	{
-		exit_free(minishell);
-		printf("exit\n");
-		exit (0);
+		cmd[i] = ft_strdup(start->value);
+		i++;
+		start = start->next;
 	}
+	return (cmd);
 }

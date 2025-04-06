@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/23 17:02:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 21:05:09 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 void	ctrl_d(t_data *minishell);
 void	print_signal(int sig);
 void	program_signal(int sig);
+void	here_doc_signal(int sig);
 
 #endif

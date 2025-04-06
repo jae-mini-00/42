@@ -6,39 +6,13 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 18:02:54 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 22:53:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_run.h"
 
-char	**make_execve_cmd(t_token *start, t_token *end)
-{
-	int		i;
-	t_token *temp;
-	char	**cmd;
-
-	i = 0;
-	temp = start;
-	while (temp != end)
-	{
-		temp = temp->next;
-		i++;
-	}
-	cmd = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!cmd)
-		return (NULL);
-	cmd[i] = NULL;
-	i = 0;
-	while (start != end)
-	{
-		cmd[i] = ft_strdup(start->value);
-		i++;
-		start = start->next;
-	}
-	return (cmd);
-}
-/* static */int	check_pipe(t_data *minishell)
+static int	check_pipe(t_data *minishell)
 {
 	t_token *temp;
 
@@ -55,15 +29,14 @@ char	**make_execve_cmd(t_token *start, t_token *end)
 }
 void	minishell_run(t_data *minishell)
 {
-	minishell_here_doc_check(minishell);
-	// int check;
+	int check;
 
-	// //here_doc 처리 먼저
-	// check = check_pipe(minishell);
-	// if (check)
-	// 	multi_fork(minishell, minishell->token, NULL);
-	// else
-	// 	solo_fork(minishell, minishell->token, NULL);
+	minishell_here_doc_check(minishell);
+	check = check_pipe(minishell);
+	if (check)
+		multi_fork(minishell, minishell->token, NULL);
+	else
+		solo_fork(minishell, minishell->token, NULL);
 	// // else
 	// // 	builtin(minishell);
 	// if (minishell->pid)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:52:29 by jaejo             #+#    #+#             */
-/*   Updated: 2024/11/07 22:21:48 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 21:51:10 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*ft_only_read(int fd, char *buf, char *backup, int *i)
 {
 	while (1)
 	{
-		*i = read(fd, buf, BUFFER_SIZE);
+		*i = read(fd, buf, BUFFER_SIZE); // 인터럽트가 걸렸을 때 나가져야 하는데, 안나가짐 => 씹음 -> (SIG_IGN), (SA_RESTART)
 		if (*i == -1)
 			return (free(backup), free(buf), NULL);
 		if (*i == 0)
