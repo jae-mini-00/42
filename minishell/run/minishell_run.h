@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/23 17:05:43 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 18:01:47 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@ char	**make_execve_cmd(t_token *start, t_token *end);
 
 /* prompt */
 char	*make_prompt(char *av);
+
+/* here_doc */
+void	minishell_here_doc_check(t_data *minishell);
+
+/* dup */
+
 
 #endif

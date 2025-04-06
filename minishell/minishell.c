@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 13:35:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 18:02:23 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int ac, char **av, char **envp)
 		// 	//printf("run\n");
 		// 	minishell_run(&minishell);
 		// }
+		minishell_run(&minishell);
 		t_token *temp = minishell.token;
 		while (temp)
 		{

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 16:34:45 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/06 17:53:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 typedef enum s_type
 {
@@ -46,6 +47,7 @@ typedef struct s_data
 	// int here
 	// itn pipe
 	// int redirection
+	int		here_doc_count;
 	char	*prompt;
 	char	*o_cmd;
 	char	**env;
