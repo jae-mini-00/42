@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 22:53:50 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/08 23:03:18 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	minishell_run(t_data *minishell)
 	minishell_here_doc_check(minishell);
 	check = check_pipe(minishell);
 	if (check)
-		multi_fork(minishell, minishell->token, NULL);
+		multi_fork(minishell);
 	else
-		solo_fork(minishell, minishell->token, NULL);
+		solo_fork(minishell);
 	// // else
 	// // 	builtin(minishell);
-	// if (minishell->pid)
+	if (minishell->pid)
 	// {
 	// 	signal (SIGINT, program_signal);
-	// 	waitpid(minishell->pid, NULL, 0);
+		waitpid(minishell->pid, NULL, 0);
 	// 	signal (SIGINT, print_signal);
 	// }
 }

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 21:20:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/08 23:57:47 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ typedef struct s_token
 typedef struct s_data
 {
 	pid_t	pid;
-	// int here
-	// itn pipe
-	// int redirection
 	int		here_doc_count;
 	char	*prompt;
 	char	*o_cmd;
