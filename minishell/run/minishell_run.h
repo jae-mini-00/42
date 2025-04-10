@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/09 01:14:17 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/09 23:56:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /* fork */
 void	solo_fork(t_data *minishell);
-void	multi_fork(t_data *minishell);
+void	multi_fork(t_data *minishell, int cmd_size, int i);
 
 /* fork utils */
 char	**make_execve_cmd(t_token *start);
@@ -36,7 +36,10 @@ char	*make_prompt(char *av);
 /* here_doc */
 void	minishell_here_doc_check(t_data *minishell);
 
-/* dup */
-
+/* pipe */
+// void	fd_free(int **fd);
+int		**fd_init(void);
+void pipe_open_close(int **fd, int idx);
+void pipe_dup(int **fd, int idx, int is_last);
 
 #endif

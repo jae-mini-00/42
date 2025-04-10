@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 22:47:48 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/11 03:07:00 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ctrl_d(t_data *minishell)
 {
 	if (!minishell->o_cmd)
 	{
-		exit_free(minishell);
+		exit_free(minishell, 0);
 		printf("exit\n");
 		exit (0);
 	}

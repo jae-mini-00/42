@@ -6,7 +6,7 @@
 #    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/04/09 02:28:27 by jaejo            ###   ########.fr        #
+#    Updated: 2025/04/11 04:18:27 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,15 @@ SIGNAL_SRCS = ./signal/minishell_signal.c \
 
 RUN_SRCS = ./run/minishell_propt.c ./run/minishell_run.c ./run/minishell_fork.c \
 			./run/minishell_here_doc.c ./run/minishell_fork_utils.c \
+			./run/minishell_pipe.c \
 
 PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_data.c \
 				./pharsing/minishell_token_split.c ./pharsing/minishell_variable_expansion.c \
 				./pharsing/minishell_phasing_utils.c ./pharsing/minishell_remove_utils.c \
 
-SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) \
+BUTILTIN_SRCS =
+
+SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) $(BUTILTIN_SRCS) \
 		minishell.c minishell_init.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -37,16 +40,11 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C ./ft_printf
 	$(CC) $(CFLAGS) $(OBJS) ./ft_printf/libftprintf.a -o $(NAME) -lreadline
 
-make_bonus : $(B_OBJS)
-	touch $@
-	$(MAKE) -C ./ft_printf
-	$(CC) $(CFLAGS) $(B_OBJS) ./ft_printf/libftprintf.a -o $(NAME) -lreadline
-
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJS) $(B_OBJS)
+	rm -f $(OBJS)
 	$(MAKE) clean -C ./ft_printf
 
 fclean : clean
