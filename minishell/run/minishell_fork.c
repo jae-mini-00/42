@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/09 02:29:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/11 04:15:04 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,54 @@ void	solo_fork(t_data *minishell)
 	minishell->pid = fork();
 	if (minishell->pid == 0)
 	{
+		printf("solo\n");
 		io_dup (minishell->token, 0, 1);
 		execve(cmd[0], cmd, minishell->env);
 		printf ("%s: command not found\n", cmd[0]);
 		split_free(cmd);
-		exit_free(minishell);
+		exit_free(minishell, errno);
 	}
 }
-void	multi_fork(t_data *minishell)
+
+void fd_close(int **fd)
+{
+	if (fd[0][0] != -1)
+		close (fd[0][0]);
+	if (fd[0][1] != -1)
+		close (fd[0][1]);
+	if (fd[1][0] != -1)
+		close (fd[1][0]);
+	if (fd[1][1] != -1)
+		close (fd[1][1]);
+	free(fd[0]);
+	free(fd[1]);
+	free(fd);
+}
+void	multi_fork(t_data *minishell, int cmd_size, int i)
 {
 	t_token *temp;
 	char **cmd;
-	int fd[2][2];
+	int **fd;
 
-	pipe(fd[0]);
-	fd[1][0] = -1;
-	fd[1][1] = -1;
+	fd = fd_init();
 	temp = minishell->token;
 	while (temp)
 	{
-		multi_fork_dup(*fd[2]);
 		minishell->pid = fork();
-		cmd = make_execve_cmd(temp);
+		pipe_open_close(fd, i);
 		if (minishell->pid == 0)
 		{
-			io_dup (minishell->token, 0, 1);
+			cmd = make_execve_cmd(temp);
+			pipe_dup(fd, i, cmd_size - 2);
+			io_dup (temp, 0, 1);
 			execve(cmd[0], cmd, minishell->env);
 			printf ("%s: command not found\n", cmd[0]);
 			split_free(cmd);
-			exit_free(minishell);
+			fd_close(fd);
+			exit_free(minishell, errno);
 		}
-		else
-			temp = find_start(temp);
+		temp = find_start(temp);
+		i++;
 	}
-	(void)minishell;
+	fd_close(fd);
 }

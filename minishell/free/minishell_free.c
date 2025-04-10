@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/19 20:44:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/11 03:18:12 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	minishell_free(t_data *minishell)
 	minishell->path = NULL;
 	minishell->token = NULL;
 }
-void	exit_free(t_data *minishell)
+void	exit_free(t_data *minishell, int num)
 {
 	if (minishell->prompt)
 		free(minishell->prompt);
@@ -68,4 +68,10 @@ void	exit_free(t_data *minishell)
 	minishell->path = NULL;
 	minishell->token = NULL;
 	minishell->env = NULL;
+	if (num)
+	{
+		if (num == -1)
+			exit (0);
+		exit(num);
+	}
 }

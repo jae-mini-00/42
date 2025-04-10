@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/08 23:57:47 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/11 03:07:34 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <errno.h>
 
 typedef enum s_type
 {
@@ -58,6 +59,6 @@ int signal_condition;
 void	split_free(char **split);
 void	minishell_free(t_data *minishell);
 void	token_free(t_token *data);
-void	exit_free(t_data *minishell);
+void	exit_free(t_data *minishell, int num);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/09 02:29:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/09 18:02:03 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,7 @@ int	main(int ac, char **av, char **envp)
 		ctrl_d(&minishell);
 		o_cmd_split_init(&minishell);
 		if (minishell.token != NULL)
-		{
 			minishell_run(&minishell);
-		}
-		// minishell_run(&minishell);
-		// t_token *temp = minishell.token;
-		// while (temp)
-		// {
-		// 	printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
-		// 	temp = temp->next;
-		// }
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);
 	}
@@ -61,11 +52,10 @@ int	main(int ac, char **av, char **envp)
 	rl_clear_history();
 }
 
-/*
-		t_token *temp = minishell.token;
-		while (temp)
-		{
-			printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
-			temp = temp->next;
-		}
-*/
+		// minishell_run(&minishell);
+		// t_token *temp = minishell.token;
+		// while (temp)
+		// {
+		// 	printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
+		// 	temp = temp->next;
+		// }

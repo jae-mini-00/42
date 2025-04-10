@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/08 23:03:18 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/11 03:12:53 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 static int	check_pipe(t_data *minishell)
 {
 	t_token *temp;
+	int		flag;
 
+	flag = 0;
 	temp = minishell->token;
 	while (temp)
 	{
-		if (temp->type == PIPE)
-			break ;
+		if (temp->type == PIPE && temp->next)
+			flag++;
+		if (temp->type == PIPE && !temp->next)
+			return (-1);
 		temp = temp->next;
 	}
-	if (temp)
-		return (true);
-	return (false);
+	return (flag);
 }
 void	minishell_run(t_data *minishell)
 {
@@ -33,16 +35,14 @@ void	minishell_run(t_data *minishell)
 
 	minishell_here_doc_check(minishell);
 	check = check_pipe(minishell);
+	if (check == -1)
+		return ;
 	if (check)
-		multi_fork(minishell);
+		multi_fork(minishell, check + 1, 0);
 	else
 		solo_fork(minishell);
 	// // else
 	// // 	builtin(minishell);
-	if (minishell->pid)
-	// {
-	// 	signal (SIGINT, program_signal);
+	if (minishell->pid != 0)
 		waitpid(minishell->pid, NULL, 0);
-	// 	signal (SIGINT, print_signal);
-	// }
 }
