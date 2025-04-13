@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 23:28:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/14 00:22:48 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/14 00:25:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int	builtin_type_check(t_token *token)
 			return (true);
 		temp = temp->next;
 	}
+	//cmd 만들어서 cmd[0]배열을 split후 마지막 배열이 builtin 인지 확인 맞으면 true 아니면 false
 	return (0);
 }
