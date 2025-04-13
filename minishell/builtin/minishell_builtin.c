@@ -6,11 +6,11 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/04 23:43:30 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/13 23:46:53 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_builtin.h"
 
 void	ft_env(t_data *minishell)
 {

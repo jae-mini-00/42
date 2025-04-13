@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/13 23:00:10 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/14 00:21:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	minishell_run(t_data *minishell)
 		return ;
 	if (check)
 		multi_fork(minishell, check + 1, 0);
+	// else if (builtin_type_check(minishell))
+	// 	builtin_check(minishell);
 	else
 		solo_fork(minishell);
-	// // else
-	// // 	builtin(minishell);
 	if (minishell->pid != 0)
 		waitpid(minishell->pid, NULL, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 21:29:05 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/14 00:12:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	o_cmd_split_init(t_data *minishell)
 	int	i;
 
 	i = 0;
+	minishell->pid = 0;
 	signal_condition = 0;
 	minishell->here_doc_count = 0;
 	while (minishell->o_cmd[i] == ' ')
