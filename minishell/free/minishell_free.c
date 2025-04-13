@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/11 03:18:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/13 22:46:01 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,11 @@ void	minishell_free(t_data *minishell)
 }
 void	exit_free(t_data *minishell, int num)
 {
-	if (minishell->prompt)
-		free(minishell->prompt);
-	if (minishell->o_cmd)
-		free(minishell->o_cmd);
-	if (minishell->env)
-		split_free(minishell->env);
-	if (minishell->path)
-		split_free(minishell->path);
-	if (minishell->token)
-		token_free(minishell->token);
+	free(minishell->prompt);
+	free(minishell->o_cmd);
+	split_free(minishell->env);
+	split_free(minishell->path);
+	token_free(minishell->token);
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
 	minishell->path = NULL;
