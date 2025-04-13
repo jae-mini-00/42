@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 23:28:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/05 23:28:57 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/14 00:22:48 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_builtin.h"
 
 int	split_last(char **split)
 {
@@ -21,7 +21,6 @@ int	split_last(char **split)
 		i++;
 	return (i - 1);
 }
-
 void	echo_print(t_data *minishell, int i, int flag)
 {
 	while (minishell->o_cmd_split[i])
@@ -34,4 +33,18 @@ void	echo_print(t_data *minishell, int i, int flag)
 			printf("%s", minishell->o_cmd_split[i]);
 		i++;
 	}
+}
+int	builtin_type_check(t_token *token)
+{
+	t_token *temp;
+	char	**cmd;
+
+	temp = token;
+	while (temp)
+	{
+		if (temp->type == BUILTIN)
+			return (true);
+		temp = temp->next;
+	}
+	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_export_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/11 07:07:22 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/13 23:46:52 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_builtin.h"
 
 int	double_quote_check(char *str)
 {
