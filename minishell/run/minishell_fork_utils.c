@@ -75,14 +75,18 @@ void	io_dup(t_token *start, int std_in, int std_out)
 			{
 				fd = open(start->next->value, O_CREAT | O_WRONLY, 0644);
 				dup2(fd, std_out);
-				close(fd);
 			}
-			else
+			else if (ft_strncmp(start->value, "<", 2) == 0)
 			{
 				fd = open(start->next->value, O_CREAT | O_RDONLY, 0644);
 				dup2(fd, std_in);
-				close(fd);
 			}
+			else if (ft_strncmp(start->value, ">>", 3) == 0)
+			{
+				fd = open(start->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+				dup2(fd, std_out);
+			}
+			close(fd);
 		}
 		start = start->next;
 	}
