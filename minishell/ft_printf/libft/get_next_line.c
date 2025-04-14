@@ -43,7 +43,7 @@ static char	*ft_only_read(int fd, char *buf, char *backup, int *i)
 {
 	while (1)
 	{
-		*i = read(fd, buf, BUFFER_SIZE); // 인터럽트가 걸렸을 때 나가져야 하는데, 안나가짐 => 씹음 -> (SIG_IGN), (SA_RESTART)
+		*i = read(fd, buf, BUFFER_SIZE);
 		if (*i == -1)
 			return (free(backup), free(buf), NULL);
 		if (*i == 0)

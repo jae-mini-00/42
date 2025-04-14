@@ -14,7 +14,7 @@
 
 static int	check_pipe(t_data *minishell)
 {
-	t_token *temp;
+	t_token	*temp;
 	int		flag;
 
 	flag = 0;
@@ -29,9 +29,10 @@ static int	check_pipe(t_data *minishell)
 	}
 	return (flag);
 }
+
 void	minishell_run(t_data *minishell)
 {
-	int check;
+	int	check;
 
 	minishell_here_doc_check(minishell);
 	check = check_pipe(minishell);

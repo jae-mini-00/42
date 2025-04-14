@@ -12,7 +12,7 @@
 
 #include "minishell_signal.h"
 
-int signal_condition;
+int	signal_condition;
 
 void	print_signal(int sig)
 {
@@ -24,16 +24,19 @@ void	print_signal(int sig)
 		rl_redisplay();
 	}
 }
+
 void	here_doc_signal(int sig) // 수정 해야함
 {
 	(void)sig;
 	signal_condition = 1;
 }
+
 void	program_signal(int sig)
 {
 	(void)sig;
 	printf("\n");
 }
+
 void	ctrl_d(t_data *minishell)
 {
 	if (!minishell->o_cmd)

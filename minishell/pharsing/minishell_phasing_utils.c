@@ -14,19 +14,22 @@
 
 int	env_len(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') ||
-	(str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
-	(str[i] == '_')))
-	i++;
+	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || \
+	(str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && \
+		str[i] <= '9') || (str[i] == '_')))
+	{
+		i++;
+	}
 	return (i);
 }
+
 void	remove_quite(t_token *token)
 {
-	int flag;
-	char *temp;
+	int		flag;
+	char	*temp;
 
 	flag = 0;
 	while (token)
@@ -43,13 +46,14 @@ void	remove_quite(t_token *token)
 		}
 	}
 }
+
 void	remove_token(t_data *minishell, t_token *data)
 {
-	t_token *now;
-	t_token *prev;
+	t_token	*now;
+	t_token	*prev;
 
 	if (!minishell || !minishell->token || !data)
-		return;
+		return ;
 	now = minishell->token;
 	prev = NULL;
 	if (now == data)
@@ -57,7 +61,7 @@ void	remove_token(t_data *minishell, t_token *data)
 		minishell->token = now->next;
 		free(now->value);
 		free(now);
-		return;
+		return ;
 	}
 	while (now && now != data)
 	{
@@ -65,17 +69,19 @@ void	remove_token(t_data *minishell, t_token *data)
 		now = now->next;
 	}
 	if (!now)
-		return;
+		return ;
 	prev->next = now->next;
 	free(now->value);
 	free(now);
 }
+
 void	token_check(t_data *minishell)
 {
 	t_token	*temp;
 	t_token	*next_token;
 
-	while (minishell->token && (minishell->token->type == REMOVE || !minishell->token->value[0]))
+	while (minishell->token && \
+		(minishell->token->type == REMOVE || !minishell->token->value[0]))
 	{
 		temp = minishell->token;
 		minishell->token = temp->next;
@@ -94,6 +100,7 @@ void	token_check(t_data *minishell)
 			temp = temp->next;
 	}
 }
+
 void	type_trance(t_token *token, t_data *minishell, int flag)
 {
 	while (token)

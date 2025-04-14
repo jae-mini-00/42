@@ -12,10 +12,10 @@
 
 #include "minishell_pharsing.h"
 
-int check_quite(char *value)
+int	check_quite(char *value)
 {
-	int	i;
-	int	flag;
+	int		i;
+	int		flag;
 	char	quite;
 
 	i = 0;
@@ -34,13 +34,15 @@ int check_quite(char *value)
 	}
 	return (flag);
 }
-char *new_value(char *value, int flag, int i, int j)
+
+char	*new_value(char *value, int flag, int i, int j)
 {
 	char	*new_value;
 	char	quite;
 
 	quite = '\0';
-	new_value = (char *)malloc(sizeof(char) * (ft_strlen(value) - (flag * 2) + 1));
+	new_value = (char *)malloc(sizeof(char) * \
+							(ft_strlen(value) - (flag * 2) + 1));
 	if (!new_value)
 		return (NULL);
 	while (value[i])

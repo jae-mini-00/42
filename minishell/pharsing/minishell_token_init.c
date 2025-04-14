@@ -22,22 +22,24 @@ static t_token	*new_token(char *cmd, t_type type)
 	token->next = NULL;
 	return (token);
 }
+
 static void	add_token(t_token **head, char *value, t_type type)
 {
-    t_token *new;
-	t_token *temp;
+	t_token	*new;
+	t_token	*temp;
 
 	new = new_token(value, type);
-    if (*head == NULL)
-        *head = new;
-    else
+	if (*head == NULL)
+		*head = new;
+	else
 	{
 		temp = *head;
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
-    }
+	}
 }
+
 int	type_init2(char **str, t_data *minishell)
 {
 	int		i;
@@ -63,6 +65,7 @@ int	type_init2(char **str, t_data *minishell)
 	}
 	return (0);
 }
+
 int	type_init(char **str, t_data *minishell)
 {
 	if (!ft_strncmp(str[0], "env", 4))
@@ -82,6 +85,7 @@ int	type_init(char **str, t_data *minishell)
 	else
 		return (type_init2(str, minishell));
 }
+
 t_token	*token_init(char *str)
 {
 	int		i;
@@ -95,7 +99,8 @@ t_token	*token_init(char *str)
 	{
 		if (ft_strncmp(data[i], "|", 2) == 0)
 			add_token(&token, data[i], PIPE);
-		else if (ft_strncmp(data[i], ">", 2) == 0 || ft_strncmp(data[i], ">>", 3) == 0 || \
+		else if (ft_strncmp(data[i], ">", 2) == 0 || \
+				ft_strncmp(data[i], ">>", 3) == 0 || \
 				ft_strncmp(data[i], "<", 2) == 0)
 			add_token(&token, data[i], REDIRECTION);
 		else if (ft_strncmp(data[i], "<<", 3) == 0)

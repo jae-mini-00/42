@@ -21,9 +21,10 @@ static void	ft_execve(t_data *minishell, char **cmd)
 	split_free(cmd);
 	exit_free(minishell, 127);
 }
+
 void	solo_fork(t_data *minishell)
 {
-	char **cmd;
+	char	**cmd;
 
 	cmd = NULL;
 	minishell->pid = fork();
@@ -33,11 +34,12 @@ void	solo_fork(t_data *minishell)
 		ft_execve(minishell, cmd);
 	}
 }
+
 void	multi_fork(t_data *minishell, int cmd_size, int i)
 {
-	t_token *temp;
-	char **cmd;
-	int **fd;
+	t_token	*temp;
+	char	**cmd;
+	int		**fd;
 
 	cmd = NULL;
 	fd = fd_init();

@@ -26,6 +26,7 @@ void	split_free(char **split)
 	}
 	free(split);
 }
+
 void	token_free(t_token *data)
 {
 	t_token	*temp;
@@ -40,6 +41,7 @@ void	token_free(t_token *data)
 		free(temp);
 	}
 }
+
 void	minishell_free(t_data *minishell)
 {
 	free(minishell->prompt);
@@ -51,6 +53,7 @@ void	minishell_free(t_data *minishell)
 	minishell->path = NULL;
 	minishell->token = NULL;
 }
+
 void	exit_free(t_data *minishell, int num)
 {
 	free(minishell->prompt);

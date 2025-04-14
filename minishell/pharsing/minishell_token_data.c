@@ -31,8 +31,8 @@ static int	space_plus_len(char *str, int str_len)
 			flag++;
 		else if (!quote && i > 0 && i + 1 < str_len)
 		{
-			if ((str[i - 1] != '>' && str[i] == '>'  && str[i + 1] != '>') || 
-			(str[i - 1] != '<' && str[i] == '<' && str[i + 1] != '<'))
+			if ((str[i - 1] != '>' && str[i] == '>' && str[i + 1] != '>') \
+				(str[i - 1] != '<' && str[i] == '<' && str[i + 1] != '<'))
 				flag++;
 		}
 	}
@@ -40,6 +40,7 @@ static int	space_plus_len(char *str, int str_len)
 		return (0);
 	return (i + flag * 2 + 1);
 }
+
 static int	redirection_plus_len(char *str, int str_len)
 {
 	char	quote;
@@ -57,7 +58,7 @@ static int	redirection_plus_len(char *str, int str_len)
 			quote = 0;
 		if (!quote && i > 0 && i + 1 < str_len)
 		{
-			if ((str[i - 1] == '>' && str[i] == '>'  && str[i + 1] != '>') || 
+			if ((str[i - 1] == '>' && str[i] == '>' && str[i + 1] != '>') || \
 			(str[i - 1] == '<' && str[i] == '<' && str[i + 1] != '<'))
 				flag++;
 		}
@@ -66,13 +67,13 @@ static int	redirection_plus_len(char *str, int str_len)
 		return (0);
 	return (i + flag * 2 + 1);
 }
+
 static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 {
 	char	*new_str;
-	int		len;
 
-	len = space_plus_len(str, ft_strlen(str));
-	new_str = (char *)malloc(sizeof(char) * len);
+	new_str = (char *)malloc(sizeof(char) * \
+					space_plus_len(str, ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
 	while (str[i])
@@ -81,8 +82,9 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 			quote = str[i];
 		else if (quote == str[i])
 			quote = 0;
-		if (i > 0 && (str[i] == '|' || (str[i - 1] != '>' && str[i] == '>'  && str[i + 1] != '>') || 
-			(str[i - 1] != '<' && str[i] == '<' && str[i + 1] != '<')) && !quote)
+		if (i > 0 && (str[i] == '|' || (str[i - 1] != '>' && str[i] == '>' && \
+			str[i + 1] != '>') || (str[i - 1] != '<' && str[i] == '<' \
+			&& str[i + 1] != '<')) && !quote)
 		{
 			new_str[j++] = ' ';
 			new_str[j++] = str[i++];
@@ -94,12 +96,12 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 	new_str[j] = '\0';
 	return (new_str);
 }
+
 static char	*redirection_space(char *str, int i, int j, char quote)
 {
 	char	*new_str;
 
-	new_str = (char *)malloc(sizeof(char) * 
-				redirection_plus_len(str, ft_strlen(str)));
+	new_str = malloc(sizeof(char) * redirection_plus_len(str, ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
 	while (str[i])
@@ -108,8 +110,9 @@ static char	*redirection_space(char *str, int i, int j, char quote)
 			quote = str[i];
 		else if (quote == str[i])
 			quote = 0;
-		if (i > 0 && ((str[i - 1] != '>' && str[i] == '>'  && str[i + 1] == '>') || 
-		(str[i - 1] != '<' && str[i] == '<' && str[i + 1] == '<')) && !quote)
+		if (i > 0 && ((str[i - 1] != '>' && str[i] == '>' && str[i + 1] == '>') \
+			|| (str[i - 1] != '<' && str[i] == '<' && str[i + 1] == '<')) \
+			&& !quote)
 		{
 			new_str[j++] = ' ';
 			new_str[j++] = str[i++];
@@ -122,6 +125,7 @@ static char	*redirection_space(char *str, int i, int j, char quote)
 	new_str[j] = '\0';
 	return (new_str);
 }
+
 char	**minishell_token_data(char *str)
 {
 	int		i;
