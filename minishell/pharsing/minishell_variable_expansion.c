@@ -120,13 +120,14 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 	temp = token;
 	while (temp)
 	{
-		start = value_check(temp, 0 , 0);
+		start = value_check(temp, 0, 0);
 		if (start)
 		{
 			my_getenv(temp, start, minishell->env);
 			temp->type = ARG;
 		}
-		temp = temp->next;
+    	else
+			temp = temp->next;
 	}
 	remove_quite(token);
 	token_check(minishell);

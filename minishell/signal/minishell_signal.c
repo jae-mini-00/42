@@ -12,6 +12,8 @@
 
 #include "minishell_signal.h"
 
+int signal_condition;
+
 void	print_signal(int sig)
 {
 	(void)sig;
