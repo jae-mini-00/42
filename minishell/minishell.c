@@ -27,6 +27,7 @@ const char *get_type_string(t_type type)
         default: return "UNKNOWN";
     }
 }
+/*
 int	main(int ac, char **av, char **envp)
 {
 	t_data	minishell;
@@ -51,11 +52,32 @@ int	main(int ac, char **av, char **envp)
 	split_free(minishell.env);
 	rl_clear_history();
 }
+*/
+int	main(int ac, char **av, char **envp)
+{
+	t_data	minishell;
 
-		// minishell_run(&minishell);
-		// t_token *temp = minishell.token;
-		// while (temp)
-		// {
-		// 	printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
-		// 	temp = temp->next;
-		// }
+	(void)av;
+	if (ac > 2)
+		return (0);
+	minishell_init(&minishell, envp);
+	signal (SIGINT, print_signal);
+	signal(SIGQUIT, SIG_IGN);
+	while (1)
+	{
+		minishell.prompt = make_prompt(av[1]);
+		minishell.o_cmd = readline(minishell.prompt);
+		ctrl_d(&minishell);
+		o_cmd_split_init(&minishell);
+		t_token *temp = minishell.token;
+		while (temp)
+		{
+			printf("value :%s type :%s\n", temp->value, get_type_string(temp->type));
+			temp = temp->next;
+		}
+		add_history(minishell.o_cmd);
+		minishell_free(&minishell);
+	}
+	split_free(minishell.env);
+	rl_clear_history();
+}

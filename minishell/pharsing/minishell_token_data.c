@@ -19,7 +19,7 @@ static int	space_plus_len(char *str, int str_len)
 	int		i;
 
 	i = -1;
-	flag = 0;
+	flag = 1;
 	quote = 0;
 	while (str[++i])
 	{
@@ -32,7 +32,7 @@ static int	space_plus_len(char *str, int str_len)
 		else if (!quote && i > 0 && i + 1 < str_len)
 		{
 			if ((str[i - 1] != '>' && str[i] == '>' && str[i + 1] != '>') \
-				(str[i - 1] != '<' && str[i] == '<' && str[i + 1] != '<'))
+				|| (str[i - 1] != '<' && str[i] == '<' && str[i + 1] != '<'))
 				flag++;
 		}
 	}
@@ -76,19 +76,22 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 					space_plus_len(str, ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
+	if ((str[0] == '<' && str[1] != '<') || (str[0] == '>' && str[1] != '>'))
+		redirection_copy(new_str, str, &j, &i);
 	while (str[i])
 	{
 		if (!quote && (str[i] == '\'' || str[i] == '"'))
 			quote = str[i];
 		else if (quote == str[i])
 			quote = 0;
-		if (i > 0 && (str[i] == '|' || (str[i - 1] != '>' && str[i] == '>' && \
+		if ((i > 0 && (str[i] == '|' || (str[i - 1] != '>' && str[i] == '>' && \
 			str[i + 1] != '>') || (str[i - 1] != '<' && str[i] == '<' \
-			&& str[i + 1] != '<')) && !quote)
+			&& str[i + 1] != '<')) && !quote))
 		{
-			new_str[j++] = ' ';
-			new_str[j++] = str[i++];
-			new_str[j++] = ' ';
+			redirection_copy(new_str, str, &j, &i);
+			//new_str[j++] = ' ';
+			//new_str[j++] = str[i++];
+			//new_str[j++] = ' ';
 		}
 		else
 			new_str[j++] = str[i++];

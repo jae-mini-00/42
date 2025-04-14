@@ -35,13 +35,14 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell);
 
 /* utils */
 int		env_len(char *str);
-void	remove_token(t_data *minishell, t_token *data);
 void	token_check(t_data *minishell);
 void	type_trance(t_token *token, t_data *minishell, int flag);
-void	remove_quite(t_token *token);
+void	redirection_copy(char *new_str, char *str, int *j, int *i);
 
 /* minishell remove utils */
 int check_quite(char *value);
 char *new_value(char *value, int flag, int i, int j);
+void	remove_quite(t_token *token);
+void	remove_token(t_data *minishell, t_token *data);
 
 #endif
