@@ -26,53 +26,18 @@ int	env_len(char *str)
 	return (i);
 }
 
-void	remove_quite(t_token *token)
+void	redirection_copy(char *new_str, char *str, int *j, int *i)
 {
-	int		flag;
-	char	*temp;
+	int	idx;
+	int	j_idx;
 
-	flag = 0;
-	while (token)
-	{
-		flag = check_quite(token->value);
-		if (!flag)
-			token = token->next;
-		else
-		{
-			temp = token->value;
-			token->value = new_value(token->value, flag, 0, 0);
-			free(temp);
-			token = token->next;
-		}
-	}
-}
-
-void	remove_token(t_data *minishell, t_token *data)
-{
-	t_token	*now;
-	t_token	*prev;
-
-	if (!minishell || !minishell->token || !data)
-		return ;
-	now = minishell->token;
-	prev = NULL;
-	if (now == data)
-	{
-		minishell->token = now->next;
-		free(now->value);
-		free(now);
-		return ;
-	}
-	while (now && now != data)
-	{
-		prev = now;
-		now = now->next;
-	}
-	if (!now)
-		return ;
-	prev->next = now->next;
-	free(now->value);
-	free(now);
+	idx = *i;
+	j_idx = *j;
+	new_str[j_idx++] = ' ';
+	new_str[j_idx++] = str[idx++];
+	new_str[j_idx++] = ' ';
+	*i = idx;
+	*j = j_idx;
 }
 
 void	token_check(t_data *minishell)
