@@ -19,14 +19,16 @@ static char	*fd_name(int count)
 	name = ft_strjoin("temp", ft_itoa(count));
 	return (name);
 }
+
 static void	here_doc_trance(t_token *token, char *name)
 {
 	token->type = REDIRECTION;
 	free(token->value);
 	token->value = ft_strdup("<");
 	free(token->next->value);
-	token->next->value = name; 
+	token->next->value = name;
 }
+
 static void	minishell_here_doc(t_token *token, char *name)
 {
 	char	*temp;
@@ -41,7 +43,8 @@ static void	minishell_here_doc(t_token *token, char *name)
 	{
 		write(1, "> ", 2);
 		temp = get_next_line(0);
-		if (signal_condition == 1 || temp == NULL || ft_strncmp(temp, end, len) == 0)
+		if (signal_condition == 1 || temp == NULL || \
+			ft_strncmp(temp, end, len) == 0)
 		{
 			free(temp);
 			free(end);
@@ -53,10 +56,11 @@ static void	minishell_here_doc(t_token *token, char *name)
 		free(temp);
 	}
 }
+
 void	minishell_here_doc_check(t_data *minishell)
 {
-	t_token *now;
-	
+	t_token	*now;
+
 	now = minishell->token;
 	signal (SIGINT, here_doc_signal); // 수정 해야함
 	while (now && signal_condition == 0)
@@ -67,7 +71,7 @@ void	minishell_here_doc_check(t_data *minishell)
 			minishell_here_doc(now, fd_name(minishell->here_doc_count));
 			now = now->next;
 		}
-		else 
+		else
 			now = now->next;
 	}
 	signal (SIGINT, print_signal); // 수정 해야함

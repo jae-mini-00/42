@@ -20,7 +20,8 @@ static void	remove_env(t_token *token, char *start)
 
 	i = 0;
 	now_value = token->value;
-	temp = (char *)malloc(sizeof(char) * (ft_strlen(token->value) - env_len(&start[1])));
+	temp = (char *)malloc(sizeof(char) * \
+				(ft_strlen(token->value) - env_len(&start[1])));
 	if (!temp)
 		return ;
 	while (*now_value)
@@ -34,14 +35,16 @@ static void	remove_env(t_token *token, char *start)
 	free(token->value);
 	token->value = temp;
 }
+
 static void	env_init(t_token *token, char *start, char *env, int j)
 {
 	char	*temp;
 	char	*copy;
 	int		i;
 
-	temp = (char *)malloc(sizeof(char) * (ft_strlen(token->value) + ft_strlen(env) - 
-	env_len(start) + 1));
+	temp = (char *)malloc(sizeof(char) * \
+				(ft_strlen(token->value) + ft_strlen(env) - \
+				env_len(start) + 1));
 	if (!temp)
 		return ;
 	i = 0;
@@ -61,6 +64,7 @@ static void	env_init(t_token *token, char *start, char *env, int j)
 	free(token->value);
 	token->value = temp;
 }
+
 static void	my_getenv(t_token *token, char *start, char **env)
 {
 	char	*temp;
@@ -89,6 +93,7 @@ static void	my_getenv(t_token *token, char *start, char **env)
 	free(need_env);
 	free(temp);
 }
+
 static char	*value_check(t_token *token, int i, char quote)
 {
 	while (token->value[i])
@@ -112,9 +117,10 @@ static char	*value_check(t_token *token, int i, char quote)
 	}
 	return (NULL);
 }
+
 void	minishell_variable_expansion(t_token *token, t_data *minishell)
 {
-	t_token *temp;
+	t_token	*temp;
 	char	*start;
 
 	temp = token;
@@ -126,7 +132,7 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 			my_getenv(temp, start, minishell->env);
 			temp->type = ARG;
 		}
-    	else
+		else
 			temp = temp->next;
 	}
 	remove_quite(token);

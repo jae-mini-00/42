@@ -25,21 +25,23 @@ static int	cmd_size(t_token *token)
 	}
 	return (count);
 }
+
 t_token	*find_start(t_token *token)
 {
-	t_token *temp;
-	
+	t_token	*temp;
+
 	temp = token;
 	while (temp && temp->type != PIPE)
 		temp = temp->next;
 	if (temp)
-		return(temp->next);
-	return(temp);
+		return (temp->next);
+	return (temp);
 }
+
 char	**make_execve_cmd(t_token *start)
 {
 	int		i;
-	t_token *temp;
+	t_token	*temp;
 	char	**cmd;
 
 	i = cmd_size(start);
@@ -60,6 +62,7 @@ char	**make_execve_cmd(t_token *start)
 	}
 	return (cmd);
 }
+
 void	io_dup(t_token *start, int std_in, int std_out)
 {
 	int	fd;
@@ -73,7 +76,7 @@ void	io_dup(t_token *start, int std_in, int std_out)
 				fd = open(start->next->value, O_CREAT | O_WRONLY, 0644);
 				dup2(fd, std_out);
 				close(fd);
-			}			
+			}
 			else
 			{
 				fd = open(start->next->value, O_CREAT | O_RDONLY, 0644);

@@ -20,7 +20,8 @@ static void	fd_close(int *fd)
 		fd[0] = -1;
 	}
 }
-void all_fd_close(int **fd)
+
+void	all_fd_close(int **fd)
 {
 	if (fd)
 	{
@@ -37,18 +38,19 @@ void all_fd_close(int **fd)
 		free(fd);
 	}
 }
+
 int	**fd_init(void)
 {
 	int	**fd;
 
 	fd = (int **)malloc(sizeof(int *) * 2);
-	if(!fd)
+	if (!fd)
 		return (NULL);
 	fd[0] = (int *)malloc(sizeof(int ) * 2);
-	if(!fd[0])
+	if (!fd[0])
 		return (NULL);
 	fd[1] = (int *)malloc(sizeof(int ) * 2);
-	if(!fd[1])
+	if (!fd[1])
 		return (NULL);
 	fd[0][0] = -1;
 	fd[0][1] = -1;
@@ -56,7 +58,8 @@ int	**fd_init(void)
 	fd[1][1] = -1;
 	return (fd);
 }
-void pipe_dup(int **fd, int i)
+
+void	pipe_dup(int **fd, int i)
 {
 	if (i != 0)
 	{
@@ -72,16 +75,17 @@ void pipe_dup(int **fd, int i)
 			if (fd[1][0] != -1)
 				dup2(fd[1][0], 0);
 			if (fd[0][1] != -1)
-			dup2(fd[0][1], 1);
+				dup2(fd[0][1], 1);
 		}
 	}
 	else
 		dup2(fd[0][1], 1);
 	all_fd_close(fd);
 }
-void pipe_open_close(int **fd, int i, int cmd_size)
+
+void	pipe_open_close(int **fd, int i, int cmd_size)
 {
-	int curr;
+	int	curr;
 
 	curr = i % 2;
 	if (i != 0)

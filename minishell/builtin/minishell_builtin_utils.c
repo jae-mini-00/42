@@ -46,6 +46,7 @@ int	builtin_type_check(t_token *token)
 			return (true);
 		temp = temp->next;
 	}
+	cmd = make_execve_cmd(token);
 	//cmd 만들어서 cmd[0]배열을 split후 마지막 배열이 builtin 인지 확인 맞으면 true 아니면 false
 	return (0);
 }
