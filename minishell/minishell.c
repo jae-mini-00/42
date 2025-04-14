@@ -27,7 +27,7 @@ const char *get_type_string(t_type type)
         default: return "UNKNOWN";
     }
 }
-/*
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data	minishell;
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **envp)
 	split_free(minishell.env);
 	rl_clear_history();
 }
-*/
+/*
 int	main(int ac, char **av, char **envp)
 {
 	t_data	minishell;
@@ -80,4 +80,4 @@ int	main(int ac, char **av, char **envp)
 	}
 	split_free(minishell.env);
 	rl_clear_history();
-}
+}*/

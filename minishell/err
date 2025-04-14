@@ -1,1 +1,0 @@
-gcc -Wall -Wextra -Werror -g -c pharsing/minishell_phasing_utils.c -o pharsing/minishell_phasing_utils.o
