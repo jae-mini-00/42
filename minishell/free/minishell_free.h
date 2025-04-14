@@ -53,7 +53,7 @@ typedef struct s_data
 	t_token	*token;
 }	t_data;
 
-int signal_condition;
+extern int signal_condition;
 
 /* free */
 void	split_free(char **split);

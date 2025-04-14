@@ -13,9 +13,9 @@
 #ifndef MINISHELL_BUILTIN_H
 # define MINISHELL_BUILTIN_H
 
-# include "../ft_printf/ft_printf.h"
-# include "../free/minishell_free.h"
-# include "../signal/minishell_signal.h" 
+//# include "../ft_printf/ft_printf.h"
+//# include "../free/minishell_free.h"
+//# include "../signal/minishell_signal.h" 
 
 /* builtin utils */
 int		builtin_type_check(t_token *token);

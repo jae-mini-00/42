@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern int signal_condition;
+
 static void	ft_full_path_split(char **path_split)
 {
 	int		i;

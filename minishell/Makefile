@@ -29,7 +29,7 @@ PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_dat
 
 BUTILTIN_SRCS =
 
-SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) $(BUTILTIN_SRCS) \
+SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) \
 		minishell.c minishell_init.c \
 
 OBJS = $(SRCS:.c=.o)
