@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
+#    By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/04/11 04:18:27 by jaejo            ###   ########.fr        #
+#    Updated: 2025/04/15 21:01:30 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,10 @@ PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_dat
 				./pharsing/minishell_token_split.c ./pharsing/minishell_variable_expansion.c \
 				./pharsing/minishell_phasing_utils.c ./pharsing/minishell_remove_utils.c \
 
-BUTILTIN_SRCS =
+BUTILTIN_SRCS = ./builtin/minishell_builtin_check.c ./builtin/minishell_builtin_utils.c \
+				./builtin/minishell_builtin.c \
 
-SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) \
+SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) $(BUTILTIN_SRCS) \
 		minishell.c minishell_init.c \
 
 OBJS = $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/11 04:18:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 20:54:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "./pharsing/minishell_pharsing.h"
 # include "./signal/minishell_signal.h"
 # include "./run/minishell_run.h"
+# include "./builtin/minishell_builtin.h"
 
 /* init */
 void	minishell_init(t_data *minishell, char **envp);

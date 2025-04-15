@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/13 23:46:53 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 21:01:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-void	ft_env(t_data *minishell)
+void	ft_env(t_data *minishell, char **cmd)
 {
+	(void)minishell;
 	int	i;
 
 	i = 0;
-	if (!minishell->o_cmd_split[1])
+	if (!cmd[1])
 	{
-		minishell->builtin_flag = 1;
 		while (minishell->env[i])
 		{
 			printf("%s\n", minishell->env[i]);
@@ -29,41 +29,38 @@ void	ft_env(t_data *minishell)
 	return ;
 }
 
-void	ft_echo(t_data *minishell)
+void	ft_echo(t_data *minishell, char **cmd)
 {
+	(void)minishell;
 	int	i;
 	int	flag;
 
 	i = 1;
-	if (access(minishell->o_cmd_split[0], X_OK) == 0)
-	{
-		if (minishell->o_cmd_split[i])
-			flag = echo_flag_check(minishell->o_cmd_split[i]);
-		else
-		{
-			printf("\n");
-			return ;
-		}
-		if (flag)
-			i++;
-		echo_print(minishell, i, flag);
-	}
+	if (cmd[i])
+		flag = echo_flag_check(cmd[i]);
 	else
-		printf("%s: No such file or directory\n", minishell->o_cmd_split[0]);
+	{
+		printf("\n");
+		return ;
+	}
+	if (flag)
+		i++;
+	echo_print(cmd, i, flag);
 }
 
-void	ft_cd(char **data)
+void	ft_cd(t_data *minishell, char **cmd)
 {
-	if (data[1] && !data[2])
+	(void)minishell;
+	if (cmd[1] && !cmd[2])
 	{
-		if (chdir(data[1]) == 0)
+		if (chdir(cmd[1]) == 0)
 			return ;
-		else if (access(data[1], F_OK) == -1)
-			printf("cd: %s: No such file or directory\n", data[1]);
+		else if (access(cmd[1], F_OK) == -1)
+			printf("cd: %s: No such file or directory\n", cmd[1]);
 		else
-			printf("cd: %s: Permission denied\n", data[1]);
+			printf("cd: %s: Permission denied\n", cmd[1]);
 	}
-	else if (!data[1])
+	else if (!cmd[1])
 	{
 		if (chdir("/home/jaejo") == 0)
 			return ;
@@ -73,20 +70,21 @@ void	ft_cd(char **data)
 	return ;
 }
 
-void	ft_pwd(char **data)
+void	ft_pwd(t_data *minishell, char **cmd)
 {
+	(void)minishell;
 	char	*now;
 	int		i;
 
 	i = 0;
-	while (data[i])
+	while (cmd[i])
 		i++;
 	if (i > 1)
 	{
-		if (data[1][0] != '-')
+		if (cmd[1][0] != '-')
 			printf("pwd: too many arguments\n");
 		else
-			printf("pwd: %s: invalid option\n", data[1]);
+			printf("pwd: %s: invalid option\n", cmd[1]);
 		return ;
 	}
 	now = getcwd(NULL, 0);
@@ -95,14 +93,14 @@ void	ft_pwd(char **data)
 	free(now);
 }
 
-void	ft_export(t_data *minishell)
-{
-	int		i;
+// void	ft_export(t_data *minishell)
+// {
+// 	int		i;
 
-	i = 0;
-	if (!minishell->o_cmd_split[1])
-		while (minishell->env[i])
-			printf("declare -x %s\n", minishell->env[i++]);
-	else
-		make_env(minishell);
-}
+// 	i = 0;
+// 	if (!minishell->o_cmd_split[1])
+// 		while (minishell->env[i])
+// 			printf("declare -x %s\n", minishell->env[i++]);
+// 	else
+// 		make_env(minishell);
+// }
