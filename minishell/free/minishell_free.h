@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_free.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/11 03:07:34 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 19:31:24 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_FREE_H
 # define MINISHELL_FREE_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
