@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 21:55:53 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 23:10:38 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_data
 {
 	pid_t	pid;
 	int		here_doc_count;
+	int		mode;
 	char	*prompt;
 	char	*o_cmd;
 	char	**env;

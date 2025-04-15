@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/14 00:12:33 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 23:13:05 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,17 @@ void	o_cmd_split_init(t_data *minishell)
 	type_trance(minishell->token, minishell, 0);
 }
 
-void	minishell_init(t_data *minishell, char **envp)
+void	minishell_init(t_data *minishell, char **envp, char *av)
 {
 	int	i;
 
 	i = 0;
 	while (envp[i])
 		i++;
+	if (av)
+		minishell->mode = ft_atoi(av);
+	else
+		minishell->mode = 0;
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
 	minishell->token = NULL;
