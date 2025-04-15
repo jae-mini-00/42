@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fork.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/13 23:09:33 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 23:42:30 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	solo_fork(t_data *minishell)
 	if (minishell->pid == 0)
 	{
 		cmd = make_execve_cmd(minishell->token);
+		if (!cmd[0])
+		{
+			split_free(cmd);
+			exit_free(minishell, 0);
+		}
 		ft_execve(minishell, cmd);
 	}
 }
@@ -52,6 +57,11 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 		{
 			pipe_dup(fd, i);
 			cmd = make_execve_cmd(temp);
+			if (!cmd[0])
+			{
+				split_free(cmd);
+				exit_free(minishell, 127);
+			}
 			ft_execve(minishell, cmd);
 		}
 		temp = find_start(temp);

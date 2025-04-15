@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 20:54:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 23:12:34 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "./builtin/minishell_builtin.h"
 
 /* init */
-void	minishell_init(t_data *minishell, char **envp);
+void	minishell_init(t_data *minishell, char **envp, char *av);
 void	o_cmd_split_init(t_data *minishell);
 
 // /* check */
