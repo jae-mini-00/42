@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 23:42:30 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 23:51:10 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	solo_fork(t_data *minishell)
 		if (!cmd[0])
 		{
 			split_free(cmd);
-			exit_free(minishell, 0);
+			exit_free(minishell, -1);
 		}
 		ft_execve(minishell, cmd);
 	}
@@ -60,7 +60,7 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 			if (!cmd[0])
 			{
 				split_free(cmd);
-				exit_free(minishell, 127);
+				exit_free(minishell, -1);
 			}
 			ft_execve(minishell, cmd);
 		}
