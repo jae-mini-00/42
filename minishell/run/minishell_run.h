@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_run.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/13 23:37:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/15 22:00:20 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	multi_fork_dup(int **fd);
 void	minishell_run(t_data *minishell);
 
 /* prompt */
-char	*make_prompt(char *av);
+char	*make_prompt(char *av, char **envp);
 
 /* here_doc */
 void	minishell_here_doc_check(t_data *minishell);
