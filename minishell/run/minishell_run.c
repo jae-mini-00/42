@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_run.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 23:38:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:09:11 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static int	check_pipe(t_data *minishell)
 void	minishell_run(t_data *minishell)
 {
 	int	check;
+	int	status;
 
+	status = 0;
 	minishell_here_doc_check(minishell);
 	check = check_pipe(minishell);
 	if (check == -1)
@@ -45,5 +47,6 @@ void	minishell_run(t_data *minishell)
 	else
 		solo_fork(minishell);
 	if (minishell->pid != 0)
-		waitpid(minishell->pid, NULL, 0);
+		waitpid(minishell->pid, &status, 0);
+	minishell->exit_code = status;
 }

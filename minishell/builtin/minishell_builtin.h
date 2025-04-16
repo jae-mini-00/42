@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:32:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:20:43 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 
 /* builtin utils */
-int		split_last(char **split);
 int		ft_str_isdigit(char *str);
 int     echo_flag_check(char *str);
 int		builtin_type_check(t_token *token);
@@ -36,7 +35,9 @@ void	ft_env(t_data *minishell, char **cmd);
 void	ft_echo(t_data *minishell, char **cmd);
 
 /* export unset */
+void	ft_unset(t_data *minishell, char **cmd);
 
 /* export unset utils */
+void	remove_minishell_env(t_data *minishell, char *env_name, int len);
 
 #endif
