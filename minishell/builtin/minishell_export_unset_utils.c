@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_export_utils.c                           :+:      :+:    :+:   */
+/*   minishell_export_unset_utils.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/13 23:46:52 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:41:53 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	path_export(t_data *minishell)
 	free(name);
 }
 
-void	make_env(t_data *minishell)
+void	make_env(t_data *minishell, char **cmd)
 {
 	int	i;
 

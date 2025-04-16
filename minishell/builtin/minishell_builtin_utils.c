@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 23:28:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 20:59:47 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:31:29 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,18 @@ int	echo_flag_check(char *str)
 		return (1);
 	else
 		return (0);
+}
+int	ft_str_isdigit(char *str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (false);
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	if (str[i])
+		return (false);
+	else
+		return (true);
 }

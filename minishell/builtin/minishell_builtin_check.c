@@ -6,38 +6,49 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:08:26 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:31:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-static void	builtin_check3(t_data *minishell)
+static void	builtin_check3(t_data *minishell, char **cmd)
 {
 	(void)minishell;
-	// if (!ft_strncmp(minishell->o_cmd_split[0], "export", 7))
-	// {
-	// 	ft_export(minishell);
-	// 	minishell->builtin_flag = 1;
-	// }
+	(void)cmd;
+	if (!ft_strncmp(cmd[0], "export", 7))
+		ft_export(minishell, cmd);
+	// else if (!ft_strncmp(cmd[0], "unset", 6))
+	// 	ft_unset(minishell, cmd);
 }
 
 static void	builtin_check2(t_data *minishell, char **cmd)
 {
+	int	i;
+
 	if (!ft_strncmp(cmd[0], "exit", 5))
 	{
 		printf("exit\n");
 		if (cmd[1] && cmd[2])
 			printf("exit: Too many arguments\n");
-		else if (cmd[1] && !cmd[2])
+		else if (cmd[1] && !ft_str_isdigit(cmd[1]) && !cmd[2])
 			printf("exit: Argument '%s' is not a valid integer\n", cmd[1]);
+		if (cmd[1] && ft_str_isdigit(cmd[1]))
+		{
+			i = ft_atoi(cmd[1]);
+			if (i != 0)
+			{
+				split_free(cmd);
+				exit_free(minishell, i);
+			}
+		}
 		split_free(cmd);
 		exit_free(minishell, -1);
 	}
 	else if (!ft_strncmp(cmd[0], "cd", 3))
 		ft_cd(minishell, cmd);
 	else
-		builtin_check3(minishell);
+		builtin_check3(minishell, cmd);
 }
 
 void	builtin_check(t_data *minishell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 21:00:14 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:32:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,23 @@
 
 
 /* builtin utils */
-int		builtin_type_check(t_token *token);
+int		split_last(char **split);
+int		ft_str_isdigit(char *str);
 int     echo_flag_check(char *str);
+int		builtin_type_check(t_token *token);
 void	echo_print(char **cmd, int i, int flag);
 
 /* builtin check */
 void	builtin_check(t_data *minishell);
 
 /* builtin */
+void	ft_cd(t_data *minishell, char **cmd);
+void	ft_pwd(t_data *minishell, char **cmd);
 void	ft_env(t_data *minishell, char **cmd);
 void	ft_echo(t_data *minishell, char **cmd);
-void	ft_pwd(t_data *minishell, char **cmd);
-void	ft_cd(t_data *minishell, char **cmd);
+
+/* export unset */
+
+/* export unset utils */
 
 #endif

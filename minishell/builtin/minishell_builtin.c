@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 21:27:20 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:40:35 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,3 @@ void	ft_pwd(t_data *minishell, char **cmd)
 		printf("%s\n", now);
 	free(now);
 }
-
-// void	ft_export(t_data *minishell)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	if (!minishell->o_cmd_split[1])
-// 		while (minishell->env[i])
-// 			printf("declare -x %s\n", minishell->env[i++]);
-// 	else
-// 		make_env(minishell);
-// }

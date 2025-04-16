@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+         #
+#    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/04/15 21:01:30 by jaejo            ###   ########.fr        #
+#    Updated: 2025/04/16 18:35:42 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_dat
 				./pharsing/minishell_phasing_utils.c ./pharsing/minishell_remove_utils.c \
 
 BUTILTIN_SRCS = ./builtin/minishell_builtin_check.c ./builtin/minishell_builtin_utils.c \
-				./builtin/minishell_builtin.c \
+				./builtin/minishell_builtin.c ./builtin/minishell_export_unset.c \
+				./builtin/minishell_export_unset_utils.c \
 
 SRCS =  $(FREE_SRCS) $(SIGNAL_SRCS) $(PHARSING_SRCS) $(RUN_SRCS) $(BUTILTIN_SRCS) \
 		minishell.c minishell_init.c \
