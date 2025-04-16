@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/09 01:20:44 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 17:59:36 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 static char	*fd_name(int count)
 {
 	char	*name;
+	char	*idx;
 
-	name = ft_strjoin("temp", ft_itoa(count));
+	idx = ft_itoa(count);
+	name = ft_strjoin("temp", idx);
+	free(idx);
 	return (name);
 }
 
@@ -26,7 +29,8 @@ static void	here_doc_trance(t_token *token, char *name)
 	free(token->value);
 	token->value = ft_strdup("<");
 	free(token->next->value);
-	token->next->value = name;
+	token->next->value = ft_strdup(name);
+	free(name);
 }
 
 static void	minishell_here_doc(t_token *token, char *name)
@@ -46,6 +50,7 @@ static void	minishell_here_doc(t_token *token, char *name)
 		if (signal_condition == 1 || temp == NULL || \
 			ft_strncmp(temp, end, len) == 0)
 		{
+			get_next_line(1023);
 			free(temp);
 			free(end);
 			here_doc_trance(token, name);
