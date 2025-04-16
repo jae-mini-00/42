@@ -6,21 +6,12 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 23:28:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:31:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:20:46 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-int	split_last(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i - 1);
-}
 void	echo_print(char **cmd, int i, int flag)
 {
 	while (cmd[i])

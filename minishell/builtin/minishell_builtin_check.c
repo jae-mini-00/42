@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:31:45 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:01:18 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static void	builtin_check3(t_data *minishell, char **cmd)
 {
-	(void)minishell;
-	(void)cmd;
-	if (!ft_strncmp(cmd[0], "export", 7))
-		ft_export(minishell, cmd);
-	// else if (!ft_strncmp(cmd[0], "unset", 6))
-	// 	ft_unset(minishell, cmd);
+	// if (!ft_strncmp(cmd[0], "export", 7))
+	// 	ft_export(minishell, cmd);
+	// else 
+	if (!ft_strncmp(cmd[0], "unset", 6))
+		ft_unset(minishell, cmd);
 }
 
 static void	builtin_check2(t_data *minishell, char **cmd)
