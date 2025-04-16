@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin_check.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 21:27:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:08:26 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static void	builtin_check2(t_data *minishell, char **cmd)
 		else if (cmd[1] && !cmd[2])
 			printf("exit: Argument '%s' is not a valid integer\n", cmd[1]);
 		split_free(cmd);
-		minishell_free(minishell);
-		exit(0);
+		exit_free(minishell, -1);
 	}
 	else if (!ft_strncmp(cmd[0], "cd", 3))
 		ft_cd(minishell, cmd);
