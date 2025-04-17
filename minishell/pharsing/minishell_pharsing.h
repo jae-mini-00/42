@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_pharsing.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/05 18:12:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/17 19:27:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	**token_split(char const *str);
 
 /* minishell variable expansion */
 void	minishell_variable_expansion(t_token *token, t_data *minishell);
+
+/* minishell variable exit code */
+void	my_exit_code(t_token *token, char *start, t_data *minishell);
 
 /* utils */
 int		env_len(char *str);

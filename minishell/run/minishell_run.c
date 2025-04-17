@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_run.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 22:09:11 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/17 23:04:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	minishell_run(t_data *minishell)
 		builtin_check(minishell);
 	else
 		solo_fork(minishell);
+	token_fd_close(minishell->token, 1);
 	if (minishell->pid != 0)
 		waitpid(minishell->pid, &status, 0);
 	minishell->exit_code = status;
