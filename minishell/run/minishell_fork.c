@@ -6,16 +6,16 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 00:49:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 02:05:36 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_run.h"
 
-static void	ft_execve(t_data *minishell, char **cmd)
+static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 {
 	signal(SIGINT, SIG_DFL);
-	io_dup (minishell->token, 0, 1);
+	io_dup (start, 0, 1);
 	execve(cmd[0], cmd, minishell->env);
 	printf ("%s: command not found\n", cmd[0]);
 	split_free(cmd);
@@ -36,7 +36,7 @@ void	solo_fork(t_data *minishell)
 			split_free(cmd);
 			exit_free(minishell, -1);
 		}
-		ft_execve(minishell, cmd);
+		ft_execve(minishell, cmd, minishell->token);
 	}
 }
 
@@ -60,7 +60,7 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 			if (!cmd[0])
 				split_free(cmd);
 			else
-				ft_execve(minishell, cmd);
+				ft_execve(minishell, cmd, temp);
 			exit_free(minishell, -1);
 		}
 		token_fd_close(temp, 0);
