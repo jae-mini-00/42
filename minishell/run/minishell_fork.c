@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fork.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:50:37 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 00:49:51 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 		if (minishell->pid == 0)
 		{
 			pipe_dup(fd, i);
+			token_fd_close(temp, 2);
 			cmd = make_execve_cmd(temp);
 			if (!cmd[0])
-			{
 				split_free(cmd);
-				exit_free(minishell, -1);
-			}
-			ft_execve(minishell, cmd);
+			else
+				ft_execve(minishell, cmd);
+			exit_free(minishell, -1);
 		}
+		token_fd_close(temp, 0);
 		temp = find_start(temp);
 		i++;
 	}

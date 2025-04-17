@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_token_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/06 17:22:45 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/17 21:10:16 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_token	*new_token(char *cmd, t_type type)
 	token = (t_token *)malloc(sizeof(t_token));
 	token->value = ft_strdup(cmd);
 	token->type = type;
+	token->fd = -1;
 	token->next = NULL;
 	return (token);
 }

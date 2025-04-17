@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 23:51:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 00:33:13 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ static void	pharsing_check(t_token *data)
 	temp = data;
 	while (temp)
 	{
-		printf("value :%s type :%s\n", temp->value, \
+		printf("value :%s | type :%s\n", temp->value, \
 			get_type_string(temp->type));
 		temp = temp->next;
 	}
+	printf("\n");
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_data	minishell;
 
-	(void)av;
 	if (ac > 3)
 		return (0);
 	minishell_init(&minishell, envp, av[2]);

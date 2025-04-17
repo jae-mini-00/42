@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 22:00:20 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/17 23:01:55 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	**make_execve_cmd(t_token *start);
 t_token	*find_start(t_token *token);
 void	io_dup(t_token *start, int std_in, int std_out);
 void	multi_fork_dup(int **fd);
+void	token_fd_close(t_token *start, int mode);
 
 /* run */
 void	minishell_run(t_data *minishell);

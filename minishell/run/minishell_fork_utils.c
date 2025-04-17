@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 23:42:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 00:29:43 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ static int	cmd_size(t_token *token)
 		token = token->next;
 	}
 	return (count);
+}
+
+void	token_fd_close(t_token *start, int mode)
+{
+	if (mode == 2)
+	{
+		start = find_start(start);
+		mode = 1;
+	}
+	while (start && (start->type != PIPE || mode == 1))
+	{
+		if (start->fd != -1)
+		{
+			close(start->fd);
+			start->fd = -1;
+		}
+		start = start->next;
+	}
 }
 
 t_token	*find_start(t_token *token)
@@ -73,12 +91,18 @@ void	io_dup(t_token *start, int std_in, int std_out)
 		{
 			if (ft_strncmp(start->value, ">", 2) == 0)
 			{
-				fd = open(start->next->value, O_CREAT | O_WRONLY, 0644);
+				fd = open(start->next->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 				dup2(fd, std_out);
 			}
 			else if (ft_strncmp(start->value, "<", 2) == 0)
 			{
-				fd = open(start->next->value, O_CREAT | O_RDONLY, 0644);
+				if (start->next->fd == -1)
+					fd = open(start->next->value, O_CREAT | O_RDONLY, 0644);
+				else
+				{
+					fd = start->next->fd;
+					start->next->fd = -1;
+				}
 				dup2(fd, std_in);
 			}
 			else if (ft_strncmp(start->value, ">>", 3) == 0)

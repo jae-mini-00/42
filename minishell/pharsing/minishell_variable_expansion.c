@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_variable_expansion.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/05 18:25:10 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/17 19:28:09 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,10 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 		start = value_check(temp, 0, 0);
 		if (start)
 		{
-			my_getenv(temp, start, minishell->env);
+			if (start[1] != '?')
+				my_getenv(temp, start, minishell->env);
+			else
+				my_exit_code(temp, start, minishell);
 			temp->type = ARG;
 		}
 		else
