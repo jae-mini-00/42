@@ -17,7 +17,7 @@ void	ft_env(t_data *minishell, char **cmd)
 	int	i;
 
 	i = 0;
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	if (!cmd[1])
 	{
 		while (minishell->env[i])
@@ -35,7 +35,7 @@ void	ft_echo(t_data *minishell, char **cmd)
 	int	flag;
 
 	i = 1;
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	if (cmd[i])
 		flag = echo_flag_check(cmd[i]);
 	else
@@ -50,7 +50,7 @@ void	ft_echo(t_data *minishell, char **cmd)
 
 void	ft_cd(t_data *minishell, char **cmd)
 {
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	if (cmd[1] && !cmd[2])
 	{
 		if (chdir(cmd[1]) == 0)
@@ -76,7 +76,7 @@ void	ft_pwd(t_data *minishell, char **cmd)
 	int		i;
 
 	i = 0;
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	while (cmd[i])
 		i++;
 	if (i > 1)
