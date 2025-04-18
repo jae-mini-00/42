@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:35:39 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 21:38:44 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static char	*get_env_name(char *env)
 		return (NULL); 
 	env_name = (char *)malloc(sizeof(char) * (len + 2));
 	if (!env_name)
-		retunr (NULL);
+		return (NULL);
 	while (i <= len)
 	{
 		env_name[i] = env[i];
 		i++;
 	}
 	env_name[i] = '\0';
-	return (env_name)
+	return (env_name);
 }
 
 void	ft_export(t_data *minishell, char **cmd)
