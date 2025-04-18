@@ -81,12 +81,29 @@ char	**make_execve_cmd(t_token *start)
 	return (cmd);
 }
 
-void	dup_capsule(int fd, int std, int mode, t_token *start)
+void	dup_capsule(int std, int mode, t_token *start, int *status)
 {
+	int	fd;
+
 	if (mode == 1)
 		fd = open(start->next->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (mode == 2)
 		fd = open(start->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if (mode == 3)
+	{
+		fd = open(start->next->value, O_RDONLY, 0644);
+		if (fd == -1)
+		{
+			printf("%s : NO such file or directory\n", start->next->value);
+			*status = 1;
+			return ;
+		}
+	}
+	else if (mode == -1)
+	{
+		fd = start->next->fd;
+		start->next->fd = -1;
+	}
 	dup2(fd, std);
 	close(fd);
 }

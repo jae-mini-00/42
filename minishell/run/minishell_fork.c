@@ -12,42 +12,48 @@
 
 #include "minishell_run.h"
 
-void	io_dup(t_token *start, int std_in, int std_out)
+int	io_dup(t_token *start, int std_in, int std_out, int status)
 {
-	int	fd;
-
-	while (start && start->type != PIPE)
+	while (start && !status && start->type != PIPE)
 	{
 		if (start->type == REDIRECTION)
 		{
 			if (ft_strncmp(start->value, ">", 2) == 0)
-				dup_capsule(fd, std_out, 1, start);
+				dup_capsule(std_out, 1, start, &status);
 			else if (ft_strncmp(start->value, "<", 2) == 0)
 			{
 				if (start->next->fd == -1)
-					fd = open(start->next->value, O_RDONLY, 0644);
+					dup_capsule(std_in, 3, start, &status);
 				else
-				{
-					fd = start->next->fd;
-					start->next->fd = -1;
-				}
-				dup_capsule(fd, std_in, -1, start);
+					dup_capsule(std_in, -1, start, &status);
 			}
 			else if (ft_strncmp(start->value, ">>", 3) == 0)
-				dup_capsule(fd, std_out, 2, start);
+				dup_capsule(std_out, 2, start, &status);
 		}
 		start = start->next;
 	}
+	return (status);
 }
 
 static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 {
+	int	status;
+
+	status = 0;
 	signal(SIGINT, SIG_DFL);
-	io_dup (start, 0, 1);
-	execve(cmd[0], cmd, minishell->env);
-	printf ("%s: command not found\n", cmd[0]);
-	split_free(cmd);
-	exit_free(minishell, 127);
+	status = io_dup (start, 0, 1, status);
+	if (!status)
+	{
+		execve(cmd[0], cmd, minishell->env);
+		printf ("%s: command not found\n", cmd[0]);
+		split_free(cmd);
+		exit_free(minishell, 127);
+	}
+	else
+	{
+		split_free(cmd);
+		exit_free(minishell, 1);
+	}
 }
 
 void	solo_fork(t_data *minishell)
@@ -61,7 +67,7 @@ void	solo_fork(t_data *minishell)
 		cmd = make_execve_cmd(minishell->token);
 		if (!cmd[0])
 		{
-			io_dup (minishell->token, 0, 1);
+			io_dup (minishell->token, 0, 1, 0);
 			split_free(cmd);
 			exit_free(minishell, -1);
 		}
@@ -78,7 +84,7 @@ static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
 	cmd = make_execve_cmd(start);
 	if (!cmd[0])
 	{
-		io_dup (start, 0, 1);
+		io_dup (start, 0, 1, 0);
 		split_free(cmd);
 	}
 	else
