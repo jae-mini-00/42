@@ -41,7 +41,7 @@ void	ft_export(t_data *minishell, char **cmd)
 	char	*env_name;
 
 	i = -1;
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	if (!cmd[1])
 		while (minishell->env[i])
 			printf("declare -x %s\n", minishell->env[i++]);
@@ -69,7 +69,7 @@ void	ft_unset(t_data *minishell, char **cmd)
 	char	*env_name;
 
 	i = 0;
-	io_dup (minishell->token, 0, 1);
+	io_dup (minishell->token, 0, 1, 0);
 	if (!cmd[1])
 		return ;
 	env_name = ft_strjoin(cmd[1], "=");

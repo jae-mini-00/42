@@ -68,3 +68,34 @@ void	builtin_check(t_data *minishell)
 	dup2(in, 0);
 	dup2(out, 1);
 }
+
+int	pipe_builtin_check(char *cmd)
+{
+	if (!ft_strncmp(cmd, "env", 4))
+		return (true);
+	else if (!ft_strncmp(cmd, "echo", 5))
+		return (true);
+	else if (!ft_strncmp(cmd, "pwd", 4))
+		return (true);
+	else if (!ft_strncmp(cmd, "exit", 5))
+		return (true);
+	else if (!ft_strncmp(cmd, "cd", 3))
+		return (true);
+	else if (!ft_strncmp(cmd, "export", 7))
+		return (true);
+	else if (!ft_strncmp(cmd, "unset", 6))
+		return (true);
+	return (false);
+}
+
+void	pipe_builtin_run(t_data *minishell, char **pipe_cmd)
+{
+	if (!ft_strncmp(pipe_cmd[0], "env", 4) && !pipe_cmd[1])
+		ft_env(minishell, pipe_cmd);
+	else if (!ft_strncmp(pipe_cmd[0], "echo", 5))
+		ft_echo(minishell, pipe_cmd);
+	else if (!ft_strncmp(pipe_cmd[0], "pwd", 4))
+		ft_pwd(minishell, pipe_cmd);
+	else
+		builtin_check2(minishell, pipe_cmd);
+}

@@ -87,6 +87,12 @@ static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
 		io_dup (start, 0, 1, 0);
 		split_free(cmd);
 	}
+	else if (pipe_builtin_check(cmd[0]))
+	{
+		pipe_builtin_run(minishell, cmd);
+		split_free(cmd);
+		exit_free(minishell, -1);
+	}
 	else
 		ft_execve(minishell, cmd, start);
 	exit_free(minishell, -1);

@@ -27,6 +27,8 @@ void	echo_print(char **cmd, int i, int flag);
 
 /* builtin check */
 void	builtin_check(t_data *minishell);
+int		pipe_builtin_check(char *cmd);
+void	pipe_builtin_run(t_data *minishell, char **pipe_cmd);
 
 /* builtin */
 void	ft_cd(t_data *minishell, char **cmd);
