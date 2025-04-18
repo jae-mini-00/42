@@ -24,7 +24,7 @@ static char	*make_seet(char **envp)
 	len = ft_strlen("SESSION_MANAGER=local/");
 	while (envp[++i])
 		if (ft_strncmp("SESSION_MANAGER=local/", envp[i], len) == 0)
-			break;
+			break ;
 	if (!envp[i])
 		return (ft_strdup(""));
 	while (envp[i][len + j] != '.')
@@ -40,8 +40,8 @@ static char	*make_seet(char **envp)
 
 static char	*make_user(char *av, char **envp)
 {
-	char 	*user;
-	char 	*seet;
+	char	*user;
+	char	*seet;
 	char	*temp;
 
 	seet = make_seet(envp);

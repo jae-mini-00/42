@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 18:13:42 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 22:06:17 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	minishell_here_doc(t_token *token)
 	{
 		write(1, "> ", 2);
 		temp = get_next_line(0);
-		if (signal_condition == 1 || temp == NULL || \
+		if (g_signal_condition == 1 || temp == NULL || \
 			ft_strncmp(temp, end, len) == 0)
 		{
 			get_next_line(1023);
@@ -56,8 +56,8 @@ void	minishell_here_doc_check(t_data *minishell)
 	t_token	*now;
 
 	now = minishell->token;
-	signal (SIGINT, here_doc_signal); // 수정 해야함
-	while (now && signal_condition == 0)
+	signal (SIGINT, here_doc_signal);
+	while (now && g_signal_condition == 0)
 	{
 		if (now->type == HERE_DOC)
 		{
@@ -68,5 +68,5 @@ void	minishell_here_doc_check(t_data *minishell)
 		else
 			now = now->next;
 	}
-	signal (SIGINT, print_signal); // 수정 해야함
+	signal (SIGINT, print_signal);
 }

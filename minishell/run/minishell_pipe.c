@@ -90,12 +90,12 @@ void	pipe_open_close(int **fd, int i, int cmd_size)
 	curr = i % 2;
 	if (i != 0)
 	{
-		if (curr == 1) //전 파이프가 0배열에 있음 -> [0][0]은 살리고 [0][1] close 
+		if (curr == 1)
 		{
 			fd_close(&fd[1][0]);
 			fd_close(&fd[0][1]);
 		}
-		else // 전 파이프가 1배열에 있음 -> [1][0]은 살리고 [1][1] close
+		else
 		{
 			fd_close(&fd[0][0]);
 			fd_close(&fd[1][1]);

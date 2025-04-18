@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:01:15 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 22:04:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	split_size(char **split)
 
 void	make_env(t_data *minishell, char *env)
 {
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 	char	**new_env;
 
 	i = 0;
@@ -51,10 +51,11 @@ void	make_env(t_data *minishell, char *env)
 	split_free(minishell->env);
 	minishell->env = new_env;
 }
+
 void	remove_minishell_env(t_data *minishell, char *env_name, int len)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	**new_env;
 
 	j = 0;

@@ -90,4 +90,3 @@ void	dup_capsule(int fd, int std, int mode, t_token *start)
 	dup2(fd, std);
 	close(fd);
 }
-

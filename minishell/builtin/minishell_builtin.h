@@ -19,10 +19,9 @@
 # include "../signal/minishell_signal.h"
 # include "../run/minishell_run.h"  
 
-
 /* builtin utils */
 int		ft_str_isdigit(char *str);
-int     echo_flag_check(char *str);
+int		echo_flag_check(char *str);
 int		builtin_type_check(t_token *token);
 void	echo_print(char **cmd, int i, int flag);
 
