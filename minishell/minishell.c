@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 18:49:42 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 22:07:18 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,21 @@ static char	*get_type_string(t_type type)
 
 static void	pharsing_check(t_token *data, char **env)
 {
-	(void)env;
 	t_token	*temp;
-	// int		pid;
-	// char	*cmd[2];
+	int		pid;
+	char	*cmd[2];
 
-	// cmd[0] = "clear";
-	// cmd[1] = NULL;
-	// pid = fork();
-	// if (pid == 0)
-	// {
-	// 	execve("/usr/bin/clear", cmd, env);
-	// 	exit(0);
-	// }
-	// else
-	// {
-		//waitpid(pid, NULL, 0);
+	cmd[0] = "clear";
+	cmd[1] = NULL;
+	pid = fork();
+	if (pid == 0)
+	{
+		execve("/usr/bin/clear", cmd, env);
+		exit(0);
+	}
+	else
+	{
+		waitpid(pid, NULL, 0);
 		temp = data;
 		while (temp)
 		{
@@ -56,7 +55,7 @@ static void	pharsing_check(t_token *data, char **env)
 			temp = temp->next;
 		}
 	}
-//}
+}
 
 int	main(int ac, char **av, char **envp)
 {

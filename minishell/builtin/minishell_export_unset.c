@@ -14,14 +14,14 @@
 
 static char	*get_env_name(char *env)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*env_name;
 
 	i = 0;
 	len = env_len(env);
 	if (env[len] != '=')
-		return (NULL); 
+		return (NULL);
 	env_name = (char *)malloc(sizeof(char) * (len + 2));
 	if (!env_name)
 		return (NULL);
@@ -39,7 +39,7 @@ void	ft_export(t_data *minishell, char **cmd)
 	int		i;
 	int		len;
 	char	*env_name;
-	
+
 	i = -1;
 	io_dup (minishell->token, 0, 1);
 	if (!cmd[1])
@@ -64,8 +64,8 @@ void	ft_export(t_data *minishell, char **cmd)
 
 void	ft_unset(t_data *minishell, char **cmd)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*env_name;
 
 	i = 0;

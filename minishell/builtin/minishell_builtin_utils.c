@@ -25,9 +25,10 @@ void	echo_print(char **cmd, int i, int flag)
 		i++;
 	}
 }
+
 int	builtin_type_check(t_token *token)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = token;
 	while (temp)
@@ -55,9 +56,10 @@ int	echo_flag_check(char *str)
 	else
 		return (0);
 }
+
 int	ft_str_isdigit(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)

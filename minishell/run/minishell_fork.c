@@ -71,7 +71,7 @@ void	solo_fork(t_data *minishell)
 
 static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
 {
-	char **cmd;
+	char	**cmd;
 
 	pipe_dup(fd, i);
 	token_fd_close(start, 2);

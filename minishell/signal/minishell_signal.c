@@ -6,13 +6,13 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/17 18:46:45 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 22:06:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_signal.h"
 
-int	signal_condition;
+int	g_signal_condition;
 
 void	print_signal(int sig)
 {
@@ -25,10 +25,10 @@ void	print_signal(int sig)
 	}
 }
 
-void	here_doc_signal(int sig) // 수정 해야함
+void	here_doc_signal(int sig)
 {
 	(void)sig;
-	signal_condition = 1;
+	g_signal_condition = 1;
 }
 
 void	program_signal(int sig)

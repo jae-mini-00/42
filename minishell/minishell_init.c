@@ -6,13 +6,13 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:06:02 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 22:08:48 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int signal_condition;
+extern int g_signal_condition;
 
 static void	ft_full_path_split(char **path_split)
 {
@@ -57,7 +57,7 @@ void	o_cmd_split_init(t_data *minishell)
 
 	i = 0;
 	minishell->pid = 0;
-	signal_condition = 0;
+	g_signal_condition = 0;
 	minishell->here_doc_count = 0;
 	while (minishell->o_cmd[i] == ' ')
 		i++;

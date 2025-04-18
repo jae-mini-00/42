@@ -68,4 +68,3 @@ void	builtin_check(t_data *minishell)
 	dup2(in, 0);
 	dup2(out, 1);
 }
-
