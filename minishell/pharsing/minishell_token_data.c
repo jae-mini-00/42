@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_token_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/24 15:13:41 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 18:41:16 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	redirection_plus_len(char *str, int str_len)
 	i = -1;
 	flag = 0;
 	quote = 0;
+	if ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>'))
+		flag++;
 	while (str[++i])
 	{
 		if (!quote && (str[i] == '\'' || str[i] == '"'))
@@ -87,12 +89,7 @@ static char	*space_plus_str_copy(char *str, int i, int j, char quote)
 		if ((i > 0 && (str[i] == '|' || (str[i - 1] != '>' && str[i] == '>' && \
 			str[i + 1] != '>') || (str[i - 1] != '<' && str[i] == '<' \
 			&& str[i + 1] != '<')) && !quote))
-		{
 			redirection_copy(new_str, str, &j, &i);
-			//new_str[j++] = ' ';
-			//new_str[j++] = str[i++];
-			//new_str[j++] = ' ';
-		}
 		else
 			new_str[j++] = str[i++];
 	}
@@ -107,6 +104,8 @@ static char	*redirection_space(char *str, int i, int j, char quote)
 	new_str = malloc(sizeof(char) * redirection_plus_len(str, ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
+	if ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>'))
+		redirection_copy2(new_str, str, &j, &i);
 	while (str[i])
 	{
 		if (!quote && (str[i] == '\'' || str[i] == '"'))
@@ -116,12 +115,7 @@ static char	*redirection_space(char *str, int i, int j, char quote)
 		if (i > 0 && ((str[i - 1] != '>' && str[i] == '>' && str[i + 1] == '>') \
 			|| (str[i - 1] != '<' && str[i] == '<' && str[i + 1] == '<')) \
 			&& !quote)
-		{
-			new_str[j++] = ' ';
-			new_str[j++] = str[i++];
-			new_str[j++] = str[i++];
-			new_str[j++] = ' ';
-		}
+			redirection_copy2(new_str, str, &j, &i);
 		else
 			new_str[j++] = str[i++];
 	}
