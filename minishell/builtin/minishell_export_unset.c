@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:38:44 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 21:48:49 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_export(t_data *minishell, char **cmd)
 	int		len;
 	char	*env_name;
 	
-	i = 0;
+	i = -1;
 	io_dup (minishell->token, 0, 1);
 	if (!cmd[1])
 		while (minishell->env[i])
@@ -51,8 +51,9 @@ void	ft_export(t_data *minishell, char **cmd)
 		if (!env_name)
 			return ;
 		len = ft_strlen(env_name);
-		while (ft_strncmp(minishell->env[i], env_name, len) != 0)
-			i++;
+		while (minishell->env[++i])
+			if (ft_strncmp(minishell->env[i], env_name, len) == 0)
+				break ;
 		if (minishell->env[i])
 			change_env(minishell, cmd[1], i);
 		else
