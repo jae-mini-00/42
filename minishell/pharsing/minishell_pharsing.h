@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/17 19:27:21 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 18:37:52 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		env_len(char *str);
 void	token_check(t_data *minishell);
 void	type_trance(t_token *token, t_data *minishell, int flag);
 void	redirection_copy(char *new_str, char *str, int *j, int *i);
+void	redirection_copy2(char *new_str, char *str, int *j, int *i);
 
 /* minishell remove utils */
 int check_quite(char *value);

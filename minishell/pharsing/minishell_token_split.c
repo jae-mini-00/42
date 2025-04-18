@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_token_split.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:07:25 by jaejo             #+#    #+#             */
-/*   Updated: 2025/03/18 18:33:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 19:02:15 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_count(char const *s, int count, char quote)
 	{
 		while (*s == ' ')
 			s++;
-		if (*s != ' ')
+		if (*s && *s != ' ')
 		{
 			while (*s && *s != ' ')
 			{

@@ -6,22 +6,11 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 00:31:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 18:13:42 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_run.h"
-
-// static char	*fd_name(int count)
-// {
-// 	char	*name;
-// 	char	*idx;
-
-// 	idx = ft_itoa(count);
-// 	name = ft_strjoin("temp", idx);
-// 	free(idx);
-// 	return (name);
-// }
 
 static void	here_doc_trance(t_token *token, int fd)
 {
