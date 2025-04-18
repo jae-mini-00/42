@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 18:38:13 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/18 21:13:52 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	redirection_copy2(char *new_str, char *str, int *j, int *i)
 	*i = idx;
 	*j = j_idx;
 }
+
 void	token_check(t_data *minishell)
 {
 	t_token	*temp;
