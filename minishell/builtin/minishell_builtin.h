@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:39:48 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:57:47 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		builtin_type_check(t_token *token);
 void	echo_print(char **cmd, int i, int flag);
 
 /* builtin check */
-void	builtin_check(t_data *minishell);
 int		pipe_builtin_check(char *cmd);
+void	builtin_check(t_data *minishell);
 void	pipe_builtin_run(t_data *minishell, char **pipe_cmd);
 
 /* builtin */

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/16 18:11:21 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 20:34:02 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	split_free(char **split)
 	while (split[i])
 	{
 		free(split[i]);
+		split[i] = NULL;
 		i++;
 	}
 	free(split);
@@ -36,7 +37,13 @@ void	token_free(t_token *data)
 	while (data)
 	{
 		temp = data;
-		free(data->value);
+		if (data->value)
+		{
+			free(data->value);
+			data->value = NULL;
+		}
+		if (data->fd != -1)
+			close(data->fd);
 		data = data->next;
 		free(temp);
 	}
