@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_pharsing.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:09:50 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:58:23 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include "../free/minishell_free.h"
 
 /* token init */
-t_token	*token_init(char *str);
 int		type_init(char **str, t_data *minishell);
 int		type_init2(char **str, t_data *minishell);
+t_token	*token_init(char *str);
 
 /* minishell token data */
 char	**minishell_token_data(char *str);

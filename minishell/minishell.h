@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/15 23:12:34 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:59:09 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,5 @@
 void	minishell_init(t_data *minishell, char **envp, char *av);
 void	o_cmd_split_init(t_data *minishell);
 
-// /* check */
-// void	builtin_check(t_data *minishell);
-// int		echo_flag_check(char *str);
 
 #endif

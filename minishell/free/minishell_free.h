@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_free.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:05:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:58:00 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ extern int	g_signal_condition;
 
 /* free */
 void	split_free(char **split);
-void	minishell_free(t_data *minishell);
 void	token_free(t_token *data);
+void	minishell_free(t_data *minishell);
 void	exit_free(t_data *minishell, int num);
 
 #endif
