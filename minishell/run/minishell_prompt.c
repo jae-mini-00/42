@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_prompt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/17 19:35:58 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 22:01:06 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,50 @@ static char	*prompt_getcwd(void)
 	return (cwd);
 }
 
+static	char	*color_prompt(char *str, int mode, char *temp1)
+{
+	const char	*b_start = "\001\033[1;34m\002";
+	const char	*b_end = "\001\033[0m\002 "; 
+	const char	*g_start = "\001\033[1;32m\002";
+	const char	*g_end = "\001\033[0m\002 ";
+	char	*temp2;
+
+	if (mode == 1)
+	{
+		temp1 = ft_strjoin(g_start, str);
+		temp2 = ft_strjoin(temp1, g_end);
+		free(temp1);
+		return (temp2);
+	}
+	else
+	{
+		temp1 = ft_strjoin(b_start, str);
+		temp2 = ft_strjoin(temp1, b_end);
+		free(temp1);
+		return (temp2);
+	}
+}
+
 char	*make_prompt(char *av, char **envp)
 {
 	char	*user;
 	char	*seet;
 	char	*temp;
 	char	*prompt;
+	char	*temp1;
 
+	temp1 = NULL;
 	if (av)
 		user = make_user(av, envp);
 	else
 		user = make_user("jaejo", envp);
 	temp = prompt_getcwd();
+	prompt = user;
+	user = color_prompt(user, 1, temp1);
+	free(prompt);
+	prompt = temp;
+	temp = color_prompt(temp, 0, temp1);
+	free(prompt);
 	seet = ft_strjoin(temp, "$ ");
 	prompt = ft_strjoin(user, seet);
 	free(user);
