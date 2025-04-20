@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fork.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 18:22:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/20 15:53:16 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 	int	status;
 
 	status = 0;
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, SIG_DFL); // 수정 해야함
 	status = io_dup (start, 0, 1, status);
 	if (!status)
 	{

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 22:01:06 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/19 22:03:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static	char	*color_prompt(char *str, int mode, char *temp1)
 	const char	*b_end = "\001\033[0m\002 "; 
 	const char	*g_start = "\001\033[1;32m\002";
 	const char	*g_end = "\001\033[0m\002 ";
-	char	*temp2;
+	char		*temp2;
 
 	if (mode == 1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_here_doc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:06:17 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/20 15:53:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	minishell_here_doc(t_token *token)
 	}
 }
 
-void	minishell_here_doc_check(t_data *minishell)
+void	minishell_here_doc_check(t_data *minishell) // sig처리 해야함
 {
 	t_token	*now;
 
