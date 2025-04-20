@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_signal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:06:37 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/20 15:46:20 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,20 @@ void	here_doc_signal(int sig)
 {
 	(void)sig;
 	g_signal_condition = 1;
+	signal (SIGINT, print_signal);
+	signal(SIGQUIT, SIG_IGN);
 }
 
-void	program_signal(int sig)
+void	program_start(void)
 {
-	(void)sig;
-	printf("\n");
+	signal (SIGINT, print_signal);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	program_return(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	ctrl_d(t_data *minishell)

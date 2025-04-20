@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 21:37:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/20 15:41:31 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac > 3)
 		return (0);
 	minishell_init(&minishell, envp, av[2]);
-	signal (SIGINT, print_signal);
-	signal(SIGQUIT, SIG_IGN);
+	program_start();
 	while (1)
 	{
 		minishell.prompt = make_prompt(av[1], envp);
