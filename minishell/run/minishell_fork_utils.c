@@ -85,6 +85,7 @@ void	dup_capsule(int std, int mode, t_token *start, int *status)
 {
 	int	fd;
 
+	fd = -1;
 	if (mode == 1)
 		fd = open(start->next->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (mode == 2)
@@ -104,6 +105,9 @@ void	dup_capsule(int std, int mode, t_token *start, int *status)
 		fd = start->next->fd;
 		start->next->fd = -1;
 	}
-	dup2(fd, std);
-	close(fd);
+	if (fd != -1)
+	{
+		dup2(fd, std);
+		close(fd);
+	}
 }

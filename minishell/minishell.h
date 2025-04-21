@@ -23,5 +23,4 @@
 void	minishell_init(t_data *minishell, char **envp, char *av);
 void	o_cmd_split_init(t_data *minishell);
 
-
 #endif

@@ -32,15 +32,16 @@ static int	check_pipe(t_token *data)
 
 static int	syntax_err_check(t_token *data)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = data;
 	while (token)
 	{
 		if (token->type == REDIRECTION || token->type == HERE_DOC)
 		{
-			if (!token->next || (token->next && (token->next->type == REDIRECTION || \
-				token->next->type == HERE_DOC || token->next->type == PIPE)))
+			if (!token->next || \
+				(token->next && (token->next->type == REDIRECTION \
+				|| token->next->type == HERE_DOC || token->next->type == PIPE)))
 			{
 				printf("syntax error near unexpected token newline\n");
 				return (false);
@@ -75,7 +76,7 @@ void	minishell_run(t_data *minishell)
 		token_fd_close(minishell->token, 1);
 		if (minishell->pid != 0)
 			waitpid(minishell->pid, &status, 0);
-		minishell->exit_code = (status >> 8) & 0xFF;;
+		minishell->exit_code = (status >> 8) & 0xFF;
 	}
 	else
 		minishell->exit_code = 2;

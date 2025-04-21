@@ -82,7 +82,7 @@ static char	*prompt_getcwd(void)
 static	char	*color_prompt(char *str, int mode, char *temp1)
 {
 	const char	*b_start = "\001\033[1;34m\002";
-	const char	*b_end = "\001\033[0m\002 "; 
+	const char	*b_end = "\001\033[0m\002 ";
 	const char	*g_start = "\001\033[1;32m\002";
 	const char	*g_end = "\001\033[0m\002 ";
 	char		*temp2;
