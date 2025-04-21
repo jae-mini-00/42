@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/20 15:53:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 01:56:26 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	io_dup(t_token *start, int std_in, int std_out, int status)
 				if (start->next->fd == -1)
 					dup_capsule(std_in, 3, start, &status);
 				else
+				{
 					dup_capsule(std_in, -1, start, &status);
+					start->next->fd = -1;
+				}
 			}
 			else if (ft_strncmp(start->value, ">>", 3) == 0)
 				dup_capsule(std_out, 2, start, &status);
@@ -40,7 +43,8 @@ static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 	int	status;
 
 	status = 0;
-	signal(SIGINT, SIG_DFL); // 수정 해야함
+	// signal(SIGINT, SIG_DFL);
+	program_return();
 	status = io_dup (start, 0, 1, status);
 	if (!status)
 	{

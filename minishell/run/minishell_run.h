@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 19:58:57 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 02:28:19 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	minishell_run(t_data *minishell);
 char	*make_prompt(char *av, char **envp);
 
 /* here_doc */
-void	minishell_here_doc_check(t_data *minishell);
+void	minishell_here_doc_check(t_data *minishellm, int *status);
 
 /* pipe */
 int		**fd_init(void);

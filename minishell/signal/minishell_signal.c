@@ -6,31 +6,26 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/20 15:46:20 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 02:52:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_signal.h"
 
-int	g_signal_condition;
-
 void	print_signal(int sig)
 {
 	(void)sig;
-	printf("\n");
-	if (rl_on_new_line() == 0)
-	{
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-void	here_doc_signal(int sig)
+void sigint_handler(int sig)
 {
 	(void)sig;
-	g_signal_condition = 1;
-	signal (SIGINT, print_signal);
-	signal(SIGQUIT, SIG_IGN);
+	close(0);
+	write(1, "\n", 1);
 }
 
 void	program_start(void)

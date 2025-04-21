@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 19:58:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/21 19:42:20 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_data
 	char	**path;
 	t_token	*token;
 }	t_data;
-
-extern int	g_signal_condition;
 
 /* free */
 void	split_free(char **split);
