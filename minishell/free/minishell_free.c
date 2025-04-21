@@ -6,11 +6,19 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 20:34:02 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 02:57:36 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_free.h"
+
+void	here_doc_free(int fd, int infd, char *temp, char *end)
+{
+	free(temp);
+	free(end);
+	close(fd);
+	close(infd);
+}
 
 void	split_free(char **split)
 {

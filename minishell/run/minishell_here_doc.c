@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:53:44 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 02:58:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,9 @@ static void	minishell_here_doc(t_token *token, int *status)
 		if (*status == 1 || ft_strncmp(temp, end, len) == 0)
 		{
 			get_next_line(1023);
-			free(temp);
-			free(end);
+			here_doc_free(fd[1], infd, temp, end);
 			if (*status != 1)
 				here_doc_trance(token, fd[0]);
-			close(fd[1]);
-			close(infd);
 			return ;
 		}
 		write(fd[1], temp, ft_strlen(temp));
