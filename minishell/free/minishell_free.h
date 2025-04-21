@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/21 19:42:20 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 02:58:29 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	split_free(char **split);
 void	token_free(t_token *data);
 void	minishell_free(t_data *minishell);
 void	exit_free(t_data *minishell, int num);
+void	here_doc_free(int fd, int infd, char *temp, char *end);
 
 #endif
