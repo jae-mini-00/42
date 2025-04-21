@@ -100,7 +100,8 @@ static char	*redirection_space(char *str, int i, int j, char quote)
 {
 	char	*new_str;
 
-	new_str = ft_calloc(sizeof(char), redirection_plus_len(str, ft_strlen(str)));
+	new_str = ft_calloc(sizeof(char), \
+		redirection_plus_len(str, ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
 	if ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>'))

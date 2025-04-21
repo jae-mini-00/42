@@ -36,6 +36,8 @@ static char	**path_init(char **envp)
 	char	**path_split;
 
 	i = 0;
+	path = NULL;
+	path_split = NULL;
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
