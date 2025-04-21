@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fork_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 18:23:21 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/21 17:39:08 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,7 @@ void	dup_capsule(int std, int mode, t_token *start, int *status)
 		}
 	}
 	else if (mode == -1)
-	{
 		fd = start->next->fd;
-		start->next->fd = -1;
-	}
 	if (fd != -1)
 	{
 		dup2(fd, std);
