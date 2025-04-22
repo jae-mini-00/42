@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 19:48:36 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:31:30 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 	if (!status)
 	{
 		execve(cmd[0], cmd, minishell->env);
-		printf ("%s: command not found\n", cmd[0]);
 		write (2, cmd[0], ft_strlen(cmd[0]));
 		write (2, ": command not found\n", 21);
 		split_free(cmd);
