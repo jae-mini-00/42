@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_export_unset.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:48:49 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:45:56 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,31 @@ static char	*get_env_name(char *env)
 	return (env_name);
 }
 
-void	ft_export(t_data *minishell, char **cmd)
+static void	export_printf(char **env, char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (!cmd)
+	{
+		while (env[i])
+			printf("declare -x %s\n", env[i++]);
+	}
+}
+
+void	ft_export(t_data *minishell, char **cmd, t_token *start)
 {
 	int		i;
 	int		len;
 	char	*env_name;
 
 	i = -1;
-	io_dup (minishell->token, 0, 1, 0);
-	if (!cmd[1])
-		while (minishell->env[i])
-			printf("declare -x %s\n", minishell->env[i++]);
+	if (!start)
+		io_dup (minishell->token, 0, 1, 0);
 	else
+		io_dup (start, 0, 1, 0);
+	export_printf(minishell->env, cmd[1]);
+	if (cmd[1])
 	{
 		env_name = get_env_name(cmd[1]);
 		if (!env_name)
@@ -54,7 +67,7 @@ void	ft_export(t_data *minishell, char **cmd)
 		while (minishell->env[++i])
 			if (ft_strncmp(minishell->env[i], env_name, len) == 0)
 				break ;
-		if (minishell->env[i])
+		if (!minishell->env[i])
 			change_env(minishell, cmd[1], i);
 		else
 			make_env(minishell, cmd[1]);
@@ -62,14 +75,17 @@ void	ft_export(t_data *minishell, char **cmd)
 	}
 }
 
-void	ft_unset(t_data *minishell, char **cmd)
+void	ft_unset(t_data *minishell, char **cmd, t_token *start)
 {
 	int		i;
 	int		len;
 	char	*env_name;
 
 	i = 0;
-	io_dup (minishell->token, 0, 1, 0);
+	if (!start)
+		io_dup (minishell->token, 0, 1, 0);
+	else
+		io_dup (start, 0, 1, 0);
 	if (!cmd[1])
 		return ;
 	env_name = ft_strjoin(cmd[1], "=");

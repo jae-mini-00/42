@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/21 17:39:08 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:38:08 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	dup_capsule(int std, int mode, t_token *start, int *status)
 		fd = open(start->next->value, O_RDONLY, 0644);
 		if (fd == -1)
 		{
-			printf("%s : NO such file or directory\n", start->next->value);
+			write(2, start->next->value, ft_strlen(start->next->value));
+			write(2, " : NO such file or directory\n", 29);
 			*status = 1;
 			return ;
 		}

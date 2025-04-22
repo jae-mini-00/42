@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin_check.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 21:37:49 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:20:04 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-static void	builtin_check3(t_data *minishell, char **cmd)
+static void	builtin_check3(t_data *minishell, char **cmd, t_token *start)
 {
 	if (!ft_strncmp(cmd[0], "export", 7))
-		ft_export(minishell, cmd);
+		ft_export(minishell, cmd, start);
 	else if (!ft_strncmp(cmd[0], "unset", 6))
-		ft_unset(minishell, cmd);
+		ft_unset(minishell, cmd, start);
 }
 
-static void	builtin_check2(t_data *minishell, char **cmd)
+static void	builtin_check2(t_data *minishell, char **cmd, t_token *start)
 {
 	int	i;
 
@@ -44,9 +44,9 @@ static void	builtin_check2(t_data *minishell, char **cmd)
 		exit_free(minishell, -1);
 	}
 	else if (!ft_strncmp(cmd[0], "cd", 3))
-		ft_cd(minishell, cmd);
+		ft_cd(minishell, cmd, start);
 	else
-		builtin_check3(minishell, cmd);
+		builtin_check3(minishell, cmd, start);
 }
 
 void	builtin_check(t_data *minishell)
@@ -57,13 +57,13 @@ void	builtin_check(t_data *minishell)
 
 	cmd = make_execve_cmd(minishell->token);
 	if (!ft_strncmp(cmd[0], "env", 4) && !cmd[1])
-		ft_env(minishell, cmd);
+		ft_env(minishell, cmd, NULL);
 	else if (!ft_strncmp(cmd[0], "echo", 5))
-		ft_echo(minishell, cmd);
+		ft_echo(minishell, cmd, NULL);
 	else if (!ft_strncmp(cmd[0], "pwd", 4))
-		ft_pwd(minishell, cmd);
+		ft_pwd(minishell, cmd, NULL);
 	else
-		builtin_check2(minishell, cmd);
+		builtin_check2(minishell, cmd, NULL);
 	split_free(cmd);
 	dup2(in, 0);
 	dup2(out, 1);
@@ -88,14 +88,14 @@ int	pipe_builtin_check(char *cmd)
 	return (false);
 }
 
-void	pipe_builtin_run(t_data *minishell, char **pipe_cmd)
+void	pipe_builtin_run(t_data *minishell, char **pipe_cmd, t_token *start)
 {
 	if (!ft_strncmp(pipe_cmd[0], "env", 4) && !pipe_cmd[1])
-		ft_env(minishell, pipe_cmd);
+		ft_env(minishell, pipe_cmd, start);
 	else if (!ft_strncmp(pipe_cmd[0], "echo", 5))
-		ft_echo(minishell, pipe_cmd);
+		ft_echo(minishell, pipe_cmd, start);
 	else if (!ft_strncmp(pipe_cmd[0], "pwd", 4))
-		ft_pwd(minishell, pipe_cmd);
+		ft_pwd(minishell, pipe_cmd, start);
 	else
-		builtin_check2(minishell, pipe_cmd);
+		builtin_check2(minishell, pipe_cmd, start);
 }
