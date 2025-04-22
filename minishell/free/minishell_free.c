@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:57:36 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:07:30 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	exit_free(t_data *minishell, int num)
 	minishell->path = NULL;
 	minishell->token = NULL;
 	minishell->env = NULL;
+	rl_clear_history();
 	if (num)
 	{
 		if (num == -1)
