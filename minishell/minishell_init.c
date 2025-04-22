@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 01:30:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:04:29 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**path_init(char **envp)
 
 void	o_cmd_split_init(t_data *minishell)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	minishell->pid = 0;
@@ -64,7 +64,6 @@ void	o_cmd_split_init(t_data *minishell)
 		return ;
 	split_free(minishell->path);
 	minishell->path = path_init(minishell->env);
-	// minishell_variable_expansion(minishell->token, minishell);
 	minishell->token = token_init(minishell->o_cmd);
 	minishell_variable_expansion(minishell->token, minishell);
 	type_trance(minishell->token, minishell, 0);
