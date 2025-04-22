@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:26:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:06:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,4 @@ int	main(int ac, char **av, char **envp)
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);
 	}
-	split_free(minishell.env);
-	rl_clear_history();
 }
