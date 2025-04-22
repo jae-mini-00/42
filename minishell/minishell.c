@@ -78,4 +78,5 @@ int	main(int ac, char **av, char **envp)
 		add_history(minishell.o_cmd);
 		minishell_free(&minishell);
 	}
+	rl_clear_history();
 }

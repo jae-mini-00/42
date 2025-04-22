@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 18:17:22 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 20:30:41 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	ft_cd(t_data *minishell, char **cmd, t_token *start)
 		if (chdir(cmd[1]) == 0)
 			return ;
 		else if (access(cmd[1], F_OK) == -1)
-			printf("cd: %s: No such file or directory\n", cmd[1]);
+			write (2, "cd: No such file or directory\n", 30);
 		else
-			printf("cd: %s: Permission denied\n", cmd[1]);
+			write(2, "cd: Permission denied\n", 22);
 	}
 	else if (!cmd[1])
 	{
@@ -75,7 +75,7 @@ void	ft_cd(t_data *minishell, char **cmd, t_token *start)
 			return ;
 	}
 	else
-		printf("cd: too many arguments\n");
+		write (2, "cd: too many arguments\n", 23);
 	return ;
 }
 
@@ -94,9 +94,9 @@ void	ft_pwd(t_data *minishell, char **cmd, t_token *start)
 	if (i > 1)
 	{
 		if (cmd[1][0] != '-')
-			printf("pwd: too many arguments\n");
+			write (2, "pwd: too many arguments\n", 25);
 		else
-			printf("pwd: %s: invalid option\n", cmd[1]);
+			write (2, "pwd: invalid option\n", 20);
 		return ;
 	}
 	now = getcwd(NULL, 0);
