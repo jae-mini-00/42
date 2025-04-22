@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:58:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:25:22 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	minishell_here_doc(t_token *token, int *status)
 	char		*end;
 	int			fd[2];
 	const int	len = ft_strlen(token->next->value) + 1;
-	const int	infd = dup(0); 
+	const int	infd = dup(0);
 
 	end = ft_strjoin(token->next->value, "\n");
 	pipe(fd);

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:44:54 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:39:23 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	syntax_err_check(t_token *data)
 				(token->next && (token->next->type == REDIRECTION \
 				|| token->next->type == HERE_DOC || token->next->type == PIPE)))
 			{
-				printf("syntax error near unexpected token newline\n");
+				write (2, "syntax error near unexpected token newline\n", 44);
 				return (false);
 			}
 		}
@@ -51,7 +51,7 @@ static int	syntax_err_check(t_token *data)
 	}
 	if (check_pipe(data) == -1)
 	{
-		printf("syntax error near unexpected token newline\n");
+		write (2, "syntax error near unexpected token newline\n", 44);
 		return (false);
 	}
 	return (true);

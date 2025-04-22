@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 01:56:26 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:37:55 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 	int	status;
 
 	status = 0;
-	// signal(SIGINT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 	program_return();
 	status = io_dup (start, 0, 1, status);
 	if (!status)
 	{
 		execve(cmd[0], cmd, minishell->env);
 		printf ("%s: command not found\n", cmd[0]);
+		write (2, cmd[0], ft_strlen(cmd[0]));
+		write (2, ": command not found\n", 21);
 		split_free(cmd);
 		exit_free(minishell, 127);
 	}
@@ -93,7 +95,7 @@ static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
 	}
 	else if (pipe_builtin_check(cmd[0]))
 	{
-		pipe_builtin_run(minishell, cmd);
+		pipe_builtin_run(minishell, cmd, start);
 		split_free(cmd);
 		exit_free(minishell, -1);
 	}

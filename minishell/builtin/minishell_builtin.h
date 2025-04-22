@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 19:57:47 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:13:32 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	echo_print(char **cmd, int i, int flag);
 /* builtin check */
 int		pipe_builtin_check(char *cmd);
 void	builtin_check(t_data *minishell);
-void	pipe_builtin_run(t_data *minishell, char **pipe_cmd);
+void	pipe_builtin_run(t_data *minishell, char **pipe_cmd, t_token *start);
 
 /* builtin */
-void	ft_cd(t_data *minishell, char **cmd);
-void	ft_pwd(t_data *minishell, char **cmd);
-void	ft_env(t_data *minishell, char **cmd);
-void	ft_echo(t_data *minishell, char **cmd);
+void	ft_cd(t_data *minishell, char **cmd, t_token *start);
+void	ft_pwd(t_data *minishell, char **cmd, t_token *start);
+void	ft_env(t_data *minishell, char **cmd, t_token *start);
+void	ft_echo(t_data *minishell, char **cmd, t_token *start);
 
 /* export unset */
-void	ft_unset(t_data *minishell, char **cmd);
-void	ft_export(t_data *minishell, char **cmd);
+void	ft_unset(t_data *minishell, char **cmd, t_token *start);
+void	ft_export(t_data *minishell, char **cmd, t_token *start);
 
 /* export unset utils */
 void	make_env(t_data *minishell, char *env);
