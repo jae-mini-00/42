@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 19:22:27 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 22:14:00 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	program_start(void)
 void	program_return(void)
 {
 	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, 0);
 }
 
 void	ctrl_d(t_data *minishell)
@@ -46,6 +46,6 @@ void	ctrl_d(t_data *minishell)
 	{
 		exit_free(minishell, 0);
 		printf("exit\n");
-		exit (0);
+		exit (minishell->exit_code);
 	}
 }

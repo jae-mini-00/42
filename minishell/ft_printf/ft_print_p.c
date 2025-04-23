@@ -31,6 +31,7 @@ static char	*ft_nil(unsigned long long temp)
 {
 	char	*nbr;
 
+	nbr = NULL;
 	if (temp == 0)
 	{
 		nbr = (char *)malloc (sizeof(char) * 6);

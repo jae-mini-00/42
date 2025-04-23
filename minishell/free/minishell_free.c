@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 20:07:30 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 20:30:27 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	exit_free(t_data *minishell, int num)
 	{
 		if (num == -1)
 			exit (0);
-		exit(num);
+		else if (num == 127)
+			exit (127);
+		exit(minishell->exit_code);
 	}
 }

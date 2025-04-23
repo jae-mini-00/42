@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/19 20:28:10 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 22:44:46 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	type_init2(char **str, t_data *minishell)
 	char	*temp;
 
 	i = 0;
+	if (!minishell->path)
+		return (0);
 	if (access(str[0], X_OK) == 0)
 		return (2);
 	else if (str[0][0] == '.' || str[0][0] == '/' || str[0][0] == '~')
