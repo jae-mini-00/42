@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 20:31:30 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 20:27:27 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	solo_fork(t_data *minishell)
 		{
 			io_dup (minishell->token, 0, 1, 0);
 			split_free(cmd);
-			exit_free(minishell, -1);
+			exit_free(minishell, 127);
 		}
 		ft_execve(minishell, cmd, minishell->token);
 	}

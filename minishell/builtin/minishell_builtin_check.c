@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 18:20:04 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 21:00:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	builtin_check2(t_data *minishell, char **cmd, t_token *start)
 			}
 		}
 		split_free(cmd);
-		exit_free(minishell, -1);
+		exit_free(minishell, minishell->exit_code);
 	}
 	else if (!ft_strncmp(cmd[0], "cd", 3))
 		ft_cd(minishell, cmd, start);

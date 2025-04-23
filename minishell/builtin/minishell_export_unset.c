@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 20:30:27 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/23 18:49:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_export(t_data *minishell, char **cmd, t_token *start)
 		while (minishell->env[++i])
 			if (ft_strncmp(minishell->env[i], env_name, len) == 0)
 				break ;
-		if (!minishell->env[i])
+		if (minishell->env[i])
 			change_env(minishell, cmd[1], i);
 		else
 			make_env(minishell, cmd[1]);
