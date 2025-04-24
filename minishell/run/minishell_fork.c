@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/23 20:27:27 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:35:26 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	ft_execve(t_data *minishell, char **cmd, t_token *start)
 	int	status;
 
 	status = 0;
-	signal(SIGINT, SIG_DFL);
-	program_return();
 	status = io_dup (start, 0, 1, status);
 	if (!status)
 	{
@@ -66,6 +64,7 @@ void	solo_fork(t_data *minishell)
 	char	**cmd;
 
 	cmd = NULL;
+	child_start();
 	minishell->pid = fork();
 	if (minishell->pid == 0)
 	{
@@ -78,6 +77,8 @@ void	solo_fork(t_data *minishell)
 		}
 		ft_execve(minishell, cmd, minishell->token);
 	}
+	signal (SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
@@ -109,6 +110,7 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 	int		**fd;
 
 	fd = fd_init();
+	child_start();
 	start = minishell->token;
 	while (start)
 	{
@@ -121,4 +123,6 @@ void	multi_fork(t_data *minishell, int cmd_size, int i)
 		i++;
 	}
 	all_fd_close(fd);
+	signal (SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }

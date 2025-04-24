@@ -6,29 +6,29 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 19:25:22 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:51:48 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_run.h"
 
-static void	terminal_state(int store_flag)
-{
-	static struct termios	old;
-	static struct termios	new;
+// static void	terminal_state(int store_flag)
+// {
+// 	static struct termios	old;
+// 	static struct termios	new;
 
-	if (store_flag)
-	{
-		tcgetattr(STDIN_FILENO, &old);
-		ft_memcpy(&new, &old, sizeof(struct termios));
-		new.c_lflag &= ~ICANON;
-		new.c_cc[VMIN] = 1;
-		new.c_cc[VTIME] = 0;
-		tcsetattr(STDIN_FILENO, TCSANOW, &new);
-	}
-	else
-		tcsetattr(STDIN_FILENO, TCSANOW, &old);
-}
+// 	if (store_flag)
+// 	{
+// 		tcgetattr(STDIN_FILENO, &old);
+// 		ft_memcpy(&new, &old, sizeof(struct termios));
+// 		new.c_lflag &= ~ICANON;
+// 		new.c_cc[VMIN] = 1;
+// 		new.c_cc[VTIME] = 0;
+// 		tcsetattr(STDIN_FILENO, TCSANOW, &new);
+// 	}
+// 	else
+// 		tcsetattr(STDIN_FILENO, TCSANOW, &old);
+// }
 
 static void	ctrl_c(int fd, int pipe[2], int *status)
 {
@@ -81,7 +81,6 @@ void	minishell_here_doc_check(t_data *minishell, int *status)
 	t_token	*now;
 
 	now = minishell->token;
-	terminal_state(1);
 	signal (SIGINT, sigint_handler);
 	while (now && !*status)
 	{
@@ -95,6 +94,5 @@ void	minishell_here_doc_check(t_data *minishell, int *status)
 		else
 			now = now->next;
 	}
-	terminal_state(0);
 	signal (SIGINT, print_signal);
 }

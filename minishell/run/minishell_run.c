@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/23 20:55:59 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:43:46 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ static int	syntax_err_check(t_token *data)
 
 static int	ft_exit_code(int status)
 {
+	if (status == 131)
+		write (1, "Quit (core dumped)\n", 20);
+	else if (status == 2)
+		write(1, "\n", 1);
 	if (WIFEXITED(status))
 		return ((status >> 8) & 0xFF);
 	else
-		return (status + 128);
+		return (WTERMSIG(status) + 128);
 }
 
 void	minishell_run(t_data *minishell)
@@ -86,6 +90,7 @@ void	minishell_run(t_data *minishell)
 			token_fd_close(minishell->token, 1);
 			if (minishell->pid != 0)
 				waitpid(minishell->pid, &status, 0);
+			program_start();
 			minishell->exit_code = ft_exit_code(status);
 		}
 	}
