@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 20:30:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 21:30:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_pid_free(t_data *minishell, int *status, int mode)
 	int	i;
 
 	i = 0;
+	if (!minishell->pid)
+		return ;
 	while (minishell->pid[i] != -2 && mode == 1)
 	{
 		waitpid(minishell->pid[i], status, 0);
