@@ -6,29 +6,11 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 18:59:14 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 23:19:38 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_run.h"
-
-// static void	terminal_state(int store_flag)
-// {
-// 	static struct termios	old;
-// 	static struct termios	new;
-
-// 	if (store_flag)
-// 	{
-// 		tcgetattr(STDIN_FILENO, &old);
-// 		ft_memcpy(&new, &old, sizeof(struct termios));
-// 		new.c_lflag &= ~ICANON;
-// 		new.c_cc[VMIN] = 1;
-// 		new.c_cc[VTIME] = 0;
-// 		tcsetattr(STDIN_FILENO, TCSANOW, &new);
-// 	}
-// 	else
-// 		tcsetattr(STDIN_FILENO, TCSANOW, &old);
-// }
 
 static void	ctrl_c(int fd, int pipe[2], int *status)
 {
