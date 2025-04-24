@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/23 21:00:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 18:01:36 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	builtin_check3(t_data *minishell, char **cmd, t_token *start)
 
 static void	builtin_check2(t_data *minishell, char **cmd, t_token *start)
 {
-	int	i;
-
 	if (!ft_strncmp(cmd[0], "exit", 5))
 	{
 		printf("exit\n");
@@ -32,14 +30,7 @@ static void	builtin_check2(t_data *minishell, char **cmd, t_token *start)
 		else if (cmd[1] && !ft_str_isdigit(cmd[1]) && !cmd[2])
 			printf("exit: Argument '%s' is not a valid integer\n", cmd[1]);
 		if (cmd[1] && ft_str_isdigit(cmd[1]))
-		{
-			i = ft_atoi(cmd[1]);
-			if (i != 0)
-			{
-				split_free(cmd);
-				exit_free(minishell, i);
-			}
-		}
+			minishell->exit_code = ft_atoi(cmd[1]);
 		split_free(cmd);
 		exit_free(minishell, minishell->exit_code);
 	}
@@ -67,6 +58,8 @@ void	builtin_check(t_data *minishell)
 	split_free(cmd);
 	dup2(in, 0);
 	dup2(out, 1);
+	close(in);
+	close(out);
 }
 
 int	pipe_builtin_check(char *cmd)
