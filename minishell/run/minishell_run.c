@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 18:43:46 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 20:30:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ void	minishell_run(t_data *minishell)
 			else
 				solo_fork(minishell);
 			token_fd_close(minishell->token, 1);
-			if (minishell->pid != 0)
-				waitpid(minishell->pid, &status, 0);
+			ft_pid_free(minishell, &status, 1);
 			program_start();
 			minishell->exit_code = ft_exit_code(status);
 		}

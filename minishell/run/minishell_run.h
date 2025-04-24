@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 02:28:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 20:30:11 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ int		**fd_init(void);
 void	all_fd_close(int **fd);
 void	pipe_dup(int **fd, int i);
 void	pipe_open_close(int **fd, int i, int cmd_size);
+
+/* pid */
+void	ft_malloc_pid(t_data *minishell, int size);
+void	ft_pid_free(t_data *minishell, int *status, int mode);
 
 #endif
