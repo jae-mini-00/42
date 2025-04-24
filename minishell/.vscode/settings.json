@@ -3,6 +3,7 @@
         "minishell_signal.h": "c",
         "minishell_builtin.h": "c",
         "minishell_run.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "type_traits": "c"
     }
 }

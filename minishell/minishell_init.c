@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/23 22:45:49 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 19:06:55 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	o_cmd_split_init(t_data *minishell)
 	char	*temp;
 
 	i = 0;
-	minishell->pid = 0;
+	minishell->pid = NULL;
 	minishell->here_doc_count = 0;
 	temp = tab_trance_space(minishell->o_cmd);
 	while (temp[i] == ' ')

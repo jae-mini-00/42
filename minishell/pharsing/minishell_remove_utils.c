@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:22:31 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 19:47:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 20:24:58 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,32 +80,4 @@ void	remove_quite(t_token *token)
 			token = token->next;
 		}
 	}
-}
-
-void	remove_token(t_data *minishell, t_token *data)
-{
-	t_token	*now;
-	t_token	*prev;
-
-	if (!minishell || !minishell->token || !data)
-		return ;
-	now = minishell->token;
-	prev = NULL;
-	if (now == data)
-	{
-		minishell->token = now->next;
-		free(now->value);
-		free(now);
-		return ;
-	}
-	while (now && now != data)
-	{
-		prev = now;
-		now = now->next;
-	}
-	if (!now)
-		return ;
-	prev->next = now->next;
-	free(now->value);
-	free(now);
 }

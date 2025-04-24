@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 20:07:31 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 20:18:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,22 @@ void	token_check(t_data *minishell)
 	t_token	*next_token;
 
 	while (minishell->token && \
-		(minishell->token->type == REMOVE || !minishell->token->value[0]))
+		(minishell->token->type == REMOVE))
 	{
 		temp = minishell->token;
 		minishell->token = temp->next;
-		remove_token(minishell, temp);
+		free(temp->value);
+		free(temp);
 	}
 	temp = minishell->token;
 	while (temp && temp->next)
 	{
 		next_token = temp->next;
-		if (next_token->type == REMOVE || !next_token->value[0])
+		if (next_token->type == REMOVE)
 		{
 			temp->next = next_token->next;
-			remove_token(minishell, next_token);
+			free(next_token->value);
+			free(next_token);
 		}
 		else
 			temp = temp->next;
