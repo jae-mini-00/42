@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 20:28:55 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 21:44:13 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ static void	minishell_printf(void)
 	printf("[1;36m|_|        \033[1;34m \\____/\033");
 	printf("[1;35m |_| |_|\033[0;35m \\___|\033[0;35m|_||_|\033[0m\n");
 	printf("\n\n\n\n\n\n\n\n\n");
+}
+
+static void	ctrl_d(t_data *minishell)
+{
+	if (!minishell->o_cmd)
+	{
+		exit_free(minishell, 0);
+		printf("exit\n");
+		exit (minishell->exit_code);
+	}
 }
 
 int	main(int ac, char **av, char **envp)

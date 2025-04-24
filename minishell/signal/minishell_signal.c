@@ -6,11 +6,19 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 18:38:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/24 21:47:23 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_signal.h"
+
+int	ctrl_c(int signal)
+{
+	static int num = 0;
+	
+	num = signal;
+	return (num);
+}
 
 void	print_signal(int sig)
 {
@@ -20,6 +28,7 @@ void	print_signal(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		ctrl_c(130);
 	}
 }
 
@@ -40,14 +49,4 @@ void	child_start(void)
 {
 	signal (SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-}
-
-void	ctrl_d(t_data *minishell)
-{
-	if (!minishell->o_cmd)
-	{
-		exit_free(minishell, 0);
-		printf("exit\n");
-		exit (minishell->exit_code);
-	}
 }
