@@ -6,17 +6,18 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 21:47:23 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 21:58:04 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_signal.h"
 
-int	ctrl_c(int signal)
+int	signal_c(int signal)
 {
-	static int num = 0;
-	
-	num = signal;
+	static int	num = 0;
+
+	if (signal != -1)
+		num = signal;
 	return (num);
 }
 
@@ -28,7 +29,7 @@ void	print_signal(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		ctrl_c(130);
+		signal_c(130);
 	}
 }
 

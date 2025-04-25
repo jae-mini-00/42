@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 20:17:57 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 19:06:42 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include "../ft_printf/ft_printf.h"
 # include "../free/minishell_free.h"
+# include "../signal/minishell_signal.h"
 
 /* token init */
 int		type_init(char **str, t_data *minishell);

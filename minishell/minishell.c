@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 21:44:13 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 21:59:22 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	main(int ac, char **av, char **envp)
 		return (0);
 	minishell_printf();
 	minishell_init(&minishell, envp, av[2]);
-	program_start();
 	while (1)
 	{
+		program_start();
 		minishell.prompt = make_prompt(av[1], envp);
 		minishell.o_cmd = readline(minishell.prompt);
 		ctrl_d(&minishell);
