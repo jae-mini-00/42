@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 20:30:41 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 20:05:07 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_cd(t_data *minishell, char **cmd, t_token *start)
 	}
 	else
 		write (2, "cd: too many arguments\n", 23);
+	minishell->exit_code = 1;
 	return ;
 }
 
@@ -93,6 +94,7 @@ void	ft_pwd(t_data *minishell, char **cmd, t_token *start)
 		i++;
 	if (i > 1)
 	{
+		minishell->exit_code = 2;
 		if (cmd[1][0] != '-')
 			write (2, "pwd: too many arguments\n", 25);
 		else

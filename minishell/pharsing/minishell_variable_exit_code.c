@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_variable_exit_code.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/17 19:34:01 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 19:04:48 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	my_exit_code(t_token *token, char *start, t_data *minishell)
 {
 	char	*temp;
 
+	minishell->exit_code = signal_c(-1);
 	temp = ft_itoa(minishell->exit_code);
 	exit_code_init(token, start, temp, 0);
 	free(temp);

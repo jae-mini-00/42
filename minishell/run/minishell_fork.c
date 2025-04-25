@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 21:09:22 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 19:54:44 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	multi_fork_run(int **fd, int i, t_token *start, t_data *minishell)
 		pipe_builtin_run(minishell, cmd, start);
 		ft_pid_free(minishell, NULL, 0);
 		split_free(cmd);
-		exit_free(minishell, -1);
+		exit_free(minishell, minishell->exit_code);
 	}
 	else
 		ft_execve(minishell, cmd, start);

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 23:19:37 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/25 21:58:34 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../free/minishell_free.h"
 
 /* signal */
-// int     ctrl_c(int signal);
+int		signal_c(int signal);
 void	child_start(void);
 void	program_start(void);
 void	print_signal(int sig);
