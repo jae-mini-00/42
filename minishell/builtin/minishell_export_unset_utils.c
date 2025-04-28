@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_export_unset_utils.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/18 22:04:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 06:33:53 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
