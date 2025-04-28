@@ -5,6 +5,8 @@
         "minishell_run.h": "c",
         "stdbool.h": "c",
         "type_traits": "c",
-        "minishell_free.h": "c"
+        "minishell_free.h": "c",
+        "minishell_pharsing.h": "c",
+        "ft_printf.h": "c"
     }
 }

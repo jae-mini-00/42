@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/22 18:13:32 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 02:12:41 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 
 /* builtin utils */
 int		ft_str_isdigit(char *str);
-int		echo_flag_check(char *str);
+int		echo_flag_check(char **str);
 int		builtin_type_check(t_token *token);
 void	echo_print(char **cmd, int i, int flag);
+void	exit_run(t_data *minishell, char **cmd);
 
 /* builtin check */
 int		pipe_builtin_check(char *cmd);

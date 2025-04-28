@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/25 21:58:04 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 05:28:03 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	sigint_handler(int sig)
 	(void)sig;
 	close(0);
 	write(1, "\n", 1);
+	signal_c(130);
 }
 
 void	program_start(void)

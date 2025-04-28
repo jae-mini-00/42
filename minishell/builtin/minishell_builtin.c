@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:08:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/25 20:05:07 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 03:36:11 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_env(t_data *minishell, char **cmd, t_token *start)
 			printf("%s\n", minishell->env[i]);
 			i++;
 		}
+		minishell->exit_code = 0;
 	}
 	return ;
 }
@@ -43,15 +44,16 @@ void	ft_echo(t_data *minishell, char **cmd, t_token *start)
 	else
 		io_dup (start, 0, 1, 0);
 	if (cmd[i])
-		flag = echo_flag_check(cmd[i]);
+		flag = echo_flag_check(cmd);
 	else
 	{
-		printf("\n");
+		write (1, "\n", 1);
 		return ;
 	}
 	if (flag)
-		i++;
+		i = flag;
 	echo_print(cmd, i, flag);
+	minishell->exit_code = 0;
 }
 
 void	ft_cd(t_data *minishell, char **cmd, t_token *start)
@@ -63,7 +65,10 @@ void	ft_cd(t_data *minishell, char **cmd, t_token *start)
 	if (cmd[1] && !cmd[2])
 	{
 		if (chdir(cmd[1]) == 0)
+		{
+			minishell->exit_code = 0;
 			return ;
+		}
 		else if (access(cmd[1], F_OK) == -1)
 			write (2, "cd: No such file or directory\n", 30);
 		else
@@ -104,5 +109,6 @@ void	ft_pwd(t_data *minishell, char **cmd, t_token *start)
 	now = getcwd(NULL, 0);
 	if (now)
 		printf("%s\n", now);
+	minishell->exit_code = 0;
 	free(now);
 }
