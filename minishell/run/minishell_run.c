@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/25 22:13:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 04:58:27 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static int	check_pipe(t_token *data)
 
 	flag = 0;
 	temp = data;
+	if (temp->type == PIPE)
+		return (-1);
 	while (temp)
 	{
-		if (temp->type == PIPE && temp->next)
+		if (temp->type == PIPE && temp->next && temp->next->type != PIPE)
 			flag++;
-		if (temp->type == PIPE && !temp->next)
+		if (temp->type == PIPE && (!temp->next || temp->next->type == PIPE))
 			return (-1);
 		temp = temp->next;
 	}
@@ -43,7 +45,7 @@ static int	syntax_err_check(t_token *data)
 				(token->next && (token->next->type == REDIRECTION \
 				|| token->next->type == HERE_DOC || token->next->type == PIPE)))
 			{
-				write (2, "syntax error near unexpected token newline\n", 44);
+				write (2, "syntax error\n", 13);
 				return (false);
 			}
 		}
@@ -51,7 +53,7 @@ static int	syntax_err_check(t_token *data)
 	}
 	if (check_pipe(data) == -1)
 	{
-		write (2, "syntax error near unexpected token newline\n", 44);
+		write (2, "syntax error\n", 13);
 		return (false);
 	}
 	return (true);

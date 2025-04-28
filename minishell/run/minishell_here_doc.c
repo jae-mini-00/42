@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/25 19:00:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 05:48:35 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 static void	ctrl_c(int fd, int pipe[2], int *status)
 {
 	dup2(fd, 0);
-	close(pipe[0]);
+	if (signal_c(-1) == 130)
+		close(pipe[0]);
+	else
+		write (1, "expected 'limit', got EOF\n", 27);
 	*status = 1;
 }
 
-static void	here_doc_trance(t_token *token, int fd)
+static void	here_doc_trance(t_token *token, int fd, int *status)
 {
+	if (signal_c(-1) != 130)
+		*status = 0;
 	token->type = REDIRECTION;
 	free(token->value);
 	token->value = ft_strdup("<");
@@ -37,23 +42,22 @@ static void	minishell_here_doc(t_token *token, int *status)
 	const int	len = ft_strlen(token->next->value) + 1;
 	const int	infd = dup(0);
 
-	end = ft_strjoin(token->next->value, "\n");
+	end = ft_strdup(token->next->value);
 	pipe(fd);
 	while (1)
 	{
-		write(1, "> ", 2);
-		temp = get_next_line(0);
+		temp = readline("> ");
 		if (!temp)
 			ctrl_c(infd, fd, status);
 		if (*status == 1 || ft_strncmp(temp, end, len) == 0)
 		{
-			get_next_line(1023);
 			here_doc_free(fd[1], infd, temp, end);
-			if (*status != 1)
-				here_doc_trance(token, fd[0]);
+			if (*status != 1 || signal_c(-1) != 130)
+				here_doc_trance(token, fd[0], status);
 			return ;
 		}
 		write(fd[1], temp, ft_strlen(temp));
+		write(fd[1], "\n", 1);
 		free(temp);
 	}
 }
@@ -63,6 +67,7 @@ void	minishell_here_doc_check(t_data *minishell, int *status)
 	t_token	*now;
 
 	now = minishell->token;
+	signal_c(0);
 	signal (SIGINT, sigint_handler);
 	while (now && !*status)
 	{
