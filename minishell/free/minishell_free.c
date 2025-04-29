@@ -6,16 +6,15 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 02:41:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 04:14:44 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_free.h"
 
-void	here_doc_free(int fd, int infd, char *temp, char *end)
+void	here_doc_free(int fd, int infd, char *temp)
 {
 	free(temp);
-	free(end);
 	close(fd);
 	close(infd);
 }

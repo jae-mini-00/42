@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 04:37:07 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 03:29:24 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	pharsing_check(t_token *data, char **env)
 		temp = data;
 		while (temp)
 		{
-			printf("value :%-30s | type :%s\n", temp->value, \
-				get_type_string(temp->type));
+			printf("value :%-15s| flag:%-15d | type :%s\n", temp->value, \
+				temp->quite_flag, get_type_string(temp->type));
 			temp = temp->next;
 		}
 	}
@@ -107,7 +107,8 @@ int	main(int ac, char **av, char **envp)
 		minishell.o_cmd = readline(minishell.prompt);
 		ctrl_d(&minishell);
 		o_cmd_split_init(&minishell);
-		if (minishell.token != NULL && !minishell.mode)
+		if (minishell.token != NULL && *minishell.token->value \
+			&& !minishell.mode)
 			minishell_run(&minishell);
 		else if (minishell.token != NULL && minishell.mode)
 			pharsing_check(minishell.token, envp);

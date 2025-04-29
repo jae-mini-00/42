@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 21:27:45 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 03:27:02 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	minishell_run(t_data *minishell)
 	status = 0;
 	if (syntax_err_check(minishell->token))
 	{
-		minishell_here_doc_check(minishell, &status);
+		minishell_here_doc_check(minishell, &status, minishell->env);
 		if (!status)
 		{
 			check = check_pipe(minishell->token);

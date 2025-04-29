@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 19:09:58 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 04:15:19 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_token
 {
 	char			*value;
 	int				fd;
+	int				quite_flag;
 	t_type			type;
 	struct s_token	*next;
 }	t_token;
@@ -62,6 +63,6 @@ void	split_free(char **split);
 void	token_free(t_token *data);
 void	minishell_free(t_data *minishell);
 void	exit_free(t_data *minishell, int num);
-void	here_doc_free(int fd, int infd, char *temp, char *end);
+void	here_doc_free(int fd, int infd, char *temp);
 
 #endif

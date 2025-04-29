@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 05:48:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 04:15:27 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,29 @@ static void	here_doc_trance(t_token *token, int fd, int *status)
 	token->next->fd = fd;
 }
 
-static void	minishell_here_doc(t_token *token, int *status)
+static void	minishell_here_doc(t_token *token, int *status, char **env)
 {
 	char		*temp;
-	char		*end;
 	int			fd[2];
-	const int	len = ft_strlen(token->next->value) + 1;
 	const int	infd = dup(0);
 
-	end = ft_strdup(token->next->value);
 	pipe(fd);
 	while (1)
 	{
 		temp = readline("> ");
 		if (!temp)
 			ctrl_c(infd, fd, status);
-		if (*status == 1 || ft_strncmp(temp, end, len) == 0)
+		if (*status == 1 || here_doc_write(env, fd[1], temp, token->next))
 		{
-			here_doc_free(fd[1], infd, temp, end);
+			here_doc_free(fd[1], infd, temp);
 			if (*status != 1 || signal_c(-1) != 130)
 				here_doc_trance(token, fd[0], status);
 			return ;
 		}
-		write(fd[1], temp, ft_strlen(temp));
-		write(fd[1], "\n", 1);
-		free(temp);
 	}
 }
 
-void	minishell_here_doc_check(t_data *minishell, int *status)
+void	minishell_here_doc_check(t_data *minishell, int *status, char **env)
 {
 	t_token	*now;
 
@@ -75,7 +69,7 @@ void	minishell_here_doc_check(t_data *minishell, int *status)
 		if (now->type == HERE_DOC)
 		{
 			minishell->here_doc_count++;
-			minishell_here_doc(now, status);
+			minishell_here_doc(now, status, env);
 			now = now->next;
 		}
 		else
