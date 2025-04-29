@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:26:38 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 04:58:27 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 21:27:45 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static int	syntax_err_check(t_token *data)
 	{
 		if (token->type == REDIRECTION || token->type == HERE_DOC)
 		{
-			if (!token->next || \
-				(token->next && (token->next->type == REDIRECTION \
-				|| token->next->type == HERE_DOC || token->next->type == PIPE)))
+			if (!token->next || (token->next && (token->next->type == \
+				REDIRECTION || token->next->type == HERE_DOC || \
+				token->next->type == PIPE || \
+				token->next->value[0] == '>' || token->next->value[0] == '<')))
 			{
 				write (2, "syntax error\n", 13);
 				return (false);

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 02:12:41 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 21:38:47 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ft_unset(t_data *minishell, char **cmd, t_token *start);
 void	ft_export(t_data *minishell, char **cmd, t_token *start);
 
 /* export unset utils */
-void	make_env(t_data *minishell, char *env);
-void	change_env(t_data *minishell, char *env, int i);
+void	make_env(t_data *minishell, char *env, int *status);
+void	change_env(t_data *minishell, char *env, int i, int *status);
 void	remove_minishell_env(t_data *minishell, char *env_name, int len);
 
 #endif

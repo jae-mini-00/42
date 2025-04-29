@@ -6,20 +6,19 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 06:34:27 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 21:38:50 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-static char	*get_env_name(char *env)
+static char	*get_env_name(char *env, int *status)
 {
-	int		i;
-	int		len;
-	char	*env_name;
+	int			i;
+	const int	len = env_len(env);
+	char		*env_name;
 
 	i = -1;
-	len = env_len(env);
 	if (len == -1)
 	{
 		write (2, "export:'", 9);
@@ -30,6 +29,8 @@ static char	*get_env_name(char *env)
 	if ((env[len] != '=' && env[len] != '+') || \
 		(env[len] == '+' && env[len + 1] != '='))
 		return (NULL);
+	if (env[len] == '+')
+		*status = 1;
 	env_name = (char *)malloc(sizeof(char) * (len + 2));
 	if (!env_name)
 		return (NULL);
@@ -52,14 +53,14 @@ static void	export_printf(char **env, char *cmd)
 	}
 }
 
-static void	export_run(t_data *minishell, char **cmd, int i)
+static void	export_run(t_data *minishell, char **cmd, int i, int *status)
 {
 	char	*env_name;
 	int		len;
 	int		j;
 
 	j = -1;
-	env_name = get_env_name(cmd[i]);
+	env_name = get_env_name(cmd[i], status);
 	if (!env_name)
 	{
 		minishell->exit_code = 1;
@@ -70,9 +71,9 @@ static void	export_run(t_data *minishell, char **cmd, int i)
 		if (ft_strncmp(minishell->env[j], env_name, len) == 0)
 			break ;
 	if (minishell->env[j])
-		change_env(minishell, cmd[i], j);
+		change_env(minishell, cmd[i], j, status);
 	else
-		make_env(minishell, cmd[i]);
+		make_env(minishell, cmd[i], status);
 	free(env_name);
 	if (minishell->exit_code != 1)
 		minishell->exit_code = 0;
@@ -81,6 +82,7 @@ static void	export_run(t_data *minishell, char **cmd, int i)
 void	ft_export(t_data *minishell, char **cmd, t_token *start)
 {
 	int		i;
+	int		status;
 
 	i = -1;
 	if (!start)
@@ -92,7 +94,8 @@ void	ft_export(t_data *minishell, char **cmd, t_token *start)
 	minishell->exit_code = 0;
 	while (cmd[i])
 	{
-		export_run(minishell, cmd, i);
+		status = 0;
+		export_run(minishell, cmd, i, &status);
 		i++;
 	}
 }

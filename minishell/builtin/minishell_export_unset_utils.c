@@ -6,16 +6,28 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 06:33:53 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 21:45:59 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_builtin.h"
 
-void	change_env(t_data *minishell, char *env, int i)
+void	change_env(t_data *minishell, char *env, int i, int *status)
 {
-	free(minishell->env[i]);
-	minishell->env[i] = ft_strdup(env);
+	char	*temp;
+
+	temp = NULL;
+	if (*status != 1)
+	{
+		free(minishell->env[i]);
+		minishell->env[i] = ft_strdup(env);
+	}
+	else
+	{
+		temp = ft_strjoin(minishell->env[i], &env[env_len(env) + 2]);
+		free(minishell->env[i]);
+		minishell->env[i] = temp;
+	}
 }
 
 static int	split_size(char **split)
@@ -30,7 +42,29 @@ static int	split_size(char **split)
 	return (i);
 }
 
-void	make_env(t_data *minishell, char *env)
+static char	*remove_plus_env(char *env)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	temp = NULL;
+	temp = (char *)malloc(sizeof(char) * (ft_strlen(env)));
+	if (!temp)
+		return (NULL);
+	while (env[i])
+	{
+		if (env[i] == '+')
+			i++;
+		temp[j++] = env[i++];
+	}
+	temp[j] = '\0';
+	return (temp);
+}
+
+void	make_env(t_data *minishell, char *env, int *status)
 {
 	int		i;
 	int		size;
@@ -46,7 +80,10 @@ void	make_env(t_data *minishell, char *env)
 		new_env[i] = ft_strdup(minishell->env[i]);
 		i++;
 	}
-	new_env[i++] = ft_strdup(env);
+	if (*status != 1)
+		new_env[i++] = ft_strdup(env);
+	else
+		new_env[i++] = remove_plus_env(env);
 	new_env[i] = NULL;
 	split_free(minishell->env);
 	minishell->env = new_env;
