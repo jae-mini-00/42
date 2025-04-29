@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:07:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/29 21:38:50 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/29 21:53:59 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,26 +103,28 @@ void	ft_export(t_data *minishell, char **cmd, t_token *start)
 void	ft_unset(t_data *minishell, char **cmd, t_token *start)
 {
 	int		i;
+	int		j;
 	int		len;
 	char	*env_name;
 
-	i = 0;
+	j = 1;
 	if (!start)
 		io_dup (minishell->token, 0, 1, 0);
 	else
 		io_dup (start, 0, 1, 0);
-	if (!cmd[1])
-		return ;
-	env_name = ft_strjoin(cmd[1], "=");
-	len = ft_strlen(env_name);
-	while (minishell->env[i])
+	while (cmd[j])
 	{
-		if (ft_strncmp(minishell->env[i], env_name, len) == 0)
-			break ;
-		i++;
+		i = -1;
+		env_name = ft_strjoin(cmd[j++], "=");
+		len = ft_strlen(env_name);
+		while (minishell->env[++i])
+		{
+			if (ft_strncmp(minishell->env[i], env_name, len) == 0)
+				break ;
+		}
+		if (minishell->env[i])
+			remove_minishell_env(minishell, env_name, len);
+		free(env_name);
 	}
-	if (minishell->env[i])
-		remove_minishell_env(minishell, env_name, len);
-	free(env_name);
 	minishell->exit_code = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:22:31 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 20:24:58 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 03:04:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	remove_quite(t_token *token)
 			token = token->next;
 		else
 		{
+			token->quite_flag = 1;
 			temp = token->value;
 			token->value = new_value(token->value, flag, 0, 0);
 			free(temp);

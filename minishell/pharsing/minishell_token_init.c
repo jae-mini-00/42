@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/24 20:24:40 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 02:06:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_token	*new_token(char *cmd, t_type type)
 	token->value = ft_strdup(cmd);
 	token->type = type;
 	token->fd = -1;
+	token->quite_flag = 0;
 	token->next = NULL;
 	return (token);
 }
