@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 04:20:31 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 20:40:49 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,15 @@ static char	*here_doc_my_getenv(char *str, char *start, char **env, int i)
 	return (temp);
 }
 
-static char	*here_doc_value_check(char *str, int i)
-{
-	while (str[i])
-	{
-		if (str[i] == '$' && str[i + 1])
-			return (&str[i]);
-		i++;
-	}
-	return (NULL);
-}
-
 static	int	here_doc_write_run(int pipe, char *new_data, t_token *token)
 {
 	int	len;
+	int	o_len;
 
+	o_len = ft_strlen(token->o_value);
 	len = ft_strlen(token->value);
-	if (ft_strncmp(new_data, token->value, len) != 0)
+	if ((ft_strncmp(new_data, token->value, len) != 0 && !token->quite_flag) \
+	|| (token->quite_flag && ft_strncmp(new_data, token->o_value, o_len) != 0))
 	{
 		write(pipe, new_data, ft_strlen(new_data));
 		write(pipe, "\n", 1);
@@ -131,14 +123,12 @@ int	here_doc_write(char **env, int pipe, char *str, t_token *token)
 		start = here_doc_value_check(new_data, 0);
 		if (!start)
 			break ;
+		temp = new_data;
 		if (start && start[1] != '?')
-		{
-			temp = new_data;
 			new_data = here_doc_my_getenv(new_data, start, env, 0);
-			free(temp);
-		}
-		// else
-		// 	new_data = my_exit_code
+		else if (start && start[1] == '?')
+			new_data = here_doc_exit_code(new_data, start);
+		free(temp);
 	}
 	flag = here_doc_write_run(pipe, new_data, token);
 	free(new_data);

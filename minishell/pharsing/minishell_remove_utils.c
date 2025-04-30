@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 17:22:31 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 03:04:21 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 19:13:33 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	check_quite(char *value)
 	i = 0;
 	flag = 0;
 	quite = '\0';
+	if (!value)
+		return (flag);
 	while (value[i])
 	{
 		if (!quite && (value[i] == '\'' || value[i] == '"'))
@@ -77,6 +79,27 @@ void	remove_quite(t_token *token)
 			token->quite_flag = 1;
 			temp = token->value;
 			token->value = new_value(token->value, flag, 0, 0);
+			free(temp);
+			token = token->next;
+		}
+	}
+}
+
+void	o_remove_quite(t_token *token)
+{
+	int		flag;
+	char	*temp;
+
+	flag = 0;
+	while (token)
+	{
+		flag = check_quite(token->o_value);
+		if (!flag)
+			token = token->next;
+		else
+		{
+			temp = token->o_value;
+			token->o_value = new_value(token->o_value, flag, 0, 0);
 			free(temp);
 			token = token->next;
 		}

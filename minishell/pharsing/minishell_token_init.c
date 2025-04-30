@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 02:06:25 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 18:58:09 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_token	*new_token(char *cmd, t_type type)
 
 	token = (t_token *)malloc(sizeof(t_token));
 	token->value = ft_strdup(cmd);
+	token->o_value = NULL;
 	token->type = type;
 	token->fd = -1;
 	token->quite_flag = 0;

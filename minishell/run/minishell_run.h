@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 04:19:33 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 20:40:21 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	minishell_here_doc_check(t_data *minishellm, int *status, char **env);
 
 /* here_doc utils */
 int		here_doc_write(char **env, int pipe, char *str, t_token *token);
+
+/* here_doc exit code */
+char	*here_doc_value_check(char *str, int i);
+char	*here_doc_exit_code(char *str, char *start);
 
 /* pipe */
 int		**fd_init(void);

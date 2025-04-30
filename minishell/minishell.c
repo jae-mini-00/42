@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:57:05 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 03:29:24 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 19:03:28 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	pharsing_check(t_token *data, char **env)
 		temp = data;
 		while (temp)
 		{
-			printf("value :%-15s| flag:%-15d | type :%s\n", temp->value, \
-				temp->quite_flag, get_type_string(temp->type));
+			printf("value :%-15s| o_value:%-15s | type :%s\n", temp->value, \
+				temp->o_value, get_type_string(temp->type));
 			temp = temp->next;
 		}
 	}
