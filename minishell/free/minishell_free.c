@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 04:14:44 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 19:23:13 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	token_free(t_token *data)
 		{
 			free(data->value);
 			data->value = NULL;
+		}
+		if (data->o_value)
+		{
+			free(data->o_value);
+			data->o_value = NULL;
 		}
 		if (data->fd != -1)
 			close(data->fd);

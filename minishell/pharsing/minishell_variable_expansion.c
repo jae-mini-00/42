@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:48:41 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 03:21:58 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 19:53:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 	temp = token;
 	while (temp)
 	{
+		temp->o_value = ft_strdup(temp->value);
 		start = value_check(temp, 0, 0);
 		if (start)
 		{
@@ -139,5 +140,6 @@ void	minishell_variable_expansion(t_token *token, t_data *minishell)
 			temp = temp->next;
 	}
 	remove_quite(token);
+	o_remove_quite(token);
 	token_check(minishell);
 }

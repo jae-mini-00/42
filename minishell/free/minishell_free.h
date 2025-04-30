@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 04:15:19 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 18:57:07 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef enum s_type
 typedef struct s_token
 {
 	char			*value;
+	char			*o_value;
 	int				fd;
 	int				quite_flag;
 	t_type			type;

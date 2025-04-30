@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 02:16:09 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/04/30 19:12:41 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	redirection_copy2(char *new_str, char *str, int *j, int *i);
 int		check_quite(char *value);
 char	*new_value(char *value, int flag, int i, int j);
 void	remove_quite(t_token *token);
+void	o_remove_quite(t_token *token);
 
 #endif

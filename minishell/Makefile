@@ -6,7 +6,7 @@
 #    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/04/30 03:02:28 by jaejo            ###   ########.fr        #
+#    Updated: 2025/04/30 20:37:11 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SIGNAL_SRCS = ./signal/minishell_signal.c \
 RUN_SRCS = ./run/minishell_prompt.c ./run/minishell_run.c ./run/minishell_fork.c \
 			./run/minishell_here_doc.c ./run/minishell_fork_utils.c \
 			./run/minishell_pipe.c ./run/minishell_pid.c ./run/minishell_here_doc_utils.c \
+			./run/minishell_here_doc_exit_code.c \
 
 PHARSING_SRCS = ./pharsing/minishell_token_init.c ./pharsing/minishell_token_data.c \
 				./pharsing/minishell_token_split.c ./pharsing/minishell_variable_expansion.c \
