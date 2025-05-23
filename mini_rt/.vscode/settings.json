@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "vec_utils.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    }
+}
