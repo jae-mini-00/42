@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+         #
+#    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/05/23 19:17:48 by jaejo            ###   ########.fr        #
+#    Updated: 2025/05/26 23:00:24 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,14 @@ NAME = minirt
 
 PRINT_SRCS = ./write_color.c \
 
+TRACE_SRCS = ./trace.c ./hit_sphere.c \
+
+SCENE_SRCS = ./scene.c \
+
 VEC_UTILS_SRCS = ./make_vec_utils.c ./vec_minus_utils.c ./vec_mult_div_utils.c \
 				 ./vec_operator_utils.c ./vec_plus_utils.c \
 
-SRCS = ./main.c $(PRINT_SRCS) $(VEC_UTILS_SRCS)
+SRCS = ./main.c $(PRINT_SRCS) $(VEC_UTILS_SRCS) $(TRACE_SRCS) $(SCENE_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 

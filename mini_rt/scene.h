@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 16:56:45 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/26 20:46:06 by jaejo            ###   ########.fr       */
+/*   Created: 2025/05/26 19:58:13 by jaejo             #+#    #+#             */
+/*   Updated: 2025/05/26 22:01:01 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef SCENE_H
+# define SCENE_H
 
-# include "./print.h"
+# include "./types.h"
 # include "./vec_utils.h"
-# include "./trace.h"
-# include "./scene.h"
+
+t_canvas	canvas(int width, int height);
+t_camera	camera(t_canvas *canvas, t_vec_point3 origin);
+t_sphere	sphere(t_vec_point3 center, double radius);
 
 #endif
