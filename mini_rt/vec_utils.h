@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:21:00 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/23 19:09:56 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/26 20:36:01 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec3			vec_cross(t_vec3 vec, t_vec3 vec2);
 t_vec3			vec3(double x, double y, double z);
 t_vec3			two_vec_mult(t_vec3 vec, t_vec3 vec2);
 t_vec3			two_vec_plus(t_vec3 vec, t_vec3 vec2);
-t_vec3			two_vec_plus(t_vec3 vec, t_vec3 vec2);
+t_vec3			two_vec_minus(t_vec3 vec, t_vec3 vec2);
 t_vec3			vec_plus(t_vec3 vec, double x, double y, double z);
 t_vec3			vec_minus(t_vec3 vec, double x, double y, double z);
 t_vec_point3	vec_point3(double x, double y, double z);

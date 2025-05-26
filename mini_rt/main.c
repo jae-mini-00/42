@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:26:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/23 19:19:28 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/26 22:05:05 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,31 @@ int	main(void)
 {
     int     i;
     int     j;
-    int     canvas_width;
-    int     canvas_height;
-    t_color3 pixel;
 
-    canvas_width = 256;
-    canvas_height = 256;
+    double u;
+    double v;
 
-    printf("P3\n%d %d\n255\n", canvas_width, canvas_height);
-    j = canvas_height - 1;
+    t_color3 pixel_color;
+    t_camera cam;
+    t_canvas canv;
+    t_ray ray;
+    t_sphere sp;
+
+    sp = sphere(vec_point3(0, 0, -5), 2);
+    canv = canvas(400, 300);
+    cam = camera(&canv, vec_point3(0, 0, 0));
+    printf("P3\n%d %d\n255\n", canv.width, canv.height);
+    j = canv.height - 1;
     while (j >= 0)
     {
         i = 0;
-        while (i < canvas_width)
+        while (i < canv.width)
         {
-            pixel.x = (double)i / (canvas_width - 1);
-            pixel.y = (double)j / (canvas_height - 1);
-            pixel.z = 0.25;
-            write_color(pixel);
+            u = (double)i / (canv.width - 1);
+            v = (double)j / (canv.height - 1);
+            ray = ray_primary(&cam, u, v);
+            pixel_color = ray_color(&ray, &sp);
+            write_color(pixel_color);
             ++i;
         }
     --j;
