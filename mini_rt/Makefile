@@ -6,7 +6,7 @@
 #    By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 16:11:45 by jaejo             #+#    #+#              #
-#    Updated: 2025/05/26 23:00:24 by jaejo            ###   ########.fr        #
+#    Updated: 2025/05/27 22:45:02 by jaejo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ NAME = minirt
 
 PRINT_SRCS = ./write_color.c \
 
-TRACE_SRCS = ./trace.c ./hit_sphere.c \
+TRACE_SRCS = ./trace.c ./hit_sphere.c ./phong_lighting.c \
 
-SCENE_SRCS = ./scene.c \
+SCENE_SRCS = ./scene.c ./object_utils.c ./object_create.c \
 
 VEC_UTILS_SRCS = ./make_vec_utils.c ./vec_minus_utils.c ./vec_mult_div_utils.c \
 				 ./vec_operator_utils.c ./vec_plus_utils.c \

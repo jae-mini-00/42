@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:38:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/26 23:21:32 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/28 00:22:59 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,74 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	return (ray);
 }
 
-t_color3	ray_color(t_ray *ray, t_sphere *sp)
+t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 {
-	double	t;
-	t_vec3	n;
+	t_bool	hit_result;
 
-	t = hit_sphere(sp, ray);
-	if (t > 0.0)
+	hit_result = FALSE;
+	if (world->type == SP)
+		hit_result = hit_sphere(world, ray, rec);
+	return (hit_result);
+}
+
+t_bool	hit(t_object *world, t_ray *ray, t_hit_record *rec)
+{
+	t_bool			hit_anything;
+	t_hit_record	temp_rec;
+
+	temp_rec = *rec;
+	hit_anything = FALSE;
+	while (world)
 	{
-		n = vec_unit(two_vec_minus(ray_at(ray, t), sp->center));
-		return (vec_mult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5));
+		if (hit_obj(world, ray, &temp_rec))
+		{
+			hit_anything = TRUE;
+			temp_rec.tmax = temp_rec.t;
+			*rec = temp_rec;
+		}
+		world = world->next;
 	}
+	return (hit_anything);
+}
+
+static t_hit_record record_init(void)
+{
+    t_hit_record    record;
+
+    record.tmin = EPSILON;
+    record.tmax = INFINITY;
+    return (record);
+}
+
+t_color3	ray_color(t_scene *scene)
+{
+	double			t;
+	// t_vec3			n;
+
+	scene->rec = record_init();
+	if (hit(scene->world, &scene->ray, &scene->rec))
+        return (phong_lighting(scene));
 	else
 	{
-		t = 0.5 * (ray->dir.y + 1.0);
+		t = 0.5 * (scene->ray.dir.y + 1.0);
 		return (two_vec_plus(vec_mult(color3(1, 1, 1), 1.0 - t), \
 		vec_mult(color3(0.5, 0.7, 1.0), t)));
 	}
 }
+
+// t_color3	ray_color(t_ray *ray, t_object *world)
+// {
+// 	double			t;
+// 	t_hit_record	rec;
+
+// 	rec.tmin = 0;
+// 	rec.tmax = INFINITY;
+// 	if (hit(world, ray, &rec))
+// 		return (vec_mult(two_vec_plus(rec.normal, color3(1, 1, 1)), 0.5));
+// 	else
+// 	{
+// 		t = 0.5 * (ray->dir.y + 1.0);
+// 		return (two_vec_plus(vec_mult(color3(1, 1, 1), 1.0 - t), \
+// 		vec_mult(color3(0.5, 0.7, 1.0), t)));
+// 	}
+// }
