@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:00:23 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/26 22:02:00 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/28 00:07:12 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,25 @@ t_camera	camera(t_canvas *canvas, t_vec_point3 orig)
 	return (cam);
 }
 
-t_sphere	sphere(t_vec_point3 center, double radius)
+t_scene	*scene_init(void)
 {
-	t_sphere	sp;
+	t_scene		*scene;
+	t_object	*world;
+	t_object	*lights;
+	double		ka;
 
-	sp.center = center;
-	sp.radius = radius;
-	sp.radius2 = radius * radius;
-	return (sp);
+	scene = (t_scene *)malloc(sizeof(t_scene));
+	if (!scene)
+		return (NULL);
+	scene->canvas = canvas(400, 300);
+	scene->camera = camera(&scene->canvas, vec_point3(0, 0, 0));
+	world = object_init(SP, sphere_init(vec_point3(-2, 0, -5), 2), color3(0.5, 0, 0));
+    object_add(&world, object_init(SP, sphere_init(vec_point3(2, 0, -5), 2), color3(0, 0.5, 0)));
+    object_add(&world, object_init(SP, sphere_init(vec_point3(0, -1000, 0), 990), color3(1, 1, 1)));
+	scene->world = world;
+	lights = object_init(LIGHT_POINT, light_point(vec_point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
+	scene->light = lights;
+	ka = 0.1;
+	scene->ambient = vec_mult(color3(1, 1, 1), ka);
+	return (scene);
 }
