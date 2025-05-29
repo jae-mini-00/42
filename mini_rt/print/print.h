@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:45:26 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/26 20:46:51 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 16:53:25 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PRINT_H
 
 # include <stdio.h>
-# include "./types.h"
+# include "../types.h"
 
 void	write_color(t_color3 pixel_color);
 

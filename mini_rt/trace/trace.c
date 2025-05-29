@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:38:20 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/28 00:22:59 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/28 18:46:49 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,3 @@ t_color3	ray_color(t_scene *scene)
 		vec_mult(color3(0.5, 0.7, 1.0), t)));
 	}
 }
-
-// t_color3	ray_color(t_ray *ray, t_object *world)
-// {
-// 	double			t;
-// 	t_hit_record	rec;
-
-// 	rec.tmin = 0;
-// 	rec.tmax = INFINITY;
-// 	if (hit(world, ray, &rec))
-// 		return (vec_mult(two_vec_plus(rec.normal, color3(1, 1, 1)), 0.5));
-// 	else
-// 	{
-// 		t = 0.5 * (ray->dir.y + 1.0);
-// 		return (two_vec_plus(vec_mult(color3(1, 1, 1), 1.0 - t), \
-// 		vec_mult(color3(0.5, 0.7, 1.0), t)));
-// 	}
-// }
