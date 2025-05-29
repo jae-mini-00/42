@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:00:23 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/28 00:07:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 16:38:04 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ t_scene	*scene_init(void)
 	if (!scene)
 		return (NULL);
 	scene->canvas = canvas(400, 300);
-	scene->camera = camera(&scene->canvas, vec_point3(0, 0, 0));
+	scene->camera = camera(&scene->canvas, vec_point3(0, 0, 1));
 	world = object_init(SP, sphere_init(vec_point3(-2, 0, -5), 2), color3(0.5, 0, 0));
     object_add(&world, object_init(SP, sphere_init(vec_point3(2, 0, -5), 2), color3(0, 0.5, 0)));
-    object_add(&world, object_init(SP, sphere_init(vec_point3(0, -1000, 0), 990), color3(1, 1, 1)));
+    object_add(&world, object_init(SP, sphere_init(vec_point3(0, -1000, 0), 950), color3(1, 1, 1)));
 	scene->world = world;
 	lights = object_init(LIGHT_POINT, light_point(vec_point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
 	scene->light = lights;

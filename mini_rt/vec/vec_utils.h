@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:21:00 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/26 20:36:01 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 16:56:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "./types.h"
+# include "../types.h"
 
 void			vec_set(t_vec3 *vec, double x, double y, double z);
 double			square_vec(t_vec3 vec);

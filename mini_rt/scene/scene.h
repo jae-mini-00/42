@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:58:13 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/27 22:45:57 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 16:56:42 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "./types.h"
-# include "./vec_utils.h"
+# include "../types.h"
+# include "../vec/vec_utils.h"
 
 void        object_add(t_object **list, t_object *new);
 t_canvas	canvas(int width, int height);
