@@ -6,13 +6,13 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:26:53 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/29 16:57:49 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:01:32 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int     main(void)
+int     main(int ac, char **av)
 {
     int         i;
     int         j;
@@ -21,7 +21,11 @@ int     main(void)
     t_color3    pixel_color;
     t_scene     *scene;
 
-    scene = scene_init();
+    if (ac == 2)
+        map_init(scene, av[1]);
+    else
+        return (0);
+    //scene = scene_init();
     printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
     j = scene->canvas.height - 1;
     while (j >= 0)
