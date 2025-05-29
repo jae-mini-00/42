@@ -6,7 +6,7 @@
 /*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:47:08 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/28 19:04:12 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/29 20:08:23 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define LIGHT_POINT 1
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
+
+# include "./ft_printf/ft_printf.h"
 
 typedef int				t_bool;
 typedef int				t_object_type;
@@ -45,6 +47,7 @@ typedef struct s_camera
 	double			viewport_w;
 	t_vec3			horizontal;
 	t_vec3			vertical;
+	t_vec3			cam_dir;
 	double			focal_len;
 	t_vec_point3	left_bottom;
 }	t_camera;
