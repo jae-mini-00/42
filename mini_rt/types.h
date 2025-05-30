@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejo < jaejo@student.42gyeongsan.kr>      +#+  +:+       +#+        */
+/*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:47:08 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/29 20:08:23 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/30 21:46:35 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define LUMEN 3
 
 # include "./ft_printf/ft_printf.h"
+# include "./free/free.h"
 
 typedef int				t_bool;
 typedef int				t_object_type;
