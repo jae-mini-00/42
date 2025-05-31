@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:29:19 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 18:33:43 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/31 19:50:01 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_bool	detect_rt_type(char **data, int *flag)
 {
 	if (object_data_check(data[0], flag, split_size(data)))
 	{
-		if (detect_value_type(data, 0))
+		if (detect_value_type(data))
 		{
 			split_free(data);
 			return (TRUE);
