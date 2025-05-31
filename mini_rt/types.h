@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:47:08 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/30 21:46:35 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/31 17:21:12 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 # define TYPES_H
 # define FALSE 0
 # define TRUE 1
-# define SP 0
-# define LIGHT_POINT 1
+# define VEC 2
+# define RGB 3
+# define SP 4
+# define PL 5
+# define CY 6
+# define LIGHT_POINT 10
 # define EPSILON 1e-6 // 0.000001
-# define LUMEN 3
+# define LUMEN 11
 
 # include "./ft_printf/ft_printf.h"
 # include "./free/free.h"
