@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:21 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 17:52:16 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/31 20:33:52 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	**minirt_data(int fd)
 	}
 	data = ft_split(all_line, '\n');
 	free(all_line);
+	close(fd);
 	return (data);
 }
 
