@@ -6,68 +6,84 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:29:19 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/30 23:14:26 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/31 18:33:43 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./scene.h"
 
-static t_bool	object_data_check(char **data)
+static t_bool	value_data_check(char *data, int type)
 {
-	// sp, cy, pl 인지 확인 하고 아니면 false 반환 맞으면 백터값 및  r g b 값 확인
-	split_free(data);
-	return (TRUE);
-}
+	char **vec;
 
-static t_bool	utils_data_check(char **data)
-{
-	// C, L, A 인지 확인 하고 아니면 false 반환 맞으면 백터값 및  r g b 값 확인
-	split_free(data);
-	return (TRUE);	
-}
-
-char	**minirt_data(int fd)
-{
-	char	*temp;
-	char	*one_line;
-	char	*all_line;
-	char	**data;
-
-	temp = NULL;
-	one_line = get_next_line(fd);
-	all_line = ft_strjoin(one_line, "\0");
-	while (one_line)
+	vec = ft_split(data, ',');
+	if (split_size(vec) == 3)
 	{
-		free(one_line);
-		one_line = get_next_line(fd);
-		if (!one_line)
-			break ;
-		temp = all_line;
-		all_line = ft_strjoin(all_line, one_line);
-		free(temp);
+		if (type == RGB && \
+			0 <= ft_atoi(vec[0]) && ft_atoi(vec[0]) <= 255 && \
+			0 <= ft_atoi(vec[1]) && ft_atoi(vec[1]) <= 255 && \
+			0 <= ft_atoi(vec[2]) && ft_atoi(vec[2]) <= 255)
+				return (split_free(vec), TRUE);
+		else if (type == VEC)
+			return (split_free(vec), TRUE);
 	}
-	data = ft_split(all_line, '\n');
-	free(all_line);
-	return (data);
+	split_free(vec);
+	return (FALSE);
+}
+
+static t_bool	detect_value_type(char **data)
+{
+	if (!ft_strncmp(data[0], "A", 2) && value_data_check(data[2], RGB) && \
+		(0 <= ft_strtod(data[1], NULL) && ft_strtod(data[1], NULL) <= 1))
+		return (TRUE);
+	else if (!ft_strncmp(data[0], "C", 2) && value_data_check(data[1], VEC) && \
+			0 <= ft_atoi(data[3]) && ft_atoi(data[3]) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+		return (TRUE);
+	else if (!ft_strncmp(data[0], "L", 2) && value_data_check(data[1], VEC) && \
+			(0 <= ft_strtod(data[2], NULL) && ft_strtod(data[2], NULL) <= 1) && \
+			value_data_check(data[3], RGB))
+		return (TRUE);
+	else if (!ft_strncmp(data[0], "sp", 3) && value_data_check(data[1], VEC) && \
+			ft_strtod(data[2], NULL) > 0 && value_data_check(data[3], RGB))
+		return (TRUE);
+	else if (!ft_strncmp(data[0], "pl", 3) && value_data_check(data[1], VEC) && \
+			value_data_check(data[3], RGB) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+			return (TRUE);
+	else if (!ft_strncmp(data[0], "cy", 3) && value_data_check(data[1], VEC) && \
+			ft_strtod(data[3], NULL) > 0 && ft_strtod(data[4], NULL) > 0 && \
+			value_data_check(data[5], RGB) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+			return (TRUE);
+	return (FALSE);
+}
+
+static t_bool	detect_rt_type(char **data, int *flag)
+{
+	if (object_data_check(data[0], flag, split_size(data)))
+	{
+		if (detect_value_type(data, 0))
+		{
+			split_free(data);
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
 t_bool	file_data_check(int fd)
 {
 	int		i;
+	int		flag;
 	char	**file_data;
 	char	**object_data;
 	
 	i = -1;
-	object_data = NULL;
 	file_data = minirt_data(fd);
 	while (file_data[++i])
 	{
 		object_data = ft_split(file_data[i], ' ');
-		if (!object_data)
-			continue ;
-		else if (object_data_check(object_data))
-			continue ;
-		else if (utils_data_check(object_data))
+		if (!object_data[0])
+			split_free(object_data);
+		else if (detect_rt_type(object_data, &flag))
 			continue ;
 		else
 		{
@@ -77,5 +93,7 @@ t_bool	file_data_check(int fd)
 		}
 	}
 	split_free(file_data);
-	return (TRUE);
+	if (flag)
+		return (TRUE);
+	return (FALSE);
 }
