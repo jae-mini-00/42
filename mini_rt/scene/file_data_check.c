@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:29:19 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 19:50:01 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 18:53:29 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static t_bool	value_data_check(char *data, int type)
 				return (split_free(vec), TRUE);
 		else if (type == VEC)
 			return (split_free(vec), TRUE);
+		else if (type == O_VEC && \
+			-1.0 <= ft_strtod(vec[0], 0) && ft_strtod(vec[0], 0) <= 1.0 && \
+			-1.0 <= ft_strtod(vec[1], 0) && ft_strtod(vec[1], 0) <= 1.0 && \
+			-1.0 <= ft_strtod(vec[2], 0) && ft_strtod(vec[2], 0) <= 1.0)
+			return (split_free(vec), TRUE);
 	}
 	split_free(vec);
 	return (FALSE);
@@ -34,24 +39,27 @@ static t_bool	value_data_check(char *data, int type)
 static t_bool	detect_value_type(char **data)
 {
 	if (!ft_strncmp(data[0], "A", 2) && value_data_check(data[2], RGB) && \
-		(0 <= ft_strtod(data[1], NULL) && ft_strtod(data[1], NULL) <= 1))
+		(0 <= ft_strtod(data[1], 0) && ft_strtod(data[1], 0) <= 1))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "C", 2) && value_data_check(data[1], VEC) && \
-			0 <= ft_atoi(data[3]) && ft_atoi(data[3]) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+			0 <= ft_atoi(data[3]) && ft_atoi(data[3]) <= 180 && \
+			value_data_check(data[2], O_VEC))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "L", 2) && value_data_check(data[1], VEC) && \
-			(0 <= ft_strtod(data[2], NULL) && ft_strtod(data[2], NULL) <= 1) && \
+			(0.0 <= ft_strtod(data[2], 0) && ft_strtod(data[2], 0) <= 1.0) && \
 			value_data_check(data[3], RGB))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "sp", 3) && value_data_check(data[1], VEC) && \
-			ft_strtod(data[2], NULL) > 0 && value_data_check(data[3], RGB))
+			ft_strtod(data[2], 0) > 0.0 && value_data_check(data[3], RGB))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "pl", 3) && value_data_check(data[1], VEC) && \
-			value_data_check(data[3], RGB) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+			value_data_check(data[3], RGB) && \
+			value_data_check(data[2], O_VEC))
 			return (TRUE);
 	else if (!ft_strncmp(data[0], "cy", 3) && value_data_check(data[1], VEC) && \
-			ft_strtod(data[3], NULL) > 0 && ft_strtod(data[4], NULL) > 0 && \
-			value_data_check(data[5], RGB) && data[2]) // data[2] 조건 추가 해야함(-1.0 ~ 1.0)
+			ft_strtod(data[3], 0) > 0.0 && ft_strtod(data[4], 0) > 0.0 && \
+			value_data_check(data[5], RGB) && \
+			value_data_check(data[2], O_VEC))
 			return (TRUE);
 	return (FALSE);
 }
