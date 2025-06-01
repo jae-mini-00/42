@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:01:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 19:52:09 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 22:53:56 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	file_init(t_scene *scene, int ac, char *file)
 			return ;
 			// fd = open(file, O_RDONLY);
 			// scene = scene_init(fd);
+			// close(fd);
 	    }
 		return ;
 	}

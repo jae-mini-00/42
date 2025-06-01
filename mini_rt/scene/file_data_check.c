@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:29:19 by jaejo             #+#    #+#             */
-/*   Updated: 2025/06/01 18:53:29 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 22:41:37 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_bool	value_data_check(char *data, int type)
 static t_bool	detect_value_type(char **data)
 {
 	if (!ft_strncmp(data[0], "A", 2) && value_data_check(data[2], RGB) && \
-		(0 <= ft_strtod(data[1], 0) && ft_strtod(data[1], 0) <= 1))
+		(0.0 <= ft_strtod(data[1], 0) && ft_strtod(data[1], 0) <= 1.0))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "C", 2) && value_data_check(data[1], VEC) && \
 			0 <= ft_atoi(data[3]) && ft_atoi(data[3]) <= 180 && \
@@ -53,13 +53,11 @@ static t_bool	detect_value_type(char **data)
 			ft_strtod(data[2], 0) > 0.0 && value_data_check(data[3], RGB))
 		return (TRUE);
 	else if (!ft_strncmp(data[0], "pl", 3) && value_data_check(data[1], VEC) && \
-			value_data_check(data[3], RGB) && \
-			value_data_check(data[2], O_VEC))
+			value_data_check(data[3], RGB) && value_data_check(data[2], O_VEC))
 			return (TRUE);
 	else if (!ft_strncmp(data[0], "cy", 3) && value_data_check(data[1], VEC) && \
 			ft_strtod(data[3], 0) > 0.0 && ft_strtod(data[4], 0) > 0.0 && \
-			value_data_check(data[5], RGB) && \
-			value_data_check(data[2], O_VEC))
+			value_data_check(data[5], RGB) && value_data_check(data[2], O_VEC))
 			return (TRUE);
 	return (FALSE);
 }

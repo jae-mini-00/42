@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:21 by jaejo             #+#    #+#             */
-/*   Updated: 2025/06/01 18:48:05 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 22:41:04 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	split_size(char **split)
 	return (i);
 }
 
-double	ft_strtod(char *str, int i)
+double	ft_strtod(char *str, int i) // 변환값이 문자를 만나 끝났을 때 에러 처리(atoi도 추가해야함)
 {
 	int		flag;
 	double	div;
