@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:21 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 20:33:52 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 18:48:05 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,32 @@ int	split_size(char **split)
 	return (i);
 }
 
-double	ft_strtod(char *str)
+double	ft_strtod(char *str, int i)
 {
-	
+	int		flag;
+	double	div;
+	double	int_part;
+	double	frac_part;
+
+	flag = 1;
+	div = 10.0;
+	int_part = 0.0;
+	frac_part = 0.0;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			flag = -1;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+		int_part = int_part * 10 + (str[i++] - '0');
+	if (str[i] == '.')
+	{
+		i++;
+		while (str[i] && str[i] >= '0' && str[i] <= '9')
+		{
+			frac_part += (str[i++] - '0') / div;
+			div *= 10.0;
+		}
+	}
+	return (flag * (int_part + frac_part));
 }
 
 char	**minirt_data(int fd)

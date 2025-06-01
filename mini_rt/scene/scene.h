@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:58:13 by jaejo             #+#    #+#             */
-/*   Updated: 2025/05/31 16:11:56 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/06/01 18:15:06 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 /* file_check_utils.c */
 int			split_size(char **split);
 char		**minirt_data(int fd);
+double		ft_strtod(char *str, int i);
 t_bool		object_data_check(char *data, int *flag, int size);
 /* file_data_check.c */
 t_bool		file_data_check(int fd);
