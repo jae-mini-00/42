@@ -1,9 +1,9 @@
 CXX	=	c++ -std=c++98
 C_Flag	=	-Wall -Wextra -Werror
 
-NAME = PhoneBook
+NAME = Account
 
-SRCS = ./main.cpp ./Contact.cpp ./PhoneBook.cpp\
+SRCS = ./tests.cpp ./Account.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
