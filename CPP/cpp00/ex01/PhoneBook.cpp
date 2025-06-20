@@ -1,35 +1,51 @@
 #include "PhoneBook.hpp"
-#include <cstdio>
-#include <unistd.h>
 
-
-int PhoneBook::i = 0;
-
-int main()
+PhoneBook::PhoneBook()
 {
-    PhoneBook   data;
-    char        *prompt = new char[100];
+    i = 0;
+}
 
-    while (true)
+PhoneBook::~PhoneBook()
+{
+    return ;
+}
+
+void    PhoneBook::ft_add()
+{
+    if (i == 8)
+        i = 0;
+    list[i].add_contact();
+    i++;
+}
+
+void    PhoneBook::main_display()
+{
+    int i = 0;
+
+    while (i < 8)
     {
-        std::cout << "Phone Book: " << std::flush;
-        if (std::cin.peek() == '\n')
-            std::cin.ignore();
-        if (!std::cin.getline(prompt, 100))
-        {
-            std::cout << "Command Only \"ADD\", \"SERCH\", \"EXIT\"" << std::endl;
-            std::cin.clear();
-            continue ;
-        }
-        else if (!strcmp(prompt, "SERCH"))
-            data.ft_serch();
-        else if (!strcmp(prompt, "ADD"))
-            data.ft_add();
-        else if (!strcmp(prompt, "EXIT"))
-            break ;
-        else
-            std::cout << "Command Only \"ADD\", \"SERCH\", \"EXIT\"" << std::endl;
+        list[i].main_display_print(i);
+        i++;
     }
-    delete[] prompt;
-    return (0);
+}
+
+void    PhoneBook::ft_search()
+{
+    int         num = 0;
+
+    main_display();
+    std::cout << "SEARCh Number: " << std::flush;
+    std::cin >> num;
+    if (std::cin.fail() || std::cin.peek() != '\n')
+    {
+        std::cout << "Invalid input. Please enter a valid number." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return ;
+    }
+    else if (num <= 0 || num > 8)
+        std::cout << "the index is out of range or wrong(1 ~ 8)" << std::endl;
+    else
+        list[num - 1].contact_display();
+    std::cin.ignore();
 }
