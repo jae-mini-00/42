@@ -1,9 +1,9 @@
 CXX	=	c++ -std=c++98
 C_Flag	=	-Wall -Wextra -Werror
 
-NAME =  Sed_is_for_losers
+NAME =  Harl_2.0
 
-SRCS = ./main.cpp \
+SRCS = ./main.cpp ./Harl.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
