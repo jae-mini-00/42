@@ -1,9 +1,9 @@
 CXX	=	c++ -std=c++98
 C_Flag	=	-Wall -Wextra -Werror
 
-NAME =  BraiiiiiiinnnzzzZ
+NAME = Moar_brainz
 
-SRCS = ./main.cpp ./Zombie.cpp ./newZombie.cpp randomChump.cpp \
+SRCS = ./main.cpp ./Zombie.cpp ./zombieHorde.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
