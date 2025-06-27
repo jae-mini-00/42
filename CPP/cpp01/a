@@ -1,6 +1,0 @@
-단계	할 일
-1	Harl 클래스 만들기
-2	debug, info, warning, error는 private 함수로 선언
-3	complain(std::string) 함수에서 level에 따라 함수 포인터로 해당 함수 호출
-4	문자열 → 함수 포인터 매핑 로직 만들기
-5	main.cpp에서 여러 레벨로 테스트 해보기
