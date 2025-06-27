@@ -10,9 +10,8 @@ class Harl
         void    info(void);
         void    warning(void);
         void    error(void);
-        std::string level;
     public :
-        Harl(std::string level);
+        Harl();
         ~Harl();
         void    complain(std::string level);
 };
