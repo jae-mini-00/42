@@ -31,7 +31,7 @@ int	retry_fork(t_philo_brain *data, pthread_mutex_t *mutex, int *fork, int idx)
 	{
 		if (check_die(data))
 			return (1);
-		usleep(200);
+		usleep(100);
 	}
 	pthread_mutex_lock(data->print_mutex);
 	printf("%lld %d has taken a fork\n", get_time_stamp_ms(), idx);
@@ -41,7 +41,7 @@ int	retry_fork(t_philo_brain *data, pthread_mutex_t *mutex, int *fork, int idx)
 
 int	try_eat(t_philo_brain *data)
 {
-	check_die(data);
+	//check_die(data);
 	data->last_eat_time = get_time_stamp_ms();
 	data->count_eat++;
 	pthread_mutex_lock(data->finish_mutex);
@@ -78,12 +78,12 @@ int	philo_eating(t_philo_brain *data)
 	if (try_eat(data))
 		return (1);
 	ft_msleep(data->time_to_eat, data);
-	pthread_mutex_lock(data->left_fork_mutex);
-	*data->left_fork = 1;
-	pthread_mutex_unlock(data->left_fork_mutex);
 	pthread_mutex_lock(data->right_fork_mutex);
 	*data->right_fork = 1;
 	pthread_mutex_unlock(data->right_fork_mutex);
+	pthread_mutex_lock(data->left_fork_mutex);
+	*data->left_fork = 1;
+	pthread_mutex_unlock(data->left_fork_mutex);
 	if (data->least_eat)
 		check_least_eat(data);
 	return (0);
