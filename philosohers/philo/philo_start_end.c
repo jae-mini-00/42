@@ -62,9 +62,9 @@ void	*start_philo(t_philo *data)
 		return ("1");
 	i = 1;
 	if (data->time_to_die > data->time_to_eat)
-		usleep(data->time_to_eat * 500);
+		usleep(data->time_to_eat * 300);
 	else
-		usleep(data->time_to_die * 500);
+		usleep(data->time_to_die * 300);
 	if (make_thread(data, i))
 		return ("1");
 	return (0);
