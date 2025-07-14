@@ -14,10 +14,10 @@ Fixed::Fixed(const Fixed& data)
 
 Fixed& Fixed::operator=(const Fixed& data)
 {
+    std::cout   << "Copy assignment operator called" << std::endl;
     if (this != &data)
     {
-        this->value = data.value;
-        std::cout   << "Copy assignment operator called" << std::endl;
+        this->value = data.getRawBits();
     }
     return (*this);
 }
