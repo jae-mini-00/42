@@ -21,7 +21,7 @@ Fixed::Fixed(float data)
 Fixed::Fixed(const Fixed& data)
 {
     std::cout   << "Copy constructor called" << std::endl;
-    *this = data;
+    this->value = data.value;
 }
 
 Fixed::~Fixed()

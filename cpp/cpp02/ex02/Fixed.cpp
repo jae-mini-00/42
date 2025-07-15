@@ -3,35 +3,30 @@
 Fixed::Fixed()
 {
     value = 0;
-    std::cout   << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int data)
 {
-    std::cout   << "Int constructor called" << std::endl;
     value = data << this->fractional_bits;
 }
 
 Fixed::Fixed(float data)
 {
-    std::cout   << "Float constructor called" << std::endl;
     value = roundf(data * 256);
 }
 
 Fixed::Fixed(const Fixed& data)
 {
-    std::cout   << "Copy constructor called" << std::endl;
-    *this = data;
+    this->value = data.value;
 }
 
 Fixed::~Fixed()
 {
-  std::cout << "Destructor called" << std::endl;
+  return ;
 }
 
 Fixed& Fixed::operator=(const Fixed& data)
 {
-    std::cout   << "Copy assignment operator called" << std::endl;
     if (this != &data)
     {
         this->value = data.getRawBits();
@@ -63,4 +58,104 @@ std::ostream& operator<<(std::ostream& os, const Fixed &data)
 {
     os   << data.toFloat();
     return (os);
+}
+
+Fixed Fixed::operator+(const Fixed& data) const
+{
+    Fixed temp(this->toFloat() + data.toFloat());
+    return (temp);
+}
+
+Fixed Fixed::operator-(const Fixed& data) const
+{
+    Fixed temp(this->toFloat() - data.toFloat());
+    return (temp);
+}
+
+Fixed Fixed::operator*(const Fixed& data) const
+{
+    Fixed temp(this->toFloat() * data.toFloat());
+    return (temp);
+}
+
+Fixed Fixed::operator/(const Fixed& data) const
+{
+    Fixed temp(this->toFloat() / data.toFloat());
+    return (temp);
+}
+
+Fixed& Fixed::operator++()
+{
+    this->value++;
+    return (*this);
+}
+
+const Fixed Fixed::operator++(int)
+{
+    Fixed temp(*this);
+    this->value++;
+    return (temp);
+}
+
+Fixed& Fixed::operator--()
+{
+    this->value--;
+    return (*this);
+}
+
+const Fixed Fixed::operator--(int)
+{
+    Fixed temp(*this);
+    this->value--;
+    return (temp);
+}
+
+bool Fixed::operator>(const Fixed& data) const
+{
+    return (this->toFloat() > data.toFloat() ? true : false);
+}
+
+bool Fixed::operator<(const Fixed& data) const
+{
+    return (this->toFloat() < data.toFloat() ? true : false);
+}
+
+bool Fixed::operator>=(const Fixed& data) const
+{
+    return (this->toFloat() >= data.toFloat() ? true : false);
+}
+
+bool Fixed::operator<=(const Fixed& data) const
+{
+    return (this->toFloat() <= data.toFloat() ? true : false);
+}
+
+bool Fixed::operator==(const Fixed& data) const
+{
+    return (this->toFloat() == data.toFloat() ? true : false);
+}
+
+bool Fixed::operator!=(const Fixed& data) const
+{
+    return (this->toFloat() != data.toFloat() ? true : false);
+}
+
+const Fixed Fixed::max(const Fixed& data1, const Fixed& data2)
+{
+    return (data1 > data2 ? data1 : data2);
+}
+
+const Fixed Fixed::min(const Fixed& data1, const Fixed& data2)
+{
+    return (data1 < data2 ? data1 : data2);
+}
+
+Fixed& Fixed::max(Fixed &data1, Fixed &data2)
+{
+    return (data1 > data2 ? data1 : data2);
+}
+
+Fixed& Fixed::min(Fixed &data1, Fixed &data2)
+{
+    return (data1 < data2 ? data1 : data2);
 }
