@@ -3,19 +3,33 @@
 int main(void)
 {
     Fixed a;
-    Fixed const b( 10 );
-    Fixed const c( 42.42f );
-    Fixed const d( b );
-    a = Fixed( 1234.4321f );
-
-    std::cout << "a is " << a << std::endl;
-    std::cout << "b is " << b << std::endl;
-    std::cout << "c is " << c << std::endl;
-    std::cout << "d is " << d << std::endl;
+    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
     
-    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+    std::cout << a << std::endl;
+    std::cout << ++a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a << std::endl << std::endl;
+
+    std::cout << a << std::endl;
+    std::cout << --a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a-- << std::endl;
+    std::cout << a << std::endl<< std::endl;
+
+    std::cout <<  Fixed( 5.05f ) + Fixed( 5.05f )  << std::endl;
+    std::cout <<  Fixed( 5.05f ) - Fixed( 5.05f )  << std::endl;
+    std::cout <<  Fixed( 5.05f ) * Fixed( 2 )  << std::endl;
+    std::cout <<  Fixed( 5.05f ) / Fixed( 5.05f )  << std::endl << std::endl;
+
+    Fixed(5.05f) > Fixed(2) ? std::cout <<  "TRUE"  << std::endl : std::cout <<  "FLASE"  << std::endl;
+    Fixed(5.05f) < Fixed(2) ? std::cout <<  "TRUE"  << std::endl : std::cout <<  "FLASE"  << std::endl;
+    Fixed(5.05f) <= Fixed(5.05f) ? std::cout <<  "TRUE"  << std::endl : std::cout <<  "FLASE"  << std::endl;
+    Fixed(5.05f) >= Fixed(10) ? std::cout <<  "TRUE"  << std::endl : std::cout <<  "FLASE"  << std::endl;
+    Fixed(5.05f) == Fixed(5.05f) ? std::cout <<  "TRUE"  << std::endl : std::cout <<  "FLASE"  << std::endl;
+    Fixed(5.05f) != Fixed(5.05f) ? std::cout <<  "TRUE\n"  << std::endl : std::cout <<  "FLASE\n"  << std::endl;
+
+    std::cout << Fixed::max( a, b ) << std::endl;
+    std::cout << Fixed::min( a, b ) << std::endl;
     return 0;
 }
