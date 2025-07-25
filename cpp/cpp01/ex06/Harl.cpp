@@ -40,11 +40,15 @@ void    Harl::error(void)
 
 Level   Harl::string_to_level(std::string level)
 {
-    if (level == "DEBUG") return (DEBUG);
-    else if (level == "INFO") return (INFO);
-    else if (level == "WARNING") return (WARNING);
-    else if (level == "ERROR") return (ERROR);
-    else return (UNKNOWN);
+    std::string temp[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    Level a_level[5] = {DEBUG, INFO, WARNING, ERROR, UNKNOWN};
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (temp[i] == level)
+            return (a_level[i]);
+    }
+    return (a_level[5]);
 }
 
 void    Harl::complain(std::string level)
