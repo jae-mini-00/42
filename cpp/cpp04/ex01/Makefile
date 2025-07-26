@@ -1,9 +1,9 @@
 CXX	=	c++
 C_Flag	=	-std=c++98 -Wall -Wextra -Werror
 
-NAME =  ClapTrap
+NAME =  Animal
 
-SRCS = ./main.cpp ./ClapTrap.cpp \
+SRCS = ./main.cpp ./Animal.cpp ./Dog.cpp ./Cat.cpp ./WrongAnimal.cpp ./WrongCat.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
