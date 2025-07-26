@@ -1,23 +1,59 @@
-#include "ClapTrap.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-int main(void)
+int main()
 {
-    ClapTrap a("A");
-    ClapTrap b("jaejo");
-    ClapTrap c(a);
-    ClapTrap d;
+    const Animal* meta = new Animal();
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
 
-    d = b;
-    for (int i = 0; i < 10; i++)
-        a.beRepaired(10);
-    for (int i = 0; i < 10; i++)
+    std::cout << '\n' << COLOR_YELLOW << meta->getType() << " " << std::endl;
+    std::cout << j->getType() << " " << std::endl;
+    std::cout << i->getType() << " " << COLOR_RESET << '\n' << std::endl;;
+    meta->makeSound();
+    j->makeSound();
+    i->makeSound();
+    std::cout << std::endl;
+
+    delete i;
+    delete j;
+    delete meta;
+
     {
-        b.attack("A");
-        a.takeDamage(0);
+        const Animal meta2 = Animal();
+        const Animal j2 = Dog();
+        const Animal i2 = Cat();
+
+        std::cout << '\n' << COLOR_YELLOW << meta2.getType() << " " << std::endl;
+        std::cout << j2.getType() << " " << std::endl;
+        std::cout << i2.getType() << " " << COLOR_RESET << '\n' << std::endl;;
+        meta2.makeSound();
+        j2.makeSound();
+        i2.makeSound();
+        std::cout << std::endl;
     }
-    a.attack("jaejo");
-    a.beRepaired(10);
-    b.attack("A");
-    b.beRepaired(10);
-    return (0);
+
+    const WrongAnimal* Wronganimal = new WrongAnimal();
+    const WrongAnimal* Wrongcat = new WrongCat();
+
+    std::cout << '\n' << COLOR_YELLOW << Wronganimal->getType() << " " << std::endl;
+    std::cout << Wrongcat->getType() << " " << COLOR_RESET << '\n' << std::endl;;
+    Wronganimal->makeSound();
+    Wrongcat->makeSound();
+    std::cout << std::endl;
+
+    delete Wrongcat;
+    delete Wronganimal;
+
+    const WrongAnimal Wronganimal2;
+    const WrongAnimal Wrongcat2;
+
+    std::cout << '\n' << COLOR_YELLOW << Wronganimal2.getType() << " " << std::endl;
+    std::cout << Wrongcat2.getType() << " " << COLOR_RESET << '\n' << std::endl;;
+    Wronganimal2.makeSound();
+    Wrongcat2.makeSound();
+    std::cout << std::endl;
+
+    return 0;
 }
