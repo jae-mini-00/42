@@ -1,7 +1,6 @@
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include <iostream>
 #include "Color.hpp"
 #include "Brain.hpp"
 

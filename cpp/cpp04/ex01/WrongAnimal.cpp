@@ -1,3 +1,4 @@
+#include <iostream>
 #include "WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal() : type("None")
