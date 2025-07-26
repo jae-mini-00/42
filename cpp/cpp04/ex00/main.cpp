@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "WrongCat.hpp"

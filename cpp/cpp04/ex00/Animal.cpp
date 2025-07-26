@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Animal.hpp"
 
 Animal::Animal() : type("None")
