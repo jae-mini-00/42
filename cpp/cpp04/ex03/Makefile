@@ -1,9 +1,10 @@
 CXX	=	c++
-C_Flag	=	-std=c++98 -Wall -Wextra -Werror
+C_Flag	=	-std=c++98 
+#-Wall -Wextra -Werror
 
-NAME =  A
+NAME =  a.out
 
-SRCS = ./main.cpp ./AMateria.cpp ./ICharacter.cpp \
+SRCS = ./main.cpp ./AMateria.cpp ./Character.cpp ./Ice.cpp ./Cure.cpp ./MateriaSource.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
