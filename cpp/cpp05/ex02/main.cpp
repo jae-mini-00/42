@@ -1,105 +1,284 @@
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main()
 {
-    AForm test("test", 100, 150);
-    std::cout   << "=======getter test=======" << std::endl;
-    std::cout   << "getName: " << test.getName() << '\n'
-                << "getIsSigned: " << test.getIsSigned() << '\n'
-                << "getGradeToSign: " << test.getGradeToSign() << '\n'
-                << "getGradeToExecute: " << test.getGradeToExecute() << std::endl;
-    std::cout   << test << std::endl;
-    std::cout   << std::endl;
+    // {
+    //     std::cout   << "======= signed, execute grade 1 test =========" << std::endl;
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
 
-    std::cout   << "=======Form besigned test=======" << std::endl;
-    Bureaucrat min("min", 150);
-    std::cout   << min << std::endl;
-    try
+    //     try {
+    //         shrubbery.beSigned(max_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(max_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.beSigned(max_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(max_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.beSigned(max_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(max_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
     {
-        test.beSigned(min);
-        std::cout   << "try Success" << std::endl;
+        std::cout   << "======= signed, execute grade 1 test =========" << std::endl;
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        max_grade.signForm(shrubbery);
+        max_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.signForm(president);
+        max_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.signForm(robot);
+        max_grade.executeForm(robot);
+        std::cout   << std::endl;
     }
-    catch (std::exception &e)
+    std::cout   << std::endl;
+
+    // {
+    //     std::cout   << "======= unsigned, execute grade 150 test =========" << std::endl;
+    //     Bureaucrat min_grade("min", 150);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         shrubbery.beSigned(min_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(min_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.beSigned(min_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(min_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.beSigned(min_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(min_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
     {
-        std::cout << e.what() << std::endl;
+        std::cout   << "======= unsigned, execute grade 150 test =========" << std::endl;
+        Bureaucrat min_grade("min", 150);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        min_grade.signForm(shrubbery);
+        min_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        min_grade.signForm(president);
+        min_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        min_grade.signForm(robot);
+        min_grade.executeForm(robot);
+        std::cout   << std::endl;
     }
     std::cout   << std::endl;
 
-    Bureaucrat max("max", 1);
-    std::cout   << max << std::endl;
-    try
+    // {
+    //     std::cout   << "======= signed, execute grade 150 test =========" << std::endl;
+    //     Bureaucrat min_grade("min", 150);
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         shrubbery.beSigned(max_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(min_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.beSigned(max_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(min_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.beSigned(max_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(min_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
     {
-        test.beSigned(max);
-        std::cout   << "try Success" << std::endl;
+        std::cout   << "======= signed, execute grade 150 test =========" << std::endl;
+        Bureaucrat min_grade("min", 150);
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        max_grade.signForm(shrubbery);
+        min_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.signForm(president);
+        min_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.signForm(robot);
+        min_grade.executeForm(robot);
+        std::cout   << std::endl;        
     }
-    catch (std::exception &e)
+    std::cout   << std::endl;
+
+    // {
+    //     std::cout   << "======= unsigned, execute grade 1 test =========" << std::endl;
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         shrubbery.execute(max_grade);
+    //         std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.execute(max_grade);
+    //         std::cout << president.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.execute(max_grade);
+    //         std::cout << robot.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
     {
-        std::cout << e.what() << std::endl;
+        std::cout   << "======= unsigned, execute grade 1 test =========" << std::endl;
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        max_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.executeForm(robot);
+        std::cout   << std::endl; 
     }
-    std::cout   << std::endl;
 
-    std::cout   << "=======Bureaucrat signForm test=======" << std::endl;
-    try
-    {
-        min.signForm(test);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    std::cout   << std::endl;
-
-    try
-    {
-        max.signForm(test);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    std::cout   << std::endl;
-
-    std::cout   << "=======Form constructor test=======" << std::endl;
-    try
-	{
-		AForm test1("test1", 0, 1);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-    std::cout   << std::endl;
-
-	try
-	{
-		AForm test2("test2", 151, 1);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-    std::cout   << std::endl;
-
-	try
-	{
-		AForm test3("test3", 1, 0);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-    std::cout   << std::endl;
-
-	try
-	{
-		AForm test4("test4", 1, 151);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-    std::cout   << std::endl;
-
-    std::cout   << "=======Destructor=======" << std::endl;
     return 0;
 }

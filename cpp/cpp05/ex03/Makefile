@@ -1,9 +1,9 @@
 CXX	=	c++
-C_Flag	=	-std=c++98 -Wall -Wextra -Werror -g -fsanitize=address
+C_Flag	=	-std=c++98 -Wall -Wextra -Werror -g #-fsanitize=address
 
-NAME =  Animal
+NAME =  form
 
-SRCS = ./main.cpp ./Animal.cpp ./Dog.cpp ./Cat.cpp ./WrongAnimal.cpp ./WrongCat.cpp \
+SRCS = ./main.cpp ./Bureaucrat.cpp ./AForm.cpp ./ShrubberyCreationForm.cpp ./PresidentialPardonForm.cpp ./RobotomyRequestForm.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -19,7 +19,7 @@ clean :
 		rm -f $(OBJS)
 
 fclean	:	clean
-			rm -f $(NAME)
+			rm -f $(NAME) *_shrubbery
 
 re	:	fclean all
 

@@ -1,63 +1,284 @@
-#include <iostream>
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main()
 {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+    // {
+    //     std::cout   << "======= signed, execute grade 1 test =========" << std::endl;
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
 
-    std::cout << '\n' << COLOR_YELLOW << meta->getType() << " " << std::endl;
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << COLOR_RESET << '\n' << std::endl;;
-    meta->makeSound();
-    j->makeSound();
-    i->makeSound();
-    std::cout << std::endl;
+    //     try {
+    //         shrubbery.beSigned(max_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(max_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
 
-    delete i;
-    delete j;
-    delete meta;
-    std::cout << std::endl;
+    //     try {
+    //         president.beSigned(max_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(max_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.beSigned(max_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(max_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
 
     {
-        const Animal meta2 = Animal();
-        const Animal j2 = Dog();
-        const Animal i2 = Cat();
+        std::cout   << "======= signed, execute grade 1 test =========" << std::endl;
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
 
-        std::cout << '\n' << COLOR_YELLOW << meta2.getType() << " " << std::endl;
-        std::cout << j2.getType() << " " << std::endl;
-        std::cout << i2.getType() << " " << COLOR_RESET << '\n' << std::endl;;
-        meta2.makeSound();
-        j2.makeSound();
-        i2.makeSound();
-        std::cout << std::endl;
+        max_grade.signForm(shrubbery);
+        max_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.signForm(president);
+        max_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.signForm(robot);
+        max_grade.executeForm(robot);
+        std::cout   << std::endl;
     }
+    std::cout   << std::endl;
 
-    std::cout << std::endl;
-    const WrongAnimal* Wronganimal = new WrongAnimal();
-    const WrongAnimal* Wrongcat = new WrongCat();
+    // {
+    //     std::cout   << "======= unsigned, execute grade 150 test =========" << std::endl;
+    //     Bureaucrat min_grade("min", 150);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
 
-    std::cout << '\n' << COLOR_YELLOW << Wronganimal->getType() << " " << std::endl;
-    std::cout << Wrongcat->getType() << " " << COLOR_RESET << '\n' << std::endl;;
-    Wronganimal->makeSound();
-    Wrongcat->makeSound();
-    std::cout << std::endl;
+    //     try {
+    //         shrubbery.beSigned(min_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(min_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
 
-    delete Wrongcat;
-    delete Wronganimal;
-    std::cout << std::endl;
+    //     try {
+    //         president.beSigned(min_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(min_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
 
-    const WrongAnimal Wronganimal2;
-    const WrongAnimal Wrongcat2 = WrongCat();
+    //     try {
+    //         robot.beSigned(min_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(min_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
 
-    std::cout << '\n' << COLOR_YELLOW << Wronganimal2.getType() << " " << std::endl;
-    std::cout << Wrongcat2.getType() << " " << COLOR_RESET << '\n' << std::endl;;
-    Wronganimal2.makeSound();
-    Wrongcat2.makeSound();
-    std::cout << std::endl;
+    {
+        std::cout   << "======= unsigned, execute grade 150 test =========" << std::endl;
+        Bureaucrat min_grade("min", 150);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        min_grade.signForm(shrubbery);
+        min_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        min_grade.signForm(president);
+        min_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        min_grade.signForm(robot);
+        min_grade.executeForm(robot);
+        std::cout   << std::endl;
+    }
+    std::cout   << std::endl;
+
+    // {
+    //     std::cout   << "======= signed, execute grade 150 test =========" << std::endl;
+    //     Bureaucrat min_grade("min", 150);
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         shrubbery.beSigned(max_grade);
+    //         std::cout << shrubbery.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             shrubbery.execute(min_grade);
+    //             std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.beSigned(max_grade);;
+    //         std::cout << president.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             president.execute(min_grade);
+    //             std::cout << president.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.beSigned(max_grade);;
+    //         std::cout << robot.getName() << ": try signed success" << std::endl;
+    //         try {
+    //             robot.execute(min_grade);
+    //             std::cout << robot.getName() << ": try execute success" << std::endl;
+    //         } catch (std::exception &e) {
+    //             std::cout << e.what() << std::endl;
+    //         }
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
+    {
+        std::cout   << "======= signed, execute grade 150 test =========" << std::endl;
+        Bureaucrat min_grade("min", 150);
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        max_grade.signForm(shrubbery);
+        min_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.signForm(president);
+        min_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.signForm(robot);
+        min_grade.executeForm(robot);
+        std::cout   << std::endl;        
+    }
+    std::cout   << std::endl;
+
+    // {
+    //     std::cout   << "======= unsigned, execute grade 1 test =========" << std::endl;
+    //     Bureaucrat max_grade("max", 1);
+    //     ShrubberyCreationForm shrubbery("shrubbery");
+    //     PresidentialPardonForm president("president");
+    //     RobotomyRequestForm robot("robot");
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         shrubbery.execute(max_grade);
+    //         std::cout << shrubbery.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         president.execute(max_grade);
+    //         std::cout << president.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+
+    //     try {
+    //         robot.execute(max_grade);
+    //         std::cout << robot.getName() << ": try execute success" << std::endl;
+    //     } catch (std::exception &e) {
+    //         std::cout << e.what() << std::endl;
+    //     }
+    //     std::cout   << std::endl;
+    // }
+    // std::cout   << std::endl;
+
+    {
+        std::cout   << "======= unsigned, execute grade 1 test =========" << std::endl;
+        Bureaucrat max_grade("max", 1);
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        max_grade.executeForm(shrubbery);
+        std::cout   << std::endl;
+        
+        max_grade.executeForm(president);
+        std::cout   << std::endl;
+
+        max_grade.executeForm(robot);
+        std::cout   << std::endl; 
+    }
 
     return 0;
 }
