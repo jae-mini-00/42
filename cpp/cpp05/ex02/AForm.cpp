@@ -23,7 +23,11 @@ AForm::~AForm()
 
 AForm& AForm::operator=(const AForm& other) 
 {
-    (void)other;
+    std::cout   << "AForm copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        std::cout   << "Can't copy assignment name" << std::endl;
+    }
     return *this;
 }
 
@@ -44,8 +48,8 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) throw (AForm::GradeTooLowExce
 
 std::ostream& operator<<(std::ostream& os, const AForm &data)
 {
-    os  << "AForm name: " << data.getName() << " AForm IsSined: " << data.getIsSigned()
-        << " AForm GradeToSign: " << data.getGradeToSign() << " AForm GradeToExecute: "
+    os  << "AForm name: " << data.getName() << ", AForm IsSined: " << data.getIsSigned()
+        << ", AForm GradeToSign: " << data.getGradeToSign() << ", AForm GradeToExecute: "
         << data.getGradeToExecute(); 
     return (os);
 }

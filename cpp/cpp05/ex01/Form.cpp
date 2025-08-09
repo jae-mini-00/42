@@ -23,7 +23,11 @@ Form::~Form()
 
 Form& Form::operator=(const Form& other) 
 {
-    (void)other;
+    std::cout   << "Form copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        std::cout   << "Can't copy assignment name" << std::endl;
+    }
     return *this;
 }
 

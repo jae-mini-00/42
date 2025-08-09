@@ -1,9 +1,10 @@
 CXX	=	c++
 C_Flag	=	-std=c++98 -Wall -Wextra -Werror -g #-fsanitize=address
 
-NAME =  form
+NAME =  Intern
 
-SRCS = ./main.cpp ./Bureaucrat.cpp ./AForm.cpp ./ShrubberyCreationForm.cpp ./PresidentialPardonForm.cpp ./RobotomyRequestForm.cpp \
+SRCS =	./main.cpp ./Bureaucrat.cpp ./AForm.cpp ./ShrubberyCreationForm.cpp ./PresidentialPardonForm.cpp ./RobotomyRequestForm.cpp \
+		./Intern.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

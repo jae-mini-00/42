@@ -19,6 +19,16 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
     std::cout   << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+{
+    std::cout   << "ShrubberyCreationForm copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        std::cout   << "Can't copy assignment name" << std::endl;
+    }
+    return (*this);
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
     std::cout << "ShrubberyCreationForm destructor called" << std::endl;

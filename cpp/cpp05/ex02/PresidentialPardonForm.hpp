@@ -9,7 +9,6 @@ class PresidentialPardonForm : public AForm
         std::string target;
 
         PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
-    
     public :
         // 생서자, 대입 연산자 및 소멸자
         PresidentialPardonForm();

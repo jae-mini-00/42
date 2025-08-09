@@ -18,6 +18,16 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& oth
     std::cout   << "PresidentialPardonForm copy constructor called" << std::endl;
 }
 
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
+{
+    std::cout   << "PresidentialPardonForm copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        std::cout   << "Can't copy assignment name" << std::endl;
+    }
+    return (*this);
+}
+
 PresidentialPardonForm::~PresidentialPardonForm()
 {
     std::cout << "PresidentialPardonForm destructor called" << std::endl;

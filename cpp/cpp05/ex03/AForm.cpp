@@ -23,6 +23,16 @@ AForm::~AForm()
 
 AForm& AForm::operator=(const AForm& other) 
 {
+    std::cout   << "AForm copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        std::cout   << "Can't copy assignment name" << std::endl;
+    }
+    return *this;
+}
+
+AForm& AForm::operator=(const AForm& other) 
+{
     (void)other;
     return *this;
 }

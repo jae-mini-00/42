@@ -1,7 +1,7 @@
 CXX	=	c++
 C_Flag	=	-std=c++98 -Wall -Wextra -Werror -g #-fsanitize=address
 
-NAME =  form
+NAME =  AForm
 
 SRCS = ./main.cpp ./Bureaucrat.cpp ./AForm.cpp ./ShrubberyCreationForm.cpp ./PresidentialPardonForm.cpp ./RobotomyRequestForm.cpp \
 
