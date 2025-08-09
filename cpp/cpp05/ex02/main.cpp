@@ -4,6 +4,19 @@
 
 int main()
 {
+    {
+        std::cout   << "===========operator test==========" << std::endl;
+        ShrubberyCreationForm shrubbery("shrubbery");
+        PresidentialPardonForm president("president");
+        RobotomyRequestForm robot("robot");
+        std::cout   << std::endl;
+
+        std::cout   << shrubbery << std::endl;
+        std::cout   << president << std::endl;
+        std::cout   << robot << std::endl;
+        std::cout   << std::endl;
+    }
+
     // {
     //     std::cout   << "======= signed, execute grade 1 test =========" << std::endl;
     //     Bureaucrat max_grade("max", 1);
