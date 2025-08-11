@@ -31,12 +31,6 @@ AForm& AForm::operator=(const AForm& other)
     return *this;
 }
 
-AForm& AForm::operator=(const AForm& other) 
-{
-    (void)other;
-    return *this;
-}
-
 std::string AForm::getName() const { return (this->name); }
 
 bool AForm::getIsSigned() const { return (this->IsSigned); }
