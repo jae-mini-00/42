@@ -6,6 +6,7 @@
 class ScalarConverter
 {
     private :
+        static double Inf_or_Nan(std::string data, int mode);
         static bool isChar(std::string str);
         static bool isInt(std::string str);
         static bool isFloat(std::string str);

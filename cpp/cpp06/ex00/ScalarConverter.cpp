@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iomanip>
 #include <limits>
+#include <cmath>
 
 ScalarConverter::ScalarConverter() {}
 
@@ -14,6 +15,29 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 }
 
 ScalarConverter::~ScalarConverter() {}
+
+double ScalarConverter::Inf_or_Nan(std::string data, int mode) // mode = 1 = float, mode = 2 = double 
+{
+    if (data == "-inf")
+    {
+        if (mode == 1)
+            return (-std::numeric_limits<float>::infinity());
+        return (-std::numeric_limits<double>::infinity());
+    }
+    else if (data == "+inf")
+    {
+        if (mode == 1)
+            return (std::numeric_limits<float>::infinity());
+        return (std::numeric_limits<double>::infinity());
+    }
+    else if (data == "nan")
+    {
+        if (mode == 1)
+            return (std::numeric_limits<float>::quiet_NaN());
+        return (std::numeric_limits<double>::quiet_NaN());
+    }
+    return (0);
+}
 
 bool ScalarConverter::isChar(std::string str)
 {
@@ -51,13 +75,22 @@ bool ScalarConverter::isFloat(std::string str)
         double num;
 
         ss >> num;
-        if (ss.eof() && !ss.fail() && \
+        if (((ss.eof() && !ss.fail()) || Inf_or_Nan(temp, 1)) && \
             num <= std::numeric_limits<float>::max() && \
             num >= -std::numeric_limits<float>::max())
         {
-            printChar(0, false, num);
-            printInt(0, false, num);
-            printFloat(num, true, 0);
+            if (!Inf_or_Nan(temp, 1))
+            {
+                printChar(0, false, num);
+                printInt(0, false, num);
+                printFloat(num, true, 0);
+            }
+            else
+            {
+                printChar(0, false, Inf_or_Nan(temp, 1));
+                printInt(0, false, Inf_or_Nan(temp, 1));
+                printFloat(Inf_or_Nan(temp, 1), true, 0);
+            }
             return (true);
         }
     }
@@ -70,14 +103,24 @@ bool ScalarConverter::isDouble(std::string str)
     double num;
 
     ss >> num;
-    if (ss.eof() && !ss.fail() && \
+    if (((ss.eof() && !ss.fail()) || Inf_or_Nan(str, 2)) && \
         num <= std::numeric_limits<double>::max() && \
         num >= -std::numeric_limits<double>::max())
     {
-        printChar(0, false, num);
-        printInt(0, false, num);
-        printFloat(0, false, num);
-        std::cout   << "double: " << num << std::endl;
+        if (!Inf_or_Nan(str, 2))
+        {
+            printChar(0, false, num);
+            printInt(0, false, num);
+            printFloat(0, false, num);
+            std::cout   << "double: " << num << std::endl;
+        }
+        else
+        {
+            printChar(0, false, Inf_or_Nan(str, 2));
+            printInt(0, false, Inf_or_Nan(str, 2));
+            printFloat(0, false, Inf_or_Nan(str, 2));
+            std::cout   << "double: " << Inf_or_Nan(str, 2) << std::endl;
+        }
         return (true);
     }
     return (false);
@@ -105,12 +148,12 @@ void ScalarConverter::printChar(char c, bool flag, double num)
     {
         std::cout   << "char: ";
         if (num  > std::numeric_limits<char>::max() || \
-            num < std::numeric_limits<char>::min())
+            num < std::numeric_limits<char>::min() || std::isnan(num))
             std::cout   << "impossible" << std::endl;
         else if (!std::isprint(num))
             std::cout   << "Non displayable" << std::endl;
         else
-            std::cout   << static_cast<char>(num) << std::endl;
+            std::cout   << '\'' << static_cast<char>(num) << '\'' << std::endl;
         return ;
     }
     std::cout   << "char: '" << c << "'\n"
@@ -125,7 +168,7 @@ void ScalarConverter::printInt(int atoi, bool flag, double num)
     {
         std::cout   << "int: ";
         if (num  > std::numeric_limits<int>::max() || \
-            num < std::numeric_limits<int>::min())
+            num < std::numeric_limits<int>::min() || std::isnan(num))
             std::cout   << "impossible" << std::endl;
         else
             std::cout   << static_cast<int>(num) << std::endl;
