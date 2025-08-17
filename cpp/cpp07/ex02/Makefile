@@ -1,7 +1,7 @@
 CXX	=	c++
 C_Flag	=	-std=c++98 -Wall -Wextra -Werror -I. -g #-fsanitize=address
 
-NAME =  iter
+NAME =  Array
 
 SRCS = ./main.cpp \
 
