@@ -17,6 +17,7 @@ int main(int ac, char **av)
 	}
 	std::cout	<< "Before: ";
 	sort.print();
+	sort.fordJohnsonSortVector();
 
 	return (0);
 }
