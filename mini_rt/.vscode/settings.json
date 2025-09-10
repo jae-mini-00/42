@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "trace.h": "c",
-        "scene.h": "c",
-        "vec_utils.h": "c",
-        "stdio.h": "c",
-        "types.h": "c"
-    }
-}
