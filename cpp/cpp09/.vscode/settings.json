@@ -49,6 +49,10 @@
         "typeinfo": "cpp",
         "map": "cpp",
         "sstream": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "set": "cpp",
+        "ctime": "cpp",
+        "bitset": "cpp",
+        "iomanip": "cpp"
     }
 }
