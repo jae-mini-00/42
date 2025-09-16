@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "hook.h": "c",
+        "print.h": "c",
+        "mlx.h": "c",
+        "ft_printf.h": "c",
+        "free.h": "c",
+        "vec_utils.h": "c",
+        "types.h": "c",
+        "cmath": "c",
+        "scene.h": "c"
+    }
+}
