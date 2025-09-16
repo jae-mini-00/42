@@ -19,6 +19,123 @@ PmergeMe::~PmergeMe() {}
 
 
 
+// void PmergeMe::fordJohnsonSortVector() {
+//     fordJohnsonSortRecursive(vec_sort);
+// }
+
+// // C++98 스타일 페어링 헬퍼 함수입니다.
+// std::vector<std::pair<int, int> > PmergeMe::makePairsCpp98(std::vector<int>& target_vec) {
+//     std::vector<std::pair<int, int> > vec_pair;
+//     size_t i = 0, n = target_vec.size();
+//     vec_pair.reserve(n / 2);
+
+//     while (i + 1 < n) {
+//         if (target_vec[i] > target_vec[i + 1]) {
+//             vec_pair.push_back(std::pair<int, int>(target_vec[i], target_vec[i + 1]));
+//         } else {
+//             vec_pair.push_back(std::pair<int, int>(target_vec[i + 1], target_vec[i]));
+//         }
+//         i += 2;
+//     }
+//     leftover = -1;
+//     if (i < n) {
+//         leftover = target_vec[i];
+//     }
+//     return vec_pair;
+// }
+
+// // 포드-존슨 정렬의 핵심 재귀 함수입니다.
+// void PmergeMe::fordJohnsonSortRecursive(std::vector<int>& target_vec) {
+//     if (target_vec.size() <= 1) {
+//         return;
+//     }
+    
+//     // 1단계: 페어링 및 비교 (C++98 준수).
+//     std::vector<std::pair<int, int> > vec_pair = makePairsCpp98(target_vec);
+//     int current_leftover = leftover;
+
+//     // 2단계: 주열 정렬 (재귀 호출).
+//     std::vector<int> main_chain;
+//     main_chain.reserve(vec_pair.size());
+//     std::vector<std::pair<int, int> >::iterator it;
+//     for (it = vec_pair.begin(); it != vec_pair.end(); ++it) {
+//         main_chain.push_back(it->first);
+//     }
+
+//     // 주열을 정렬하기 위해 재귀적으로 자신을 호출합니다.
+//     fordJohnsonSortRecursive(main_chain);
+
+//     // 3단계: 작은 값 삽입.
+//     target_vec.clear();
+//     target_vec.reserve(target_vec.size());
+
+//     // 정렬된 주열을 타겟 벡터에 추가합니다.
+//     target_vec.insert(target_vec.begin(), main_chain.begin(), main_chain.end());
+
+//     // 자코브스탈 삽입 순서를 가져옵니다.
+//     std::vector<int> jacob_order = getJacobsthalInsertionOrder(vec_pair.size());
+
+//     // 정렬된 주열에 작은 값들을 삽입합니다.
+//     for (size_t i = 0; i < jacob_order.size(); ++i) {
+//         int idx = jacob_order[i];
+//         if (idx < (int)vec_pair.size()) {
+//             int val = vec_pair[idx].second;
+//             std::vector<int>::iterator pos = std::lower_bound(target_vec.begin(), target_vec.end(), val);
+//             target_vec.insert(pos, val);
+//         }
+//     }
+    
+//     // 남은 원소가 있다면 삽입합니다.
+//     if (current_leftover != -1) {
+//         std::vector<int>::iterator pos = std::lower_bound(target_vec.begin(), target_vec.end(), current_leftover);
+//         target_vec.insert(pos, current_leftover);
+//     }
+// }
+
+// // 자코브스탈 삽입 순서를 생성하는 함수입니다.
+// std::vector<int> PmergeMe::getJacobsthalInsertionOrder(size_t size) {
+//     std::vector<int> jacob_points;
+//     if (size == 0) return jacob_points;
+
+//     std::vector<int> jacob_indices;
+//     // 일반적인 크기에 대한 미리 계산된 자코브스탈 수
+//     jacob_indices.push_back(1); jacob_indices.push_back(3); jacob_indices.push_back(5);
+//     jacob_indices.push_back(11); jacob_indices.push_back(21); jacob_indices.push_back(43);
+//     jacob_indices.push_back(85); jacob_indices.push_back(171); jacob_indices.push_back(341);
+    
+//     std::vector<bool> seen(size, false);
+    
+//     for (size_t i = 0; i < jacob_indices.size(); ++i) {
+//         int end_idx = jacob_indices[i] - 1;
+//         int start_idx = (i > 0) ? jacob_indices[i - 1] - 1 : -1;
+        
+//         for (int j = std::min(end_idx, (int)size - 1); j > start_idx; --j) {
+//             if (j >= 0 && !seen[j]) {
+//                 jacob_points.push_back(j);
+//                 seen[j] = true;
+//             }
+//         }
+//     }
+    
+//     // 남은 원소를 역순으로 추가합니다.
+//     for (int i = (int)size - 1; i >= 0; --i) {
+//         if (!seen[i]) {
+//             jacob_points.push_back(i);
+//         }
+//     }
+
+//     return jacob_points;
+// }
+
+
+
+
+
+
+
+
+
+
 bool PmergeMe::vec_format(int ac, char **av)
 {
 	std::string one_line = av[1];
@@ -73,7 +190,7 @@ std::vector<std::pair<int, int> > PmergeMe::vec_makePairs()
 	return (vec_pair);
 }
 
-void PmergeMe::vec_insertionSort(std::vector<std::pair<int, int> >& vec_pair, \
+void PmergeMe::vec_insertionSort(std::vector<std::pair<int, int> >& vec_pair, 
 								int left, int right)
 {
 	for (int i = left + 1; i <= right; ++i)
@@ -89,7 +206,7 @@ void PmergeMe::vec_insertionSort(std::vector<std::pair<int, int> >& vec_pair, \
     }
 }
 
-void PmergeMe::vec_merge(std::vector<std::pair<int, int> >& vec_pair, \
+void PmergeMe::vec_merge(std::vector<std::pair<int, int> >& vec_pair, 
 							int left, int right, int mid) 
 {
     int total_size = right - left + 1;
@@ -114,7 +231,7 @@ void PmergeMe::vec_merge(std::vector<std::pair<int, int> >& vec_pair, \
         vec_pair[left + idx] = vec_merge_buffer[idx];
 }
 
-void PmergeMe::vec_merge_sort(std::vector<std::pair<int, int> >& vec_pair, \
+void PmergeMe::vec_merge_sort(std::vector<std::pair<int, int> >& vec_pair, 
 							int left, int right)
 {
     if (right - left <= 48)
@@ -230,7 +347,7 @@ void PmergeMe::fordJohnsonSortVector(void)
 // 	return (vec_pair);
 // }
 
-// void PmergeMe::vec_insertionSort(std::vector<std::pair<int, int> >& vec_pair, \
+// void PmergeMe::vec_insertionSort(std::vector<std::pair<int, int> >& vec_pair, 
 // 								int left, int right)
 // {
 // 	for (int i = left + 1; i <= right; ++i)
@@ -246,7 +363,7 @@ void PmergeMe::fordJohnsonSortVector(void)
 //     }
 // }
 
-// void PmergeMe::vec_merge(std::vector<std::pair<int, int> >& vec_pair, \
+// void PmergeMe::vec_merge(std::vector<std::pair<int, int> >& vec_pair, 
 // 							int left, int right, int mid) 
 // {
 //     int total_size = right - left + 1;
@@ -271,7 +388,7 @@ void PmergeMe::fordJohnsonSortVector(void)
 //         vec_pair[left + idx] = merge_buffer[idx];
 // }
 
-// void PmergeMe::vec_merge_sort(std::vector<std::pair<int, int> >& vec_pair, \
+// void PmergeMe::vec_merge_sort(std::vector<std::pair<int, int> >& vec_pair, 
 // 							int left, int right)
 // {
 //     if (right - left <= 48)

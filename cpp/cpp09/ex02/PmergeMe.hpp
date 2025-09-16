@@ -40,6 +40,10 @@ class PmergeMe
 		void deque_merge_sort(std::deque<std::pair<int, int> >& deque_pair, \
 									int left, int right);
 		std::deque<int> deque_getJacobsthalInsertionOrder(size_t size);
+
+		// void fordJohnsonSortRecursive(std::vector<int>& target_vec);
+		// std::vector<int> getJacobsthalInsertionOrder(size_t size);
+		// std::vector<std::pair<int, int> > makePairsCpp98(std::vector<int>& target_vec);
 		
 	public :
  		PmergeMe(); // 멤버변수 정리 해야함
