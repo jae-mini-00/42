@@ -1,0 +1,16 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"minishell_pharsing.h": "c",
+		"stdlib.h": "c",
+		"ft_printf.h": "c",
+		"unistd.h": "c",
+		"minishell_free.h": "c",
+		"type_traits": "c",
+		"minishell_signal.h": "c",
+		"minishell_run.h": "c",
+		"minishell_builtin.h": "c",
+		"scene.h": "c",
+		"fcntl.h": "c"
+	}
+}
