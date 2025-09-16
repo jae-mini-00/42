@@ -1,6 +1,6 @@
 CXX	=	c++ -std=c++98
-C_Flag	=	-O3 -march=native -flto -funroll-loops -Wall -Wextra -Werror
-
+C_Flag	= -Wall -Wextra -Werror
+# -O3 -march=native -flto -funroll-loops
 NAME = PmergeMe
 
 SRCS = ./main.cpp ./PmergeMe.cpp \

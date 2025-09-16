@@ -237,7 +237,7 @@ void PmergeMe::fordJohnsonSortVector(void)
 // 	{
 //         std::pair<int, int> key = vec_pair[i];
 //         int j = i - 1;
-//         while (j >= left && vec_pair[j].first < key.first)
+//         while (j >= left && vec_pair[j].first > key.first)
 // 		{
 //             vec_pair[j + 1] = vec_pair[j];
 //             --j;
@@ -257,7 +257,7 @@ void PmergeMe::fordJohnsonSortVector(void)
 //     int k = 0;
 //     while (i <= mid && j <= right)
 //     {
-//         if (vec_pair[i].first > vec_pair[j].first) 
+//         if (vec_pair[i].first < vec_pair[j].first) 
 //             merge_buffer[k++] = vec_pair[i++];
 //         else
 //             merge_buffer[k++] = vec_pair[j++];
@@ -341,36 +341,16 @@ void PmergeMe::fordJohnsonSortVector(void)
 // 	for (size_t i = 0; i < jacob.size(); ++i)
 // 	{
 // 		int val = vec_pair[jacob[i]].second;
-// 		pos = lower_bound_desc(vec_sort.begin(), vec_sort.end(), val);
+// 		pos = std::lower_bound(vec_sort.begin(), vec_sort.end(), val);
 // 		vec_sort.insert(pos, val);
 // 	}
 // 	if (leftover != -1)
 // 	{
-// 		pos = lower_bound_desc(vec_sort.begin(), vec_sort.end(), leftover);
+// 		pos = std::lower_bound(vec_sort.begin(), vec_sort.end(), leftover);
 // 		vec_sort.insert(pos, leftover);
 // 	}
-// 	// std::reverse(vec_sort.begin(), vec_sort.end());
 // }
 
-// void PmergeMe::vec_print(void)
-// {
-// 	std::vector<int>::iterator begin = vec_sort.begin();
-// 	std::vector<int>::iterator end = vec_sort.end();
-
-// 	if (vec_sort.size() < 10)
-// 	{
-// 		for (; begin + 1 != end; begin++)
-// 			std::cout	<< *begin << ' ';
-// 		std::cout	<< *begin << std::endl;
-// 	}
-// 	else
-// 	{
-// 		for (int i = 0; i < 10; i++)
-// 			std::cout	<< *(begin + i) << ' ';
-// 		std::cout	<< "[...]" << std::endl;
-// 	}
-// 	return ;
-// }
 
 
 
