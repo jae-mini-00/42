@@ -1,0 +1,56 @@
+types =
+    html|htm -> text/html
+    css      -> text/css
+    js       -> application/javascript
+    json     -> application/json
+    jpg|jpeg -> image/jpeg
+    png      -> image/png
+    _        -> application/octet-stream
+
+uwsgi =
+    /uwsgi/login.py:9000
+    /uwsgi/function2.py:9090
+
+
+
+:8080 =
+    [] +<= X-Content-Type-Options: "nosniff"
+    $add_csp_sha256.cgi
+
+    ...30
+
+    GET /old_stuff/* =301> /new_stuff/*
+
+    GET /download/*/mp3/* =301> /*/mp3/*.mp3
+
+    GET /download/ <i- /spool/www
+
+    GET *.(jpg|jpeg|gif) <- /spool/www/*.(jpg|jpeg|gif)
+
+    GET|POST|DELETE * <- /spool/www/*
+        ? index2.html
+        @ auth_info
+        ->{} 10MB
+        ! 404:/404.html
+
+
+
+:8040 =
+    [] +<= X-Content-Type-Options: "nosniff"
+
+    ...30
+
+    GET /old_stuff/* =301> /new_stuff/*
+
+    GET /download/*/mp3/* =301> /*/mp3/*.mp3
+
+    GET /download/ <i- /spool/www
+
+    GET *.(jpg|jpeg|gif) <- /spool/www/*.(jpg|jpeg|gif)
+
+    POST /upload_file $upload_file.cgi(UPLOAD_DEST=/uploaded/)
+        ...5
+        BUFFER_SIZE=2048
+
+    POST /login $9000(AUTH_INFO=/auth_info)
+        ...7
