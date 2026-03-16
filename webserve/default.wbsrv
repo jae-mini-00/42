@@ -9,12 +9,13 @@ types =
 
 uwsgi =
     /uwsgi/login.py:9000
-    /uwsgi/function2.py:9090
+    /uwsgi/function2.py:9090fux
 
 
 
 :8080 =
     [] +<= X-Content-Type-Options: "nosniff"
+    
     $add_csp_sha256.cgi
 
     ...30

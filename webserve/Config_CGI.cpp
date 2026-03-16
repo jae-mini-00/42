@@ -147,3 +147,35 @@ std::string Config_CGI::parse_env(const std::string &line) {
   this->env[key_and_value[0]] = key_and_value[1];
   return "";
 }
+
+static bool is_uwsgi(std::string line)
+{
+  return true;
+}
+
+std::string parse_uwsgi(FileDescriptor &fd, std::map<std::string, std::string> uwsgi)
+{
+  std::vector<std::string> key_and_value;
+  std::string line = "";
+
+  while (true) {
+    Result<std::string> temp = fd.read_file_line();
+    if (temp.error() != "")
+      return "FileDescriptor Error: " + temp.error();
+    else if (temp.value() == "\n" || temp.value() == "")
+      return "";
+    line = trim_char(temp.value(), '\n');
+    if (is_tab_or_space(line, 1) == false ||
+    (line.empty() || line[line.length() - 1] == ' ' ||
+      line[line.length() - 1] == '\t'))
+    line = trim_space(line);
+    if (!is_uwsgi(line))
+      return "Error: \"" + line "\" uwsgi syntax error";
+    key_and_value = string_split(line, ":");
+    if (uwsgi.find(key_and_value[0]) !=  uwsgi.end())
+      return "Error: \"" + line "\" uwsgi syntax error";
+    else
+      uwsgi[key_and_value[0]] = key_and_value[1];
+  }
+  return "";
+}
