@@ -1,0 +1,59 @@
+services:
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - ${WORDPRESS_DB_DATA_PATH}:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+      - DB_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+    secrets:
+      - db_password
+      - db_root_password
+
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    volumes:
+      - ${WORDPRESS_SITE_DATA_PATH}:/var/www/html
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - DB_HOST=${DB_HOST}
+    secrets:
+      - db_password
+
+  nginx:
+    build: ./requirements/nginx
+    image: nginx
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    ports:
+      - "443:443"
+    volumes:
+      - ${WORDPRESS_SITE_DATA_PATH}:/var/www/html:ro
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+
+networks:
+  inception:
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
