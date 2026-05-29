@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # 패키지 설치 및 패키지 목록 업데이트
 # 서버 설치(실제 엔진)
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     mariadb-server \
     mariadb-client \
     dumb-init \
+    && rm -rf /var/lib/mysql/* \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
