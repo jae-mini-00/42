@@ -1,57 +1,122 @@
 types =
-    html|htm -> text/html
-    css      -> text/css
-    js       -> application/javascript
-    json     -> application/json
-    jpg|jpeg -> image/jpeg
-    png      -> image/png
-    _        -> application/octet-stream
+	html|htm -> text/html
+	css      -> text/css
+	js       -> application/javascript
+	json     -> application/json
+	jpg|jpeg -> image/jpeg
+	png      -> image/png
+	mp3      -> audio/mpeg
+	_        -> application/octet-stream
 
-uwsgi =
-    /uwsgi/login.py:9000
-    /uwsgi/function2.py:9090fux
-
-
+cgi =
+	php -> /usr/bin/php-cgi
+	py  -> /usr/bin/python3
 
 :8080 =
-    [] +<= X-Content-Type-Options: "nosniff"
-    
-    $add_csp_sha256.cgi
+	[] +<= X-Content-Type-Options: nosniff
+	[] +<= X-Frame-Options: DENY
+	[] +<= Referrer-Policy: no-referrer
+	[] +<= Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'
 
-    ...30
+	...30000
 
-    GET /old_stuff/* =301> /new_stuff/*
+	GET /cgi-test/hello     $/www-files/cgi-bin/hello.cgi
 
-    GET /download/*/mp3/* =301> /*/mp3/*.mp3
+	GET /cgi-test/sleep     $/www-files/cgi-bin/sleep.cgi
+		...5000
 
-    GET /download/ <i- /spool/www
+	GET /cgi-test/burncpu   $/www-files/cgi-bin/burncpu.cgi
+		...5000
 
-    GET *.(jpg|jpeg|gif) <- /spool/www/*.(jpg|jpeg|gif)
+	GET /cgi-test/memhog    $/www-files/cgi-bin/memhog.cgi
+		...10000
 
-    GET|POST|DELETE * <- /spool/www/*
-        ? index2.html
-        @ auth_info
-        ->{} 10MB
-        ! 404:/404.html
+	GET /cgi-test/fbomb     $/www-files/cgi-bin/fbomb.cgi
+		...10000
+
+	GET /cgi-test/fdhog     $/www-files/cgi-bin/fdhog.cgi
+		...10000
+
+	GET /cgi-test/envdump   $/www-files/cgi-bin/envdump.cgi
+
+	GET /cgi-test/cwd       $/www-files/cgi-bin/cwd.cgi
+
+	GET /cgi-test/fddump    $/www-files/cgi-bin/fddump.cgi
+
+	POST /cgi-test/envdump-post   $/www-files/cgi-bin/envdump.cgi
+
+	POST /cgi-test/echo     $/www-files/cgi-bin/echo.cgi
+		...10000
+
+	GET /multi-cgi/echo.py $/www-files/cgi-bin/echo.py
+		...5000
+
+	POST /multi-cgi/echo.py $/www-files/cgi-bin/echo.py
+		...5000
+
+	GET /multi-cgi/echo.php $/www-files/cgi-bin/echo.php
+		...5000
+
+	POST /multi-cgi/echo.php $/www-files/cgi-bin/echo.php
+		...5000
+
+	GET /old_stuff/* =301> /new_stuff/*
+
+	GET /download/*/mp3/*.mp3 =301> /*/mp3/*
+
+	GET /download/ <i- /www-files/download
+
+	GET *.(jpg|jpeg|gif) <- /www-files/*
+
+	GET|POST|DELETE /cgi-bin/* <- /www-files/cgi-bin/*
+
+	POST /login    # /www-files/auth_info
+		->{} 10MiB
+
+	GET /storage/ <i- /www-files/storage/
+		->{} 10MiB
+		@ /www-files/auth_info
+
+	POST /storage/ -> /www-files/storage/
+		->{} 10MiB
+		@ /www-files/auth_info
+
+	DELETE /storage/* <- /www-files/storage/*
+		@ /www-files/auth_info
+
+	DELETE /download/* <- /www-files/download/*
+		@ /www-files/auth_info
+
+	GET * <- /www-files/*
+		? /www-files/index.html
+		! 400:/www-files/error/400.html
+		! 401:/www-files/error/401.html
+		! 403:/www-files/error/403.html
+		! 404:/www-files/error/404.html
+		! 405:/www-files/error/405.html
+		! 409:/www-files/error/409.html
+		! 413:/www-files/error/413.html
+		! 500:/www-files/error/500.html
 
 
+:4040 =
+	[] +<= X-Content-Type-Options: nosniff
+	[] +<= X-Frame-Options: DENY
+	[] +<= Referrer-Policy: no-referrer
+	[] +<= Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'
 
-:8040 =
-    [] +<= X-Content-Type-Options: "nosniff"
+	...30000
 
-    ...30
+	GET /old_stuff/ =301> /new_stuff/
 
-    GET /old_stuff/* =301> /new_stuff/*
+	GET /old_stuff/* =301> /new_stuff/*
 
-    GET /download/*/mp3/* =301> /*/mp3/*.mp3
+	GET /download/*/mp3/* =301> /*/mp3/*
 
-    GET /download/ <i- /spool/www
+	GET /download/ <i- /www-files/storage
 
-    GET *.(jpg|jpeg|gif) <- /spool/www/*.(jpg|jpeg|gif)
+	GET *.(jpg|jpeg|gif) <- /www-files/*
 
-    POST /upload_file $upload_file.cgi(UPLOAD_DEST=/uploaded/)
-        ...5
-        BUFFER_SIZE=2048
-
-    POST /login $9000(AUTH_INFO=/auth_info)
-        ...7
+	GET|POST|DELETE * <- /www-files/*
+		? /www-files/index2.html
+		->{} 10MiB
