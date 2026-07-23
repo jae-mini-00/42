@@ -22,7 +22,7 @@ static t_bool	file_name_check(char *file)
 			if (file[i--] == 'r')
 				if (file[i--] == '.')
 					return (TRUE);
-	write(2, "Error :Invalid file extension: expected .rt\n", 46);
+	write(2, "Error :Invalid file extension: expected .rt\n", 45);
 	return (FALSE);
 }
 
