@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:41:03 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 19:23:13 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/02 20:17:26 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,32 @@ void	minishell_free(t_data *minishell)
 {
 	free(minishell->prompt);
 	free(minishell->o_cmd);
+	free(minishell->home);
 	split_free(minishell->path);
 	token_free(minishell->token);
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
 	minishell->path = NULL;
 	minishell->token = NULL;
+	minishell->home = NULL;
 }
 
 void	exit_free(t_data *minishell, int num)
 {
 	free(minishell->prompt);
 	free(minishell->o_cmd);
+	free(minishell->home);
+	free(minishell->old_pwd);
 	split_free(minishell->env);
 	split_free(minishell->path);
 	token_free(minishell->token);
+	minishell->home = NULL;
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
 	minishell->path = NULL;
 	minishell->token = NULL;
 	minishell->env = NULL;
+	minishell->old_pwd = NULL;
 	rl_clear_history();
 	if (num == 127)
 		exit (127);

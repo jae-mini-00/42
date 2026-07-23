@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:40:27 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 18:57:07 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/02 20:16:31 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_data
 	int		here_doc_count;
 	int		mode;
 	int		exit_code;
+	char	*home;
+	char	*old_pwd;
 	char	*prompt;
 	char	*o_cmd;
 	char	**env;
