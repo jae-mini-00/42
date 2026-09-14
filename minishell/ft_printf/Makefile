@@ -51,6 +51,7 @@ bonus : make_bonus
 clean :
 	rm -f $(OBJS) $(B_OBJS)
 	$(MAKE) clean -C ./libft
+	rm -f libftprintf.a
 
 fclean : clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 23:07:29 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 20:52:04 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/02 20:41:51 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	builtin_check(t_data *minishell)
 	const int	out = dup(1);
 
 	cmd = make_execve_cmd(minishell->token);
-	if (!ft_strncmp(cmd[0], "env", 4) && !cmd[1])
+	if (!ft_strncmp(cmd[0], "env", 4))
 		ft_env(minishell, cmd, NULL);
 	else if (!ft_strncmp(cmd[0], "echo", 5))
 		ft_echo(minishell, cmd, NULL);

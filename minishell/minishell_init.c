@@ -6,7 +6,7 @@
 /*   By: jaejo <jaejo@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:16:39 by jaejo             #+#    #+#             */
-/*   Updated: 2025/04/30 02:05:42 by jaejo            ###   ########.fr       */
+/*   Updated: 2025/05/02 20:17:51 by jaejo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ void	o_cmd_split_init(t_data *minishell)
 	if (temp[i] == '\n' || temp[i] == '\0')
 		return (free(temp));
 	split_free(minishell->path);
+	free(minishell->home);
+	minishell->home = NULL;
+	i = -1;
+	while (minishell->env[++i])
+		if (ft_strncmp(minishell->env[i], "HOME", 5) == 61)
+			minishell->home = ft_strdup(&minishell->env[i][5]);
 	minishell->path = path_init(minishell->env);
 	minishell->token = token_init(temp);
 	minishell_variable_expansion(minishell->token, minishell);
@@ -112,7 +118,9 @@ void	minishell_init(t_data *minishell, char **envp, char *av)
 		minishell->mode = ft_atoi(av);
 	else
 		minishell->mode = 0;
+	minishell->old_pwd = NULL;
 	minishell->exit_code = 0;
+	minishell->home = NULL;
 	minishell->prompt = NULL;
 	minishell->o_cmd = NULL;
 	minishell->token = NULL;

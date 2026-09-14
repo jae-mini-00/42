@@ -57,9 +57,9 @@ static t_bool	rec_sphere(t_object *world, t_ray *ray, t_hit_record *rec,
 t_bool	hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec)
 {
 	double		discriminant;
-	t_sphere	*sp;
+	// t_sphere	*sp;
 
-	sp = world->element;
+	// sp = world->element;
 	discriminant = discriminant_check(world, ray);
 	if (discriminant < 0)
 		return (FALSE);
